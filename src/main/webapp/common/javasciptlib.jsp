@@ -1,0 +1,1 @@
+<script src="${contextPath}/assets/javascript/jquery.min.js"></script>
