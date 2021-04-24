@@ -3,7 +3,8 @@ package dao;
 import bean.AccountModel;
 
 public interface IAccountDAO {
-    AccountModel findUsernameAndPassword(String username, String password);
+    AccountModel findByUsername(String username);
+    AccountModel findByEmail(String email);
     Long insert(AccountModel account);
     void update(AccountModel account);
 }

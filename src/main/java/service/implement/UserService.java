@@ -1,5 +1,6 @@
 package service.implement;
 
+import bean.UserModel;
 import dao.IUserDAO;
 import service.IUserService;
 
@@ -10,4 +11,9 @@ import javax.inject.Inject;
 public class UserService implements IUserService {
     @Inject
     private IUserDAO userDAO;
+
+    @Override
+    public UserModel findEmailUser(String email) {
+        return userDAO.findEmailUser(email);
+    }
 }

@@ -29,8 +29,10 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         } catch (SQLException e) {
             // TODO: handle exception
             e.printStackTrace();
-            return null;
+        } catch (Exception e2) {
+            e2.printStackTrace();
         }
+        return null;
     }
 
     private void setParameters(PreparedStatement statement, Object... parameters) {

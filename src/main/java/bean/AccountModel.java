@@ -4,8 +4,7 @@ public class AccountModel extends AbstractModel {
     private Long accountId;
     private String username;
     private String password;
-    private UserModel user = new UserModel();
-    private RoleModel role = new RoleModel();
+    private UserModel user;
 
     public UserModel getUser() {
         return user;
@@ -13,14 +12,6 @@ public class AccountModel extends AbstractModel {
 
     public void setUser(UserModel user) {
         this.user = user;
-    }
-
-    public RoleModel getRole() {
-        return role;
-    }
-
-    public void setRole(RoleModel role) {
-        this.role = role;
     }
 
     public Long getAccountId() {

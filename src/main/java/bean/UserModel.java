@@ -5,14 +5,14 @@ public class UserModel extends AbstractModel {
     private String fullName;
     private String email;
     private String SDT;
-    private Long roleId;
+    private RoleModel roleMole;
 
-    public Long getRoleId() {
-        return roleId;
+    public RoleModel getRoleMole() {
+        return roleMole;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRoleMole(RoleModel roleMole) {
+        this.roleMole = roleMole;
     }
 
     public Long getUserId() {
