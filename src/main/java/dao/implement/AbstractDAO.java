@@ -25,7 +25,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         try {
             registerJDBC();
             return DriverManager.getConnection(resourceBundle.getString("url"),
-                    resourceBundle.getString("username"), resourceBundle.getString("password"));
+                    resourceBundle.getString("username"),resourceBundle.getString("password"));
         } catch (SQLException e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -162,4 +162,5 @@ public class AbstractDAO<T> implements GenericDAO<T> {
     public void delete(String sql, Object... parameters) {
         update(sql, parameters);
     }
+
 }

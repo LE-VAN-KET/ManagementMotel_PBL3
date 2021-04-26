@@ -28,4 +28,13 @@ public class VillageModel extends AbstractModel {
     public void setDistrictId(Long districtId) {
         this.districtId = districtId;
     }
+
+    @Override
+    public String toString() {
+        return "VillageModel{" +
+                "villageId=" + villageId +
+                ", villageName='" + villageName + '\'' +
+                ", districtId=" + districtId +
+                '}';
+    }
 }

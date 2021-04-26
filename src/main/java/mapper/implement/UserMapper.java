@@ -1,5 +1,6 @@
 package mapper.implement;
 
+import bean.RoleModel;
 import mapper.IRowMapper;
 import bean.UserModel;
 
@@ -14,8 +15,8 @@ public class UserMapper implements IRowMapper<UserModel> {
             user.setUserId(resultSet.getLong("userId"));
             user.setFullName(resultSet.getString("fullName"));
             user.setEmail(resultSet.getString("email"));
-            user.setSDT(resultSet.getString("SDT"));
-            user.setRoleId(resultSet.getLong("roleId"));
+            RoleModel roleModel = new RoleMapper().mapRow(resultSet);
+            user.setRoleModel(roleModel);
             user.setCreateAt(resultSet.getTimestamp("createAt"));
             user.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
             return user;

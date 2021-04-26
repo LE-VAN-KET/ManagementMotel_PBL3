@@ -23,19 +23,18 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
     @Override
     public Long insert(UserModel user) {
         String sql = "INSERT INTO users(fullName, email, SDT, roleId) VALUES(?, ?, ?, ?)";
-        return insert(sql, new UserMapper(), user.getFullName(), user.getEmail(), user.getSDT(),
-                user.getRoleId());
+        return insert(sql, user.getFullName(), user.getEmail(), user.getSDT());
     }
 
     @Override
     public void update(UserModel user) {
         String sql = "UPDATE users SET fullName = ?, email = ?, SDT = ?";
-        update(sql, new UserMapper(), user.getFullName(), user.getEmail(), user.getSDT());
+        update(sql, user.getFullName(), user.getEmail(), user.getSDT());
     }
 
     @Override
     public void delete(Long userId) {
         String sql = "DELETE FROM users WHERE userId = ?";
-        delete(sql, new UserMapper(), userId);
+        delete(sql, userId);
     }
 }

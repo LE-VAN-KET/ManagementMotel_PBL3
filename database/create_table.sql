@@ -22,14 +22,15 @@ create table users(
 );
 
 create table account(
-    accountId int not null,
+    accountId int auto_increment not null,
     username varchar(50) not null,
     password varchar(50) not null,
+    userId int unique not null,
     createAt timestamp default current_timestamp,
     modifiedAt timestamp default current_timestamp
         on update current_timestamp,
     constraint pk_account_users primary key(accountId),
-    constraint fk_account_users foreign key(accountId) references users(userId)
+    constraint fk_account_users foreign key(userId) references users(userId)
 );
 
 create table district(

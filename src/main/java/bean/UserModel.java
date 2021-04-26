@@ -5,15 +5,7 @@ public class UserModel extends AbstractModel {
     private String fullName;
     private String email;
     private String SDT;
-    private Long roleId;
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
+    private RoleModel roleModel;
 
     public Long getUserId() {
         return userId;
@@ -45,5 +37,24 @@ public class UserModel extends AbstractModel {
 
     public void setSDT(String SDT) {
         this.SDT = SDT;
+    }
+
+    public RoleModel getRoleModel() {
+        return roleModel;
+    }
+
+    public void setRoleModel(RoleModel roleModel) {
+        this.roleModel = roleModel;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "userId=" + userId +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", SDT='" + SDT + '\'' +
+                ", roleModel=" + roleModel +
+                '}';
     }
 }

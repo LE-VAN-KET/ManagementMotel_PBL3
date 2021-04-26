@@ -10,8 +10,8 @@ public class PostModel extends AbstractModel {
     private Double price;
     private Long square;
     private String address;
-    private String villageId;
-    private Long userId;
+    private VillageModel villageModel;
+    private UserModel userModel;
     private Boolean statusPost;
     private Boolean statusRental;
     private Timestamp publishedAt;
@@ -72,28 +72,20 @@ public class PostModel extends AbstractModel {
         this.address = address;
     }
 
-    public String getVillageId() {
-        return villageId;
+    public VillageModel getVillageModel() {
+        return villageModel;
     }
 
-    public void setVillageId(String villageId) {
-        this.villageId = villageId;
+    public void setVillageModel(VillageModel villageModel) {
+        this.villageModel = villageModel;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UserModel getUserModel() {
+        return userModel;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Timestamp getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(Timestamp publishedAt) {
-        this.publishedAt = publishedAt;
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 
     public Boolean getStatusPost() {
@@ -110,5 +102,13 @@ public class PostModel extends AbstractModel {
 
     public void setStatusRental(Boolean statusRental) {
         this.statusRental = statusRental;
+    }
+
+    public Timestamp getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(Timestamp publishedAt) {
+        this.publishedAt = publishedAt;
     }
 }
