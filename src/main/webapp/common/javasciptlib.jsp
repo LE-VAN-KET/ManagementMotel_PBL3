@@ -2,9 +2,8 @@
 <script src="${contextPath}/assets/javascript/jquery-3.4.1.slim.min.js"></script>
 <script src="${contextPath}/assets/javascript/popper.min.js"></script>
 <script src="${contextPath}/assets/javascript/bootstrap.min.js"></script>
-<script src="${contextPath}/assets/javascript/lazyloading.min.js"></script>
-<%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>--%>
 <script src="${contextPath}/assets/javascript/toastr.min.js"></script>
+<script src="${contextPath}/assets/javascript/lazyloading.min.js"></script>
 <script>
     toastr.options = {
         "closeButton": false,

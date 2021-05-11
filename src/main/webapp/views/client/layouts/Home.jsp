@@ -1,12 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Admin
+  User: Van Ket
   Date: 16/04/2021
   Time: 9:34 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="../../common/taglib.jsp"%>
+<%@include file="../../../common/taglib.jsp"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html>
 
@@ -16,70 +16,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phong Tro Da Nang</title>
     <link href="${contextPath}/assets/css/home.css" rel="stylesheet">
-    <%@include file="../../common/csslib.jsp"%>
+    <%@include file="../../../common/csslib.jsp"%>
 </head>
 
 <body class="hero-anime">
-    <div class="navigation-wrap bg-light start-header start-style p-0 bg-white">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="navbar navbar-expand-md navbar-light py-0">
-
-                        <a class="navbar-brand p-0" href="#">
-                            <img data-src="${contextPath}/assets/images/logo-pbl3.png" class="lazyload m-0" alt="...">
-                        </a>
-
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ml-auto py-4 py-md-0">
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                    <a class="nav-link" href="#"><i class="fas fa-home mr-1"></i></i>Home</a>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                        aria-haspopup="true" aria-expanded="false">Phòng Trọ</a>
-                                    <div class="dropdown-menu border-0 bg-white">
-                                        <a class="dropdown-item" href="#">Liên Chiểu</a>
-                                        <a class="dropdown-item" href="#">Thanh Khê</a>
-                                        <a class="dropdown-item" href="#">Sơn Trà</a>
-                                        <a class="dropdown-item" href="#">Hải Châu</a>
-                                        <a class="dropdown-item" href="#">Cẩm Lệ</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link" href="#">Contact</a>
-                                </li>
-                            </ul>
-                            <a type="button" href="dang-tin" class="animated-dang-tin btn btn-white ml-3"
-                                style="color: #111;">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Đăng tin
-                            </a>
-                            <a type="button" href="#" class="singin_up text-decoration-none ml-lg-2"><i
-                                    class="fas fa-sign-in-alt mr-1"></i>Singin</a>
-                            <a type="button" href="#" class="singin_up text-decoration-none ml-2"><i
-                                    class="fas fa-user-plus mr-1"></i>Singup</a>
-                        </div>
-
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
+<%--     block navigation--%>
+    <%@include file="../components/navigation.jsp"%>
     <div class="section">
         <div class="container title m-0 mx-auto">
             <div class="row m-0">
                 <div class="col-12">
-                    <h4>
+                    <h4 class="text-white">
                         <span>W</span><span>e</span><span>l</span><span>c</span><span>o</span><span>m</span><span>e</span>
                         <span>P</span><span>h</span><span>ò</span><span>n</span><span>g</span>
                         <span>T</span><span>r</span><span>ọ</span>
@@ -94,15 +41,7 @@
                                         <label for="district">District</label>
                                         <select name="khu-vuc" id="district"
                                             class="form-control form-control-outline-none">
-                                            <option value="all">All</option>
-                                            <option value="lien-chieu">Liên chiểu</option>
-                                            <option value="hai-chau">Hải Châu</option>
-                                            <option value="thanh-khe">Thanh khê</option>
-                                            <option value="hoa-vang">Hòa Vang</option>
-                                            <option value="cam-le">Cẩm Lệ</option>
-                                            <option value="son-tra">Sơn Trà</option>
-                                            <option value="ngu-hanh-son">Ngũ Hành Sơn</option>
-                                            <option value="huyen-hoang-sa">Huyện Hoàng Sa</option>
+                                            <option value="all" data-id=0>All</option>
                                         </select>
                                     </div>
 
@@ -110,7 +49,7 @@
                                         <label for="village">Village</label>
                                         <select name="khu-vuc" id="village"
                                             class="form-control form-control-outline-none">
-                                            <option value="all">All</option>
+                                            <option value="all" data-id=0>All</option>
                                         </select>
                                     </div>
 
@@ -167,68 +106,42 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                    <div class="row mx-0 detail-list">
-                        <div class="col-6 p-0">
-                            <a href="#">
-                                <img class="img-fluid lazyload"
-                                    data-src="https://phongtrodn.com/wp-content/uploads/2021/03/IMG_5319.jpg"
-                                    style="width: 100%; height: 200px" alt="...">
-                            </a>
-                        </div>
-                        <div class="info-real col-6">
-                            <h5>
-                                <a href="#">
-                                    Phòng trọ 15m2, đường Lê Sát, Nam Hòa Cường
-                                </a>
-                            </h5>
-                            <p class="p-1 m-0">
-                                <i class="fas fa-dollar-sign"></i>
-                                Giá:
-                                <strong>
-                                    1 Triệu 800K ₫ / Tháng
-                                </strong>
-                            </p>
-                            <p class="p-1 m-0"><i class="far fa-building"></i> Diện tích:
-                                <strong>15m<sup>2</sup></strong></p>
-                            <p class="p-1 m-0"><i class="fas fa-map-marker-alt"></i><span> Khu vực:
-                                    <strong>Hải Châu</strong>
+                <c:if test="${!POSTMODELS.isEmpty()}">
+                    <c:forEach items="${POSTMODELS}" var="postModels">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row mx-0 detail-list">
+                                <div class="col-6 p-0">
+                                    <a href="#">
+                                        <img class="img-fluid lazyload"
+                                             data-src="https://drive.google.com/uc?export=view&id=${postModels.linkImages}"
+                                             style="width: 100%; height: 200px" alt="...">
+                                    </a>
+                                </div>
+                                <div class="info-real col-6">
+                                    <h5>
+                                        <a href="#">
+                                            ${postModels.title}
+                                        </a>
+                                    </h5>
+                                    <p class="p-1 m-0">
+                                        <i class="fas fa-dollar-sign"></i>
+                                        Giá:
+                                        <strong>
+                                            ${postModels.price} ₫ / Tháng
+                                        </strong>
+                                    </p>
+                                    <p class="p-1 m-0"><i class="far fa-building"></i> Diện tích:
+                                        <strong>${postModels.square}m<sup>2</sup></strong></p>
+                                    <p class="p-1 m-0"><i class="fas fa-map-marker-alt"></i><span> Khu vực:
+                                    <strong>${postModels.villageModel.villageName}-${postModels.villageModel.districtModel.districtName}</strong>
                                 </span></p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                    <div class="row detail-list mx-0">
-                        <div class="col-6 p-0">
-                            <a href="#">
-                                <img class="img-fluid lazyload"
-                                    data-src="https://phongtrodn.com/wp-content/uploads/2021/03/IMG_5319.jpg"
-                                    style="width: 100%; height: 200px" alt="...">
-                            </a>
-                        </div>
-                        <div class="info-real col-6">
-                            <h5>
-                                <a href="#">
-                                    Phòng trọ 15m2, đường Lê Sát, Nam Hòa Cường
-                                </a>
-                            </h5>
-                            <p class="p-1 m-0">
-                                <i class="fas fa-dollar-sign"></i>
-                                Giá:
-                                <strong>
-                                    1 Triệu 800K ₫ / Tháng
-                                </strong>
-                            </p>
-                            <p class="p-1 m-0"><i class="far fa-building"></i> Diện tích:
-                                <strong>15m<sup>2</sup></strong></p>
-                            <p class="p-1 m-0"><i class="fas fa-map-marker-alt"></i><span> Khu vực:
-                                    <strong>Hải Châu</strong>
-                                </span></p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
+                    </c:forEach>
+                </c:if>
+
             </div>
         </div>
     </section>
@@ -363,64 +276,49 @@
             </div>
         </div>
     </section>
-    <!-- footer -->
-    <footer class="bg-dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12">
-                    <h5>Absout Us</h5>
-                    <ul>
-                        <li>
-                            <i class="far fa-address-card mr-1"></i>
-                            <span>Address: </span>
-                            <small>K8/10 Đồng kè, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng</small>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-volume"></i>
-                            <span>Phone: </span>
-                            <small>0328560055 - 0906589823</small>
-                        </li>
-                        <li>
-                            <i class="far fa-envelope"></i>
-                            <span>Email: </span>
-                            <small>anhle1512001@gmail.com</small>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-8 col-md-6 col-xs-12 col-sm-12 row">
-                    <h5 class="col-12">Phòng Trọ, Nhà Trọ</h5>
-                    <ul class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-                        <li>
-                            <a href="#">Phòng trọ Liên chiểu</a>
-                        </li>
-                        <li>
-                            <a href="#">Phòng trọ Hải Châu</a>
-                        </li>
-                        <li>
-                            <a href="#">Phòng trọ Cẩm Lệ</a>
-                        </li>
-                        <li>
-                            <a href="#">Phòng trọ Hòa Vang</a>
-                        </li>
-                    </ul>
-                    <ul class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-                        <li>
-                            <a href="#">Phòng trọ Thanh Khê</a>
-                        </li>
-                        <li>
-                            <a href="#">Phòng trọ Sơn Trà</a>
-                        </li>
-                        <li>
-                            <a href="#">Phòng trọ Ngũ Hành Sơn</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <p class="text-center py-2 m-0">@Copyright by Team Bker: Le van Ket && Nguyen tan Khanh</p>
+    <area class="container">
+        <div class="row">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.8396925331685!2d108.1477255143661!3d16.07380644358591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314218d68dff9545%3A0x714561e9f3a7292c!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBCw6FjaCBLaG9hIC0gxJDhuqFpIGjhu41jIMSQw6AgTuG6tW5n!5e0!3m2!1svi!2sus!4v1619884499308!5m2!1svi!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-    </footer>
-    <%@include file="../../common/javasciptlib.jsp"%>
-    <script src="../../assets/javascript/home.js"></script>
+    </area>
+    <!-- footer -->
+    <%@include file="../components/footer.jsp"%>
+
+    <!-- Back to top button -->
+    <a id="back-to-top"></a>
+    <%@include file="../../../common/javasciptlib.jsp"%>
+    <script src="../../../assets/javascript/home.js"></script>
+    <script>
+        if (${!DISTRICTSMODELS.isEmpty()}) {
+            // set list district option
+            <c:forEach items="${DISTRICTMODELS}" var="district">
+                $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
+            </c:forEach>
+        }
+
+        $(document).ready(function () {
+            // set list village by district
+            $("#district").change(() => {
+                const districtId = $( "#district option:selected" ).data('id');
+                $("#village option").remove();
+                <c:forEach items="${DISTRICTMODELS}" var="district">
+                    if(${district.districtId} === districtId) {
+                        if (${!district.listVillage.isEmpty()}) {
+                            <c:forEach items="${district.listVillage}" var="village">
+                            $('#village').append("<option data-id = ${village.villageId} " +
+                                "value='${village.villageName}'>${village.villageName}</option>");
+                            </c:forEach>
+                        } else {
+                            $('#village').append("<option value='All' data-id = 0 >All</option>");
+                        }
+                    }
+                </c:forEach>
+                if (districtId == 0) {
+                    $('#village').append("<option value='All' data-id=0>All</option>");
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

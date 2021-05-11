@@ -1,5 +1,6 @@
 package utils;
 
+import bean.PostModel;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public class FormUtil {
             BeanUtils.populate(object, request.getParameterMap());
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
         return object;
     }

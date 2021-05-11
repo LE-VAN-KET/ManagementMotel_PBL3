@@ -17,7 +17,7 @@
     <div id="particles-js"></div>
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center h-100">
-            <div class="col-lg-4 col-sm-8 card-login">
+            <div class="col-lg-4 col-md-8 col-xs-8 col-sm-8 card-login">
                 <div class="card">
                     <div class="card-header login text-white text-center">
                         <div class="photo"></div>

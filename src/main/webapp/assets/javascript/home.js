@@ -12,6 +12,22 @@
             }
         });
     });
+    let btn = $('#back-to-top');
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    $('#back-to-top').on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({
+            scrollTop: 0
+        }, 300);
+    });
 
     //Animation
 
@@ -31,13 +47,11 @@
     });
 
     $(document).ready(function () {
-        $('nav li a').click(function(e) {
+        $('nav li a').click(function() {
 
             $('nav li.active').removeClass('active');
-
             let $parent = $(this).parent();
             $parent.addClass('active');
-            e.preventDefault();
         });
         $('a.post-sort').click(function(e) {
 

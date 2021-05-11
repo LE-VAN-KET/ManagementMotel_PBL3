@@ -87,7 +87,7 @@
     <script>
         if (${!ERRORS.isEmpty()}) {
             <c:forEach items="${ERRORS}" var="error">
-            toastr.error('${error}', 'Error!');
+                toastr.error('${error}', 'Error!');
             </c:forEach>
         }
 

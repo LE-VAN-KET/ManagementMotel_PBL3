@@ -5,16 +5,34 @@ import java.sql.Timestamp;
 public class PostModel extends AbstractModel {
     private Long postId;
     private String title;
-    private String desciption;
+    private String description;
     private String linkImages;
     private Double price;
     private Long square;
     private String address;
-    private String villageId;
-    private Long userId;
+//    private Long villageId;
+//    private Long userId;
     private Boolean statusPost;
     private Boolean statusRental;
     private Timestamp publishedAt;
+    private UserModel userModel;
+    private VillageModel villageModel;
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
+    public VillageModel getVillageModel() {
+        return villageModel;
+    }
+
+    public void setVillageModel(VillageModel villageModel) {
+        this.villageModel = villageModel;
+    }
 
     public Long getPostId() {
         return postId;
@@ -32,12 +50,12 @@ public class PostModel extends AbstractModel {
         this.title = title;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLinkImages() {
@@ -72,30 +90,6 @@ public class PostModel extends AbstractModel {
         this.address = address;
     }
 
-    public String getVillageId() {
-        return villageId;
-    }
-
-    public void setVillageId(String villageId) {
-        this.villageId = villageId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Timestamp getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(Timestamp publishedAt) {
-        this.publishedAt = publishedAt;
-    }
-
     public Boolean getStatusPost() {
         return statusPost;
     }
@@ -110,5 +104,13 @@ public class PostModel extends AbstractModel {
 
     public void setStatusRental(Boolean statusRental) {
         this.statusRental = statusRental;
+    }
+
+    public Timestamp getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(Timestamp publishedAt) {
+        this.publishedAt = publishedAt;
     }
 }
