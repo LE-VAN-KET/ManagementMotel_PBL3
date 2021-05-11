@@ -16,7 +16,6 @@ import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import constant.GoogleAPIConstant;
-import controller.DriveQuickstart;
 import org.apache.commons.fileupload.FileItem;
 
 import java.io.FileNotFoundException;
@@ -41,7 +40,7 @@ public class UploadFileUtil {
      */
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
-        InputStream in = DriveQuickstart.class.getResourceAsStream(GoogleAPIConstant.CLIENT_SECRET_FILE_NAME);
+        InputStream in = UploadFileUtil.class.getResourceAsStream(GoogleAPIConstant.CLIENT_SECRET_FILE_NAME);
         if (in == null) {
             throw new FileNotFoundException("Resource not found: " + GoogleAPIConstant.CLIENT_SECRET_FILE_NAME);
         }
