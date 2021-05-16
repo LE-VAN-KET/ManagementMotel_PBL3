@@ -114,7 +114,7 @@ public class UploadFileUtil {
                 .setPageSize(1)
                 .execute();
         List<File> files = result.getFiles();
-        System.out.println(files.get(0).getWebViewLink());
+//        System.out.println(files.get(0).getWebViewLink());
         return files.isEmpty() ? null: files.get(0).getId();
     }
 }

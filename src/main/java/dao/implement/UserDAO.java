@@ -15,14 +15,14 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
 
     @Override
     public UserModel findOne(Long userId) {
-        String sql = "SELECT * FROM users WHERE userId = ?";
+        String sql = "SELECT * FROM users WHERE userId = ? LIMIT 1";
         List<UserModel> users = query(sql, new UserMapper(), userId);
         return users.isEmpty() ? null : users.get(0);
     }
 
     @Override
     public UserModel findEmailUser(String email) {
-        String sql = "SELECT * FROM users WHERE email = ?";
+        String sql = "SELECT * FROM users WHERE email = ? LIMIT 1";
         List<UserModel> users = query(sql, new UserMapper(), email);
         return users.isEmpty() ? null: users.get(0);
     }

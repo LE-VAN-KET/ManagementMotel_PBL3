@@ -36,7 +36,7 @@
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
                         </ul>
-                        <a type="button" href="/new-post" class="animated-dang-tin btn btn-white ml-3"
+                        <a type="button" href="/post?action=add" class="animated-dang-tin btn btn-white ml-3"
                            style="color: #111;">
                             <span></span>
                             <span></span>

@@ -35,7 +35,7 @@
                     </h4>
                     <div class="box-search">
                         <div class="container">
-                            <form action="" class="form-search row">
+                            <form action="/home" class="form-search row" method="post" id="formSearch">
                                 <div class="col-10 row">
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="district">District</label>
@@ -57,17 +57,17 @@
                                         <label for="square">Square metre</label>
                                         <select name="khu-vuc" id="square"
                                             class="form-control form-control-outline-none">
-                                            <option value="all">All</option>
-                                            <option value="1">Dưới 20m2</option>
-                                            <option value="2">20m2 - 30m2</option>
-                                            <option value="3">30m2 - 40m2</option>
-                                            <option value="4">40m2 - 50m2</option>
-                                            <option value="5">50m2 - 60m2</option>
-                                            <option value="6">60m2 - 70m2</option>
-                                            <option value="7">70m2 - 80m2</option>
-                                            <option value="8">80m2 - 90m2</option>
-                                            <option value="9">90m2 - 100m2</option>
-                                            <option value="10">Trên 100m2</option>
+                                            <option value="all" data-square="all">All</option>
+                                            <option value="1" data-square="<=20">Dưới 20m2</option>
+                                            <option value="2" data-square="20-30">20m2 - 30m2</option>
+                                            <option value="3" data-square="30-40">30m2 - 40m2</option>
+                                            <option value="4" data-square="40-50">40m2 - 50m2</option>
+                                            <option value="5" data-square="50-60">50m2 - 60m2</option>
+                                            <option value="6" data-square="60-70">60m2 - 70m2</option>
+                                            <option value="7" data-square="70-80">70m2 - 80m2</option>
+                                            <option value="8" data-square="80-90">80m2 - 90m2</option>
+                                            <option value="9" data-square="90-100">90m2 - 100m2</option>
+                                            <option value="10" data-square=">=100">Trên 100m2</option>
                                         </select>
                                     </div>
 
@@ -75,18 +75,21 @@
                                         <label for="price">Price</label>
                                         <select name="khu-vuc" id="price"
                                             class="form-control form-control-outline-none">
-                                            <option value="all">All</option>
-                                            <option value="1">&lt; 500K</option>
-                                            <option value="2">500K - 1 triệu</option>
-                                            <option value="3">1 triệu - 1 triệu 5</option>
-                                            <option value="4">1 triệu 5 - 2 triệu</option>
-                                            <option value="5">2 triệu - 3 triệu</option>
-                                            <option value="6">3 triệu - 4 triệu</option>
-                                            <option value="7">4 triệu - 5 triệu</option>
-                                            <option value="8">&gt; 5 triệu</option>
+                                            <option value="all" data-price="all">All</option>
+                                            <option value="1" data-price="<=500000">&lt; 500K</option>
+                                            <option value="2" data-price="500000-1000000">500K - 1 triệu</option>
+                                            <option value="3" data-price="1000000-1500000">1 triệu - 1 triệu 5</option>
+                                            <option value="4" data-price="1500000-2000000">1 triệu 5 - 2 triệu</option>
+                                            <option value="5" data-price="2000000-3000000">2 triệu - 3 triệu</option>
+                                            <option value="6" data-price="3000000-4000000">3 triệu - 4 triệu</option>
+                                            <option value="7" data-price="4000000-5000000">4 triệu - 5 triệu</option>
+                                            <option value="8" data-price=">=5000000">&gt; 5 triệu</option>
                                         </select>
                                     </div>
                                 </div>
+                                <input type="text" name="data-square" hidden>
+                                <input type="text" name="data-price" hidden>
+                                <input type="number" name="villageId" hidden>
                                 <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 position-relative">
                                     <button type="submit" class="btn btn-primary btn-search"><i
                                             class="fab fa-searchengin mr-1"></i>Search</button>
@@ -111,7 +114,7 @@
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="row mx-0 detail-list">
                                 <div class="col-6 p-0">
-                                    <a href="#">
+                                    <a href="/post?action=show&&postId=${postModels.postId}">
                                         <img class="img-fluid lazyload"
                                              data-src="https://drive.google.com/uc?export=view&id=${postModels.linkImages}"
                                              style="width: 100%; height: 200px" alt="...">
@@ -119,7 +122,7 @@
                                 </div>
                                 <div class="info-real col-6">
                                     <h5>
-                                        <a href="#">
+                                        <a href="/post?action=show&&postId=${postModels.postId}">
                                             ${postModels.title}
                                         </a>
                                     </h5>
@@ -316,6 +319,13 @@
                 if (districtId == 0) {
                     $('#village').append("<option value='All' data-id=0>All</option>");
                 }
+            })
+
+            //set value param square and price when recieve event submit form
+            $("#formSearch").submit(() => {
+                $("input[name='data-square']").val($("#square option:selected").data("square"));
+                $("input[name='data-price']").val($("#price option:selected").data("price"));
+                $("input[name='villageId']").val($("#village option:selected").data("id"));
             })
         })
     </script>
