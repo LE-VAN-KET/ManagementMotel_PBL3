@@ -26,10 +26,24 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String districtId = req.getParameter("villageId");
+        String square = req.getParameter("data-square");
+        String price = req.getParameter("data-price");
         List<DistrictModel> districtModels = districtService.selectViewAll();
-        List<PostModel> postModels = postService.selectAll();
-        for (PostModel post: postModels) {
-            post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
+        List<PostModel> postModels = null;
+
+        try {
+            if (districtId != null || square != null || price != null) {
+                postModels = postService.findByParameters(districtId, square, price);
+            } else {
+                postModels = postService.selectAll();
+            }
+
+            for (PostModel post: postModels) {
+                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         req.setAttribute(SystemConstant.POSTMODELS, postModels);
         req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
@@ -38,20 +52,6 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String districtId = req.getParameter("villageId");
-        String square = req.getParameter("data-square");
-        String price = req.getParameter("data-price");
-        try {
-            List<DistrictModel> districtModels = districtService.selectViewAll();
-            List<PostModel> postModels = postService.findByParameters(districtId, square,price);
-            for (PostModel post: postModels) {
-                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
-            }
-            req.setAttribute(SystemConstant.POSTMODELS, postModels);
-            req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
-            req.getRequestDispatcher("/views/client/layouts/Home.jsp").forward(req, resp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 }

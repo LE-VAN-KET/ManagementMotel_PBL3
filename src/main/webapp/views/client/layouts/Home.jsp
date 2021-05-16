@@ -35,7 +35,7 @@
                     </h4>
                     <div class="box-search">
                         <div class="container">
-                            <form action="/home" class="form-search row" method="post" id="formSearch">
+                            <form action="/home" class="form-search row" method="get" id="formSearch">
                                 <div class="col-10 row">
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="district">District</label>
