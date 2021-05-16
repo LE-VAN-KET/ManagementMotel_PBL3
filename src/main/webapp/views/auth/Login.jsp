@@ -69,9 +69,13 @@
                     </div>
                     <div class = "text-center pb-2">
                         <small class = "">Don't have an account?</small>
-                        <a href="/register" class="text-primary font-weight-bold text-decoration-none" style="font-size: 14px">Register</a>
+                        <a href="/register" class="text-primary font-weight-bold text-decoration-none" style="font-size: 14px">
+                            Register Account
+                        </a>
                     </div>
-                    <a href="/forgot-password" class="text-center text-primary pb-2 text-decoration-none" style="font-size: 15px">I forgot password</a>
+                    <a href="/forgot-password" class="text-center text-primary pb-2 text-decoration-none" style="font-size: 15px">
+                        I forgot password
+                    </a>
                 </div>
             </div>
         </div>

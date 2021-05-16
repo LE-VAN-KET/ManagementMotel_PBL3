@@ -5,7 +5,9 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 public class EmailUtil {
@@ -39,6 +41,45 @@ public class EmailUtil {
         msg.setSentDate(new Date());
         msg.setContent(message);
 
-        Transport.send(msg);
+//        Transport.send(msg);
+        MailSender.queue(msg);
+    }
+}
+
+class MailSender extends Thread {
+    static {
+        MailSender sender = new MailSender();
+        sender.start();
+    }
+
+    static final List<Message> _queue = new ArrayList<>();
+
+    public static void queue(Message mail) {
+        // avoid deadlock
+        synchronized (_queue) {
+            _queue.add(mail);
+            _queue.notify();
+        }
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                synchronized (_queue) {
+                    if (_queue.size() > 0) {
+                        Message  mail = _queue.remove(0);
+                        Transport.send(mail);
+                    } else {
+                        _queue.wait();
+                    }
+                }
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+                break;
+            }
+        }
     }
 }

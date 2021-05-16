@@ -1,5 +1,5 @@
 <script src="${contextPath}/assets/javascript/jquery.min.js"></script>
-<script src="${contextPath}/assets/javascript/jquery-3.4.1.slim.min.js"></script>
+<%--<script src="${contextPath}/assets/javascript/jquery-3.4.1.slim.min.js"></script>--%>
 <script src="${contextPath}/assets/javascript/popper.min.js"></script>
 <script src="${contextPath}/assets/javascript/bootstrap.min.js"></script>
 <script src="${contextPath}/assets/javascript/toastr.min.js"></script>
