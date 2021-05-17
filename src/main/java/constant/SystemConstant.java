@@ -9,4 +9,6 @@ public class SystemConstant {
     public static final int SALT = 12;
     public static final String DISTRICTSMODELS = "DISTRICTMODELS";
     public static final String POSTMODELS = "POSTMODELS";
+    public static final String PAGEABLE = "PAGEABLE";
+    public static final Integer MAXPAGEITEM = 10;
 }

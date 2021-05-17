@@ -2,11 +2,11 @@ package service.implement;
 
 import bean.PostModel;
 import dao.IPostDAO;
+import paging.Pageble;
 import service.IPostService;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
-import java.sql.Timestamp;
 import java.util.List;
 
 @ManagedBean
@@ -42,13 +42,13 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<PostModel> selectAll() {
-        return postDAO.selectAll();
+    public List<PostModel> selectAll(Pageble pageble) {
+        return postDAO.selectAll(pageble);
     }
 
     @Override
-    public List<PostModel> findByVillageId(Long villageId) {
-        return postDAO.findByVillageId(villageId);
+    public List<PostModel> findByVillageId(Long villageId, Pageble pageble) {
+        return postDAO.findByVillageId(villageId, pageble);
     }
 
     private boolean isExpression(String str) {
@@ -56,7 +56,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<PostModel> findByParameters(String villageId, String square, String price) {
+    public List<PostModel> findByParameters(String villageId, String square, String price, Pageble pageble) {
         Long _villageId = Long.parseLong(villageId);
         List<PostModel> postModels = null;
         String[] priceOptions = price.split("-");
@@ -65,34 +65,34 @@ public class PostService implements IPostService {
         switch (validateParamsFind(_villageId, square, price)) {
             case 0:
                 // findByVillageId
-                postModels = findByVillageId(_villageId);
+                postModels = findByVillageId(_villageId, pageble);
                 break;
             case 1:
 //                findByVillageIdAndPrice
                 if (isExpression(price)) {
-                    postModels = postDAO.findByVillageIdAndExpressionPrice(_villageId, price);
+                    postModels = postDAO.findByVillageIdAndExpressionPrice(_villageId, price, pageble);
                 } else {
                     postModels = postDAO.findByVillageIdAndPrice(_villageId, Double.parseDouble(priceOptions[0]),
-                            Double.parseDouble(priceOptions[priceOptions.length - 1]));
+                            Double.parseDouble(priceOptions[priceOptions.length - 1]), pageble);
                 }
                 break;
             case 2:
                 // findByVillageIdAndSquare
                 if (isExpression(square)) {
-                    postModels = postDAO.findByVillageIdAndExpressionSquare(_villageId, square);
+                    postModels = postDAO.findByVillageIdAndExpressionSquare(_villageId, square, pageble);
                 } else {
                     postModels = postDAO.findByVillageIdAndSquare(_villageId, Long.parseLong(squareOptions[0]),
-                            Long.parseLong(squareOptions[squareOptions.length - 1]));
+                            Long.parseLong(squareOptions[squareOptions.length - 1]), pageble);
                 }
                 break;
             case 3:
                 // selectAllPost
-                postModels = selectAll();
+                postModels = selectAll(pageble);
                 break;
             case 4:
                 // findBySquareAndPrice
                 if (isExpression(square) && isExpression(price)) {
-                    postModels = postDAO.findByExpressionPrice_ExpressionSquare(square, price);
+                    postModels = postDAO.findByExpressionPrice_ExpressionSquare(square, price, pageble);
                     break;
                 }
 
@@ -100,7 +100,7 @@ public class PostService implements IPostService {
                     postModels = postDAO.findByPriceAndSquare(Double.parseDouble(priceOptions[0]),
                             Double.parseDouble(priceOptions[priceOptions.length - 1]),
                             Long.parseLong(squareOptions[0]),
-                            Long.parseLong(squareOptions[squareOptions.length - 1]));
+                            Long.parseLong(squareOptions[squareOptions.length - 1]), pageble);
                     break;
                 }
 
@@ -108,31 +108,31 @@ public class PostService implements IPostService {
                     // express square
                     postModels = postDAO.findByPrice_ExpressionSquare(Double.parseDouble(priceOptions[0]),
                             Double.parseDouble(priceOptions[priceOptions.length - 1]),
-                            square);
+                            square, pageble);
                     break;
                 }
 
                 postModels = postDAO.findByExpressionPrice_Square(price, Long.parseLong(squareOptions[0]),
-                        Long.parseLong(squareOptions[squareOptions.length - 1]));
+                        Long.parseLong(squareOptions[squareOptions.length - 1]), pageble);
                 break;
             case 5:
                 // findByPrice
                 if (isExpression(price)) {
                     // express price
-                    postModels = postDAO.findByExpressionPrice(price);
+                    postModels = postDAO.findByExpressionPrice(price, pageble);
                 } else {
                     postModels = postDAO.findByPrice(Double.parseDouble(priceOptions[0]),
-                            Double.parseDouble(priceOptions[priceOptions.length - 1]));
+                            Double.parseDouble(priceOptions[priceOptions.length - 1]), pageble);
                 }
                 break;
             default:
                 // findBySquare
                 if (isExpression(square)) {
                     // express price
-                    postModels = postDAO.findByExpressionSquare(square);
+                    postModels = postDAO.findByExpressionSquare(square, pageble);
                 } else {
                     postModels = postDAO.findBySquare(Long.parseLong(squareOptions[0]),
-                            Long.parseLong(squareOptions[squareOptions.length - 1]));
+                            Long.parseLong(squareOptions[squareOptions.length - 1]), pageble);
                 }
                 break;
         }
@@ -168,5 +168,10 @@ public class PostService implements IPostService {
         } else {
             return 6; // findBySquare
         }
+    }
+
+    @Override
+    public int getTotalItem() {
+        return postDAO.getTotalItem();
     }
 }

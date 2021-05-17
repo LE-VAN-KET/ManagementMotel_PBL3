@@ -13,7 +13,7 @@ public class AccountDAO extends AbstractDAO<AccountModel> implements IAccountDAO
         StringBuilder sql = new StringBuilder("SELECT * FROM account AS acc");
         sql.append(" INNER JOIN users AS u ON u.userId = acc.userId");
         sql.append(" INNER JOIN role AS r ON r.roleId = u.roleId");
-        sql.append(" WHERE username = ?");
+        sql.append(" WHERE username = ? LIMIT 1");
         List<AccountModel> accounts = query(sql.toString(), new AccountMapper(), username);
         return accounts.isEmpty() ? null : accounts.get(0);
     }
@@ -23,7 +23,7 @@ public class AccountDAO extends AbstractDAO<AccountModel> implements IAccountDAO
         StringBuilder sql = new StringBuilder("SELECT * FROM account AS acc");
         sql.append(" INNER JOIN users AS u ON u.userId = acc.userId");
         sql.append(" INNER JOIN role AS r ON r.roleId = u.roleId");
-        sql.append(" WHERE u.email = ?");
+        sql.append(" WHERE u.email = ? LIMIT 1");
         List<AccountModel> accounts = query(sql.toString(), new AccountMapper(), email);
         return accounts.isEmpty() ? null : accounts.get(0);
     }

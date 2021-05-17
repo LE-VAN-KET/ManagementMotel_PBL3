@@ -39,24 +39,13 @@ public class PostController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        switch (action) {
-            case "show":
-//                Long postId = Long.parseLong(req.getParameter("postId"));
-//                PostModel postModel = postService.finOne
-                req.getRequestDispatcher("/views/client/layouts/DetailPost.jsp").forward(req, resp);
-                break;
-            case "add":
-                break;
-            case "update":
-                break;
-            case "delete":
-                break;
-            default:
-                List<DistrictModel> districtModels = districtService.selectViewAll();
-                req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
-                req.setAttribute("ACCOUNTMODEL",  SessionUtil.getInstance().getValue(req,"ACCOUNTMODEL"));
-                req.getRequestDispatcher("/views/client/layouts/Post-article.jsp").forward(req, resp);
-                break;
+        if ("show".equals(action)) {
+            req.getRequestDispatcher("/views/client/layouts/DetailPost.jsp").forward(req, resp);
+        } else {
+            List<DistrictModel> districtModels = districtService.selectViewAll();
+            req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
+            req.setAttribute("ACCOUNTMODEL",  SessionUtil.getInstance().getValue(req,"ACCOUNTMODEL"));
+            req.getRequestDispatcher("/views/client/layouts/Post-article.jsp").forward(req, resp);
         }
     }
 

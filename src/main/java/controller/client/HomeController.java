@@ -3,8 +3,10 @@ package controller.client;
 import bean.DistrictModel;
 import bean.PostModel;
 import constant.SystemConstant;
+import paging.Pageble;
 import service.IDistrictService;
 import service.IPostService;
+import utils.FormUtil;
 import utils.UploadFileUtil;
 
 import javax.inject.Inject;
@@ -26,17 +28,24 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String districtId = req.getParameter("villageId");
-        String square = req.getParameter("data-square");
-        String price = req.getParameter("data-price");
+        String villageId = req.getParameter("village");
+        String square = req.getParameter("square");
+        String price = req.getParameter("price");
         List<DistrictModel> districtModels = districtService.selectViewAll();
         List<PostModel> postModels = null;
+        Pageble pageble = FormUtil.toModel(Pageble.class, req);
+        pageble.setTotalItem(postService.getTotalItem());
+        pageble.setMaxPageItem(SystemConstant.MAXPAGEITEM);
+
+        if (pageble.getPage() == null) {
+            pageble.setPage(1);
+        }
 
         try {
-            if (districtId != null || square != null || price != null) {
-                postModels = postService.findByParameters(districtId, square, price);
+            if (villageId != null || square != null || price != null) {
+                postModels = postService.findByParameters(villageId, square, price, pageble);
             } else {
-                postModels = postService.selectAll();
+                postModels = postService.selectAll(pageble);
             }
 
             for (PostModel post: postModels) {
@@ -45,6 +54,7 @@ public class HomeController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        req.setAttribute(SystemConstant.PAGEABLE, pageble);
         req.setAttribute(SystemConstant.POSTMODELS, postModels);
         req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
         req.getRequestDispatcher("/views/client/layouts/Home.jsp").forward(req, resp);
