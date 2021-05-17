@@ -12,11 +12,7 @@
 
 <head>
     <title>Title</title>
-    <link href="${contextPath}/assets/css/home.css" rel="stylesheet">
-    <link href="${contextPath}/assets/css/fonts.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <%@include file="../../../common/csslib.jsp"%>
     <link rel="stylesheet" href="${contextPath}/assets/css/slideShowImages.css">
     <link rel="stylesheet" href="${contextPath}/assets/css/detailPost.css">
 </head>
@@ -169,14 +165,12 @@
     <!-- footer -->
     <%@include file="../components/footer.jsp"%>
 
-    <!-- Back to top button -->
-    <a id="back-to-top"></a>
-    <script src="${contextPath}/assets/javascript/jquery.min.js"></script>
-    <script src="${contextPath}/assets/javascript/jquery-3.4.1.slim.min.js"></script>
-    <script src="${contextPath}/assets/javascript/popper.min.js"></script>
-    <script src="${contextPath}/assets/javascript/bootstrap.min.js"></script>
-    <script src="${contextPath}/assets/javascript/lazyloading.min.js"></script>
-    <script src="../../../assets/javascript/home.js"></script>
+    <script src="${contextPath}/assets/javascript/template/jquery.min.js"></script>
+<%--    <script src="${contextPath}/assets/javascript/jquery-3.2.1.slim.min.js"></script>--%>
+    <script src="${contextPath}/assets/javascript/template/bootstrap/popper.min.js"></script>
+    <script src="${contextPath}/assets/javascript/template/bootstrap.min.js"></script>
+    <script src="${contextPath}/assets/javascript/template/lazyloading.min.js"></script>
+    <script src="../../../assets/javascript/navigation.js"></script>
     <script src="../../../assets/javascript/slideShow.js"></script>
     <script>
         $(document).ready(function () {

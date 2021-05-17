@@ -17,6 +17,7 @@
     <title>Phong Tro Da Nang</title>
     <link href="${contextPath}/assets/css/home.css" rel="stylesheet">
     <%@include file="../../../common/csslib.jsp"%>
+    <link rel="stylesheet" href="${contextPath}/assets/css/template/pagination.min.css">
 </head>
 
 <body class="hero-anime">
@@ -39,7 +40,7 @@
                                 <div class="col-10 row">
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="district">District</label>
-                                        <select name="khu-vuc" id="district"
+                                        <select name="district" id="district"
                                             class="form-control form-control-outline-none">
                                             <option value="all" data-id=0>All</option>
                                         </select>
@@ -47,49 +48,51 @@
 
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="village">Village</label>
-                                        <select name="khu-vuc" id="village"
+                                        <select name="village" id="village"
                                             class="form-control form-control-outline-none">
-                                            <option value="all" data-id=0>All</option>
+                                            <option value="0" data-id=0>All</option>
                                         </select>
                                     </div>
 
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="square">Square metre</label>
-                                        <select name="khu-vuc" id="square"
+                                        <select name="square" id="square"
                                             class="form-control form-control-outline-none">
                                             <option value="all" data-square="all">All</option>
-                                            <option value="1" data-square="<=20">Dưới 20m2</option>
-                                            <option value="2" data-square="20-30">20m2 - 30m2</option>
-                                            <option value="3" data-square="30-40">30m2 - 40m2</option>
-                                            <option value="4" data-square="40-50">40m2 - 50m2</option>
-                                            <option value="5" data-square="50-60">50m2 - 60m2</option>
-                                            <option value="6" data-square="60-70">60m2 - 70m2</option>
-                                            <option value="7" data-square="70-80">70m2 - 80m2</option>
-                                            <option value="8" data-square="80-90">80m2 - 90m2</option>
-                                            <option value="9" data-square="90-100">90m2 - 100m2</option>
-                                            <option value="10" data-square=">=100">Trên 100m2</option>
+                                            <option value="<=20" data-square="<=20">Dưới 20m2</option>
+                                            <option value="20-30" data-square="20-30">20m2 - 30m2</option>
+                                            <option value="30-40" data-square="30-40">30m2 - 40m2</option>
+                                            <option value="40-50" data-square="40-50">40m2 - 50m2</option>
+                                            <option value="50-60" data-square="50-60">50m2 - 60m2</option>
+                                            <option value="60-70" data-square="60-70">60m2 - 70m2</option>
+                                            <option value="70-80" data-square="70-80">70m2 - 80m2</option>
+                                            <option value="80-90" data-square="80-90">80m2 - 90m2</option>
+                                            <option value="90-100" data-square="90-100">90m2 - 100m2</option>
+                                            <option value=">=100" data-square=">=100">Trên 100m2</option>
                                         </select>
                                     </div>
 
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="price">Price</label>
-                                        <select name="khu-vuc" id="price"
+                                        <select name="price" id="price"
                                             class="form-control form-control-outline-none">
                                             <option value="all" data-price="all">All</option>
-                                            <option value="1" data-price="<=500000">&lt; 500K</option>
-                                            <option value="2" data-price="500000-1000000">500K - 1 triệu</option>
-                                            <option value="3" data-price="1000000-1500000">1 triệu - 1 triệu 5</option>
-                                            <option value="4" data-price="1500000-2000000">1 triệu 5 - 2 triệu</option>
-                                            <option value="5" data-price="2000000-3000000">2 triệu - 3 triệu</option>
-                                            <option value="6" data-price="3000000-4000000">3 triệu - 4 triệu</option>
-                                            <option value="7" data-price="4000000-5000000">4 triệu - 5 triệu</option>
-                                            <option value="8" data-price=">=5000000">&gt; 5 triệu</option>
+                                            <option value="<=500000" data-price="<=500000">&lt; 500K</option>
+                                            <option value="500000-1000000" data-price="500000-1000000">500K - 1 triệu</option>
+                                            <option value="1000000-1500000" data-price="1000000-1500000">1 triệu - 1 triệu 5</option>
+                                            <option value="1500000-2000000" data-price="1500000-2000000">1 triệu 5 - 2 triệu</option>
+                                            <option value="2000000-3000000" data-price="2000000-3000000">2 triệu - 3 triệu</option>
+                                            <option value="3000000-4000000" data-price="3000000-4000000">3 triệu - 4 triệu</option>
+                                            <option value="4000000-5000000" data-price="4000000-5000000">4 triệu - 5 triệu</option>
+                                            <option value=">=5000000" data-price=">=5000000">&gt; 5 triệu</option>
                                         </select>
                                     </div>
                                 </div>
-                                <input type="text" name="data-square" hidden>
-                                <input type="text" name="data-price" hidden>
-                                <input type="number" name="villageId" hidden>
+<%--                                <input type="text" name="data-square" hidden>--%>
+<%--                                <input type="text" name="data-price" hidden>--%>
+<%--                                <input type="number" name="villageId" hidden>--%>
+                                <input type="hidden" value="1" name = "page" id = "page">
+<%--                                <input type="hidden" value="" name = "maxPageItem" id = "maxPageItem">--%>
                                 <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 position-relative">
                                     <button type="submit" class="btn btn-primary btn-search"><i
                                             class="fab fa-searchengin mr-1"></i>Search</button>
@@ -121,21 +124,21 @@
                                     </a>
                                 </div>
                                 <div class="info-real col-6">
-                                    <h5>
+                                    <h6>
                                         <a href="/post?action=show&&postId=${postModels.postId}">
                                             ${postModels.title}
                                         </a>
-                                    </h5>
+                                    </h6>
                                     <p class="p-1 m-0">
-                                        <i class="fas fa-dollar-sign"></i>
+                                        <i class="fas fa-dollar-sign text-info"></i>
                                         Giá:
                                         <strong>
                                             ${postModels.price} ₫ / Tháng
                                         </strong>
                                     </p>
-                                    <p class="p-1 m-0"><i class="far fa-building"></i> Diện tích:
+                                    <p class="p-1 m-0"><i class="far fa-building text-info"></i> Diện tích:
                                         <strong>${postModels.square}m<sup>2</sup></strong></p>
-                                    <p class="p-1 m-0"><i class="fas fa-map-marker-alt"></i><span> Khu vực:
+                                    <p class="p-1 m-0"><i class="fas fa-map-marker-alt text-info"></i><span> Khu vực:
                                     <strong>${postModels.villageModel.villageName}-${postModels.villageModel.districtModel.districtName}</strong>
                                 </span></p>
                                 </div>
@@ -144,7 +147,10 @@
                         </div>
                     </c:forEach>
                 </c:if>
-
+            </div>
+            <div class="box">
+                <ul id="pagination" class="pagination"></ul>
+                <div class="show"></div>
             </div>
         </div>
     </section>
@@ -287,16 +293,19 @@
     <!-- footer -->
     <%@include file="../components/footer.jsp"%>
 
-    <!-- Back to top button -->
-    <a id="back-to-top"></a>
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/home.js"></script>
+    <script src="../../../assets/javascript/template/pagination.min.js"></script>
     <script>
         if (${!DISTRICTSMODELS.isEmpty()}) {
             // set list district option
             <c:forEach items="${DISTRICTMODELS}" var="district">
                 $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
             </c:forEach>
+        }
+
+        if (${POSTMODELS.isEmpty()}) {
+            toastr.info("No posts found", "Notification:");
         }
 
         $(document).ready(function () {
@@ -309,7 +318,7 @@
                         if (${!district.listVillage.isEmpty()}) {
                             <c:forEach items="${district.listVillage}" var="village">
                             $('#village').append("<option data-id = ${village.villageId} " +
-                                "value='${village.villageName}'>${village.villageName}</option>");
+                                "value='${village.villageId}'>${village.villageName}</option>");
                             </c:forEach>
                         } else {
                             $('#village').append("<option value='All' data-id = 0 >All</option>");
@@ -323,10 +332,33 @@
 
             //set value param square and price when recieve event submit form
             $("#formSearch").submit(() => {
-                $("input[name='data-square']").val($("#square option:selected").data("square"));
-                $("input[name='data-price']").val($("#price option:selected").data("price"));
-                $("input[name='villageId']").val($("#village option:selected").data("id"));
+                // $("input[name='data-square']").val($("#square option:selected").data("square"));
+                // $("input[name='data-price']").val($("#price option:selected").data("price"));
+                // $("input[name='villageId']").val($("#village option:selected").data("id"));
             })
+
+            $('#pagination').pagination({
+                total: ${PAGEABLE.totalItem}, // 总数据条数
+                current: ${PAGEABLE.page}, // 当前页码
+                length: ${PAGEABLE.maxPageItem}, // 每页数据量
+                size: 2, // 显示按钮个数
+                /**
+                 * [click description]
+                 * @param  {[object]} options = {
+                 *      current: options.current,
+                 *      length: options.length,
+                 *      total: options.total
+                 *  }
+                 * @param  {[object]} $target [description]
+                 * @return {[type]}         [description]
+                 */
+                click: function(options,$target) { // 点击按钮事件
+                    $("#page").val(options.current);
+                    // $("#maxPageItem").val(options.length);
+                    $("#formSearch").submit();
+                }
+            });
+
         })
     </script>
 </body>

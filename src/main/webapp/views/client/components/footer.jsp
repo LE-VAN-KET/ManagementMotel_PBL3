@@ -10,27 +10,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12">
-                <h5>Absout Us</h5>
+                <h5 class="text-primary">Absout Us</h5>
                 <ul>
                     <li>
-                        <i class="far fa-address-card mr-1"></i>
+                        <i class="far fa-address-card mr-1 text-primary"></i>
                         <span>Address: </span>
                         <small>K8/10 Đồng kè, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng</small>
                     </li>
                     <li>
-                        <i class="fas fa-phone-volume"></i>
+                        <i class="fas fa-phone-volume text-success"></i>
                         <span>Phone: </span>
                         <small>0328560055 - 0906589823</small>
                     </li>
                     <li>
-                        <i class="far fa-envelope"></i>
+                        <i class="far fa-envelope text-danger"></i>
                         <span>Email: </span>
                         <small>anhle1512001@gmail.com</small>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-8 col-md-6 col-xs-12 col-sm-12 row">
-                <h5 class="col-12">Phòng Trọ, Nhà Trọ</h5>
+                <h5 class="col-12 text-primary">Phòng Trọ, Nhà Trọ</h5>
                 <ul class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
                     <li>
                         <a href="#">Phòng trọ Liên chiểu</a>
@@ -58,6 +58,8 @@
                 </ul>
             </div>
         </div>
-        <p class="text-center py-2 m-0">Copyright @ by Team DUTer: Le van Ket && Nguyen tan Khanh</p>
+        <p class="text-center py-2 m-0 text-secondary">Copyright @ by Team DUTer: Le van Ket && Nguyen tan Khanh</p>
     </div>
 </footer>
+<%--    <!-- Back to top button -->--%>
+<a href="#" id="back-to-top"><i class="fas fa-arrow-up"></i></a>

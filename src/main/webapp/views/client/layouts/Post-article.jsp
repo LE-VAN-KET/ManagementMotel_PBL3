@@ -11,7 +11,6 @@
 <html>
 <head>
     <title>Đăng tin mới</title>
-    <link href="${contextPath}/assets/css/home.css" rel="stylesheet">
     <%@include file="../../../common/csslib.jsp"%>
 </head>
 <body class="hero-anime">
@@ -32,11 +31,8 @@
     <!-- footer -->
     <%@include file="../components/footer.jsp"%>
 
-    <!-- Back to top button -->
-    <a id="back-to-top"></a>
     <%@include file="../../../common/javasciptlib.jsp"%>
-    <script src="../../../assets/javascript/home.js"></script>
-    <script src="../../../assets/javascript/ckeditor.js"></script>
+    <script src="../../../assets/javascript/template/ckeditor.js"></script>
     <script>
         if (${ACCOUNTMODEL != null}) {
             $("input[name = 'userId']").val(${ACCOUNTMODEL.user.userId});

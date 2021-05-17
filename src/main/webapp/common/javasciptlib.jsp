@@ -1,9 +1,10 @@
-<script src="${contextPath}/assets/javascript/jquery.min.js"></script>
-<%--<script src="${contextPath}/assets/javascript/jquery-3.4.1.slim.min.js"></script>--%>
-<script src="${contextPath}/assets/javascript/popper.min.js"></script>
-<script src="${contextPath}/assets/javascript/bootstrap.min.js"></script>
-<script src="${contextPath}/assets/javascript/toastr.min.js"></script>
-<script src="${contextPath}/assets/javascript/lazyloading.min.js"></script>
+<script src="${contextPath}/assets/javascript/template/jquery.min.js"></script>
+<%--<script src="${contextPath}/assets/javascript/jquery-3.2.1.slim.min.js"></script>--%>
+<script src="${contextPath}/assets/javascript/template/bootstrap/popper.min.js"></script>
+<script src="${contextPath}/assets/javascript/template/bootstrap/bootstrap.min.js"></script>
+<script src="${contextPath}/assets/javascript/template/toastr.min.js"></script>
+<script src="${contextPath}/assets/javascript/template/lazyloading.min.js"></script>
+<script src="${contextPath}/assets/javascript/navigation.js"></script>
 <script>
     toastr.options = {
         "closeButton": false,

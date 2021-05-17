@@ -21,10 +21,13 @@
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
                                 <a class="nav-link" href="#"><i class="fas fa-home mr-1"></i></i>Home</a>
                             </li>
-                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                   aria-haspopup="true" aria-expanded="false">Phòng Trọ</a>
-                                <div class="dropdown-menu  bg-white">
+
+                            <li class="nav-item dropdown dropdown-slide dropdown-hover pl-4 pl-md-0 ml-0 ml-md-4">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Phòng Trọ
+                                    <i class="fas fa-caret-down ml-1"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Liên Chiểu</a>
                                     <a class="dropdown-item" href="#">Thanh Khê</a>
                                     <a class="dropdown-item" href="#">Sơn Trà</a>
@@ -32,10 +35,12 @@
                                     <a class="dropdown-item" href="#">Cẩm Lệ</a>
                                 </div>
                             </li>
+
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
                         </ul>
+
                         <a type="button" href="/post?action=add" class="animated-dang-tin btn btn-white ml-3"
                            style="color: #111;">
                             <span></span>
