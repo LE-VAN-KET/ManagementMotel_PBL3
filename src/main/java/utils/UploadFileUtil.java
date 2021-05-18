@@ -5,7 +5,10 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.InputStreamContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -76,7 +79,19 @@ public class UploadFileUtil {
         if (_driverService == null) {
             try {
                 final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-                _driverService = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                final Credential credential = getCredentials(HTTP_TRANSPORT);
+                _driverService = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+                        .setHttpRequestInitializer(new HttpRequestInitializer() {
+
+                            @Override
+                            public void initialize(HttpRequest httpRequest) throws IOException {
+
+                                credential.initialize(httpRequest);
+                                httpRequest.setConnectTimeout(3 * 60000);  // 300 minutes connect timeout
+                                httpRequest.setReadTimeout(3 * 60000);  // 300 minutes read timeout
+
+                            }
+                        })
                         .setApplicationName(GoogleAPIConstant.APPLICATION_NAME)
                         .build();
             } catch (GeneralSecurityException e) {
