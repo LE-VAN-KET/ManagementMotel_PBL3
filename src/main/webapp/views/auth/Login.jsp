@@ -31,7 +31,7 @@
                                        size="18" alt="login" autofocus=''>
                                 <span class="form-highlight"></span>
                                 <span class="form-bar"></span>
-                                <label for="username" class="float-label">Username</label>
+                                <label for="username" class="float-label">Username or email</label>
                                 <erroru>
                                     Email is required
                                     <i>

@@ -10,6 +10,9 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng tin mới</title>
     <%@include file="../../../common/csslib.jsp"%>
 </head>
@@ -34,9 +37,15 @@
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/template/ckeditor.js"></script>
     <script>
+        if (${!ERRORS.isEmpty()}) {
+            <c:forEach items="${ERRORS}" var="error">
+            toastr.error('${error}', 'Error!');
+            </c:forEach>
+        }
+
         if (${ACCOUNTMODEL != null}) {
             $("input[name = 'userId']").val(${ACCOUNTMODEL.user.userId});
-            $("a.singin_up").remove();
+            // $("a.singin_up").remove();
         }
 
         if (${!DISTRICTSMODELS.isEmpty()}) {
@@ -47,12 +56,13 @@
             </c:forEach>
         }
 
+        $('#loading').addClass("show");
+        setTimeout(function () {
+            $('#loading').removeClass("show");
+            $('#loading').addClass("hidden");
+        }, 2000);
+
         $(document).ready(function () {
-            $('#loading').addClass("show");
-            setTimeout(function () {
-                $('#loading').removeClass("show");
-                $('#loading').addClass("hidden");
-            }, 2000);
             // set list village by district
             $("#district").change(() => {
                 const districtId = $( "#district option:selected" ).data('id');

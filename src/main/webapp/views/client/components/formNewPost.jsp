@@ -77,7 +77,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <form action="/new-post" method="POST" id="postForm" role="form"
+                        <form action="/post" method="POST" id="postForm" role="form"
                               enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="title">Tiêu đề: </label><br>

@@ -27,22 +27,20 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-//        check authorization
+//        check authorization admin
         if (url.startsWith("/admin")) {
-            AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(request, "ACCOUNTMODEL");
+            AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(request,
+                    SystemConstant.ACCOUNTMODEL);
             if (accountModel != null) {
                 /*permission access case role that*/
                 switch (accountModel.getUser().getRoleMole().getRoleName()) {
-                    case SystemConstant.LANDLORD: {
-                        response.sendRedirect("/landlord");
-                        break;
-                    }
-/*                    case SystemConstant.ADMIN: {
+                    case SystemConstant.ADMIN: {
                         response.sendRedirect("/admin");
                         break;
-                    }*/
+                    }
+                    case SystemConstant.LANDLORD:
                     case SystemConstant.USER: {
-                        response.sendRedirect("/user");
+                        response.sendRedirect("/home");
                         break;
                     }
                 }
@@ -51,7 +49,7 @@ public class AuthorizationFilter implements Filter {
                 * not permission access, done
                 * redirect /home
                 * */
-                response.sendRedirect("/home");
+                response.sendRedirect("/login?message=not_permission&&alert=danger");
             }
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

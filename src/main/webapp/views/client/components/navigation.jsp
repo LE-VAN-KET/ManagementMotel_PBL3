@@ -39,9 +39,22 @@
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                 <a class="nav-link" href="#">Contact</a>
                             </li>
+                            <c:if test="${ACCOUNTMODEL != null}">
+                                <li class="nav-item dropdown dropdown-slide dropdown-hover pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Setting
+                                        <i class="fas fa-user-cog ml-1 text-primary"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="#">Quản lý bài đăng</a>
+                                        <a class="dropdown-item" href="/edit-profile">Tài khoản</a>
+                                        <a class="dropdown-item" href="#">Log out</a>
+                                    </div>
+                                </li>
+                            </c:if>
                         </ul>
 
-                        <a type="button" href="/post?action=add" class="animated-dang-tin btn btn-white ml-3"
+                        <a type="button" href="/post" class="animated-dang-tin btn btn-white ml-3"
                            style="color: #111;">
                             <span></span>
                             <span></span>
@@ -49,10 +62,12 @@
                             <span></span>
                             Đăng tin
                         </a>
-                        <a type="button" href="/login" class="singin_up text-decoration-none ml-lg-2"><i
-                                class="fas fa-sign-in-alt mr-1"></i>Singin</a>
-                        <a type="button" href="/register" class="singin_up text-decoration-none ml-2"><i
-                                class="fas fa-user-plus mr-1"></i>Singup</a>
+                        <c:if test="${ACCOUNTMODEL == null}">
+                            <a type="button" href="/login" class="singin_up text-decoration-none ml-lg-2"><i
+                                    class="fas fa-sign-in-alt mr-1"></i>Singin</a>
+                            <a type="button" href="/register" class="singin_up text-decoration-none ml-2"><i
+                                    class="fas fa-user-plus mr-1"></i>Singup</a>
+                        </c:if>
                     </div>
 
                 </nav>

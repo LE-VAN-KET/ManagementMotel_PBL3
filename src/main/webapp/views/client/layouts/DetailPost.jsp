@@ -165,12 +165,7 @@
     <!-- footer -->
     <%@include file="../components/footer.jsp"%>
 
-    <script src="${contextPath}/assets/javascript/template/jquery.min.js"></script>
-<%--    <script src="${contextPath}/assets/javascript/jquery-3.2.1.slim.min.js"></script>--%>
-    <script src="${contextPath}/assets/javascript/template/bootstrap/popper.min.js"></script>
-    <script src="${contextPath}/assets/javascript/template/bootstrap.min.js"></script>
-    <script src="${contextPath}/assets/javascript/template/lazyloading.min.js"></script>
-    <script src="../../../assets/javascript/navigation.js"></script>
+    <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/slideShow.js"></script>
     <script>
         $(document).ready(function () {

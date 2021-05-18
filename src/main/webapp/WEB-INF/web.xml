@@ -28,6 +28,55 @@
         <param-name>port</param-name>
         <param-value>587</param-value>
     </context-param>
+
+<!--    Authentication-->
+    <filter>
+        <filter-name>authenticationFilter</filter-name>
+        <filter-class>filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/register</url-pattern>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+
+<!--    Authorization post-->
+    <filter>
+        <filter-name>authorizationPost</filter-name>
+        <filter-class>filter.AuthorizationPostFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authorizationPost</filter-name>
+        <url-pattern>/post</url-pattern>
+    </filter-mapping>
+
+<!--    Authorization edit profile-->
+    <filter>
+        <filter-name>authorizationEditProfile</filter-name>
+        <filter-class>filter.AuthorizationEditProfileFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authorizationEditProfile</filter-name>
+        <url-pattern>/edit-profile</url-pattern>
+    </filter-mapping>
+
+<!--    Authorization user-->
+    <filter>
+        <filter-name>authorizationUser</filter-name>
+        <filter-class>filter.AuthorizationUser</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authorizationUser</filter-name>
+        <url-pattern>/post</url-pattern>
+        <url-pattern>/quan-ly-bai-dang</url-pattern>
+    </filter-mapping>
+
+<!--    error access url-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/views/HandleError.jsp</location>
+    </error-page>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

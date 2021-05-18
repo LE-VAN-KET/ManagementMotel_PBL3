@@ -117,7 +117,7 @@
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="row mx-0 detail-list">
                                 <div class="col-6 p-0">
-                                    <a href="/post?action=show&&postId=${postModels.postId}">
+                                    <a href="/post/show?postId=${postModels.postId}">
                                         <img class="img-fluid lazyload"
                                              data-src="https://drive.google.com/uc?export=view&id=${postModels.linkImages}"
                                              style="width: 100%; height: 200px" alt="...">
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="info-real col-6">
                                     <h6>
-                                        <a href="/post?action=show&&postId=${postModels.postId}">
+                                        <a href="/post/show?postId=${postModels.postId}">
                                             ${postModels.title}
                                         </a>
                                     </h6>
@@ -309,6 +309,9 @@
         }
 
         $(document).ready(function () {
+            if ("${message}" != "" && "${alert}" == "danger") {
+                toastr.error('${message}', 'falied!');
+            }
             // set list village by district
             $("#district").change(() => {
                 const districtId = $( "#district option:selected" ).data('id');
