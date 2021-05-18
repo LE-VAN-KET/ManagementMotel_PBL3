@@ -9,12 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AuthorizationAdminFilter implements Filter {
+public class AuthenticationFilter implements Filter {
     private ServletContext context;
-
-    public AuthorizationAdminFilter() {
-        super();
-    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,13 +18,11 @@ public class AuthorizationAdminFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-//        check authorization admin
-        if (url.startsWith("/admin")) {
+        if (url.startsWith("/register") || url.startsWith("/login")) {
             AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(request,
                     SystemConstant.ACCOUNTMODEL);
             if (accountModel != null) {
@@ -38,21 +32,21 @@ public class AuthorizationAdminFilter implements Filter {
                         response.sendRedirect("/admin");
                         break;
                     }
-                    case SystemConstant.LANDLORD:
-                    case SystemConstant.USER: {
+                    case SystemConstant.USER:
+                    case SystemConstant.LANDLORD: {
                         response.sendRedirect("/home");
                         break;
                     }
+
+                    default:
+                        response.sendRedirect("/home");
+                        break;
                 }
             } else {
-                /*
-                * not permission access, done
-                * redirect /home
-                * */
-                response.sendRedirect("/login?message=not_permission&&alert=danger");
+                chain.doFilter(servletRequest, servletResponse);
             }
         } else {
-            filterChain.doFilter(servletRequest, servletResponse);
+            chain.doFilter(servletRequest, servletResponse);
         }
     }
 

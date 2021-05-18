@@ -9,12 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AuthorizationAdminFilter implements Filter {
-    private ServletContext context;
+public class AuthorizationPostFilter implements Filter {
 
-    public AuthorizationAdminFilter() {
-        super();
-    }
+    private ServletContext context;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,13 +19,16 @@ public class AuthorizationAdminFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-//        check authorization admin
-        if (url.startsWith("/admin")) {
+//        check authorization post
+        if (url.startsWith("/post/show")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
+
+        if (url.startsWith("/post")) {
             AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(request,
                     SystemConstant.ACCOUNTMODEL);
             if (accountModel != null) {
@@ -38,17 +38,20 @@ public class AuthorizationAdminFilter implements Filter {
                         response.sendRedirect("/admin");
                         break;
                     }
-                    case SystemConstant.LANDLORD:
+                    case SystemConstant.LANDLORD: {
+                        filterChain.doFilter(servletRequest, servletResponse);
+                        break;
+                    }
                     case SystemConstant.USER: {
-                        response.sendRedirect("/home");
+                        response.sendRedirect("/home?message=not_permission&&alert=danger");
                         break;
                     }
                 }
             } else {
                 /*
-                * not permission access, done
-                * redirect /home
-                * */
+                 * not permission access, done
+                 * redirect /home
+                 * */
                 response.sendRedirect("/login?message=not_permission&&alert=danger");
             }
         } else {
