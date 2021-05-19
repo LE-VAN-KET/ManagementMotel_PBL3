@@ -1,7 +1,6 @@
 package service;
 
 import bean.AccountModel;
-import bean.UserModel;
 
 import java.util.List;
 
@@ -12,4 +11,6 @@ public interface IAccountService {
     void update(AccountModel account);
     List<String> registerValidation(AccountModel accountModel, String repeatPassword);
     String resetAccountPassword(String email);
+    List<String> validateEdit(AccountModel accountModelFresh);
+    void editProfile(AccountModel accountModel);
 }

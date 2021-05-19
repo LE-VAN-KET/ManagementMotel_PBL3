@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="../../../common/taglib.jsp"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html>
 <head>
     <meta charset="UTF-8">
@@ -39,6 +41,12 @@
                 toastr.info('${message}', 'falied!');
             }
 
+            if (${!ERRORS.isEmpty()}) {
+                <c:forEach items="${ERRORS}" var="error">
+                toastr.error('${error}', 'Error!');
+                </c:forEach>
+            }
+
             $('#loading').addClass("show");
             setTimeout(function () {
                 $('#loading').removeClass("show");
@@ -51,6 +59,10 @@
 
             $("#changeUsername").click(function () {
                 $("input[name='username']").prop("disabled", false).focus();
+            })
+
+            $("#changeEmail").click(function () {
+                $("input[name='email']").prop("disabled", false).focus();
             })
         })
     </script>

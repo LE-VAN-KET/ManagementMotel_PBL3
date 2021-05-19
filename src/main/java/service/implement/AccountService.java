@@ -4,10 +4,10 @@ import bean.AccountModel;
 import bean.UserModel;
 import constant.SystemConstant;
 import dao.IAccountDAO;
-import dao.IUserDAO;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import service.IAccountService;
+import service.IUserService;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
@@ -21,7 +21,7 @@ public class AccountService implements IAccountService {
     private IAccountDAO accountDAO;
 
     @Inject
-    private IUserDAO userDAO;
+    private IUserService userService;
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
@@ -32,7 +32,7 @@ public class AccountService implements IAccountService {
 
     @Override
     public AccountModel findByUserNameAndPassword(String username, String password) {
-        AccountModel accountModel = findByUsername(username);
+        AccountModel accountModel = accountDAO.findByUsernameOrEmail(username);
         if (accountModel != null) {
             boolean verifyPass = verifyHash(password, accountModel.getPassword());
             if (verifyPass) {
@@ -47,9 +47,9 @@ public class AccountService implements IAccountService {
         Long userId = null;
         if ((accountModel.getUser().getFullName() == null) && (accountModel.getUser().getSDT() == null)
             || ("".equals(accountModel.getUser().getFullName())) || ("".equals(accountModel.getUser().getSDT()))) {
-            userId = userDAO.addUser(accountModel.getUser());
+            userId = userService.addUser(accountModel.getUser());
         } else {
-            userId = userDAO.insert(accountModel.getUser());
+            userId = userService.insert(accountModel.getUser());
         }
 
         accountModel.setPassword(hash(accountModel.getPassword()));
@@ -67,7 +67,7 @@ public class AccountService implements IAccountService {
     }
 
     private boolean isEmail(String email) {
-        UserModel userModel = userDAO.findEmailUser(email);
+        UserModel userModel = userService.findEmailUser(email);
         return (userModel != null) ? true: false;
     }
 
@@ -129,6 +129,69 @@ public class AccountService implements IAccountService {
             return randomPassword;
         }
         return null;
+    }
+
+    @Override
+    public List<String> validateEdit(AccountModel accountModelFresh) {
+        List<String> errors = new ArrayList<>();
+        // check all field empty
+        if (isAll_Fields_Empty(accountModelFresh.getUser().getFullName(), accountModelFresh.getUser().getEmail(),
+                accountModelFresh.getUser().getSDT(), accountModelFresh.getUsername())) {
+            errors.add(resourceBundle.getString("all_fields_not_empty"));
+        } else {
+            /*
+             * regex validation format fields unique
+             * if field format valid
+             * then check field already exist */
+            String emaiRegex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+            if (!accountModelFresh.getUser().getEmail().matches(emaiRegex)) {
+                errors.add(resourceBundle.getString("email_invalid"));
+            } else {
+                // validate email edit already
+                UserModel userModelEmail = userService.findByEmailEdit(accountModelFresh.getUser().getEmail(),
+                        accountModelFresh.getUser().getUserId());
+                if (userModelEmail != null) {
+                    errors.add(resourceBundle.getString("email_already_exist"));
+                }
+            }
+
+            String phoneVietnameseRegex = "(84|0[3|5|7|8|9])+([0-9]{8})\\b";
+            if (!accountModelFresh.getUser().getSDT().matches(phoneVietnameseRegex)) {
+                errors.add(resourceBundle.getString("phone_invalid"));
+            } else {
+                //validate phone edit already
+                UserModel userModelPhone = userService.findPhonelEdit(accountModelFresh.getUser().getSDT(),
+                        accountModelFresh.getUser().getUserId());
+                if (userModelPhone != null) {
+                    errors.add(resourceBundle.getString("phone_already_exist"));
+                }
+            }
+
+            String usernameregex = "[0-9a-zA-Z_.-]*";
+            if (!accountModelFresh.getUsername().matches(usernameregex)) {
+                errors.add(resourceBundle.getString("username_invalid"));
+            } else {
+                // validate username already
+                AccountModel accountModel = accountDAO.findByUsernameEdit(accountModelFresh.getUsername(),
+                        accountModelFresh.getUser().getUserId());
+                if (accountModel != null) {
+                    errors.add(resourceBundle.getString("usename_already_exist"));
+                }
+            }
+        }
+
+        return errors;
+    }
+
+    @Override
+    public void editProfile(AccountModel accountModel) {
+        userService.update(accountModel.getUser());
+        if (accountModel.getPassword() == null || "".equals(accountModel.getPassword())) {
+            accountDAO.updateUsername(accountModel);
+        } else {
+            accountModel.setPassword(hash(accountModel.getPassword()));
+            accountDAO.update(accountModel);
+        }
     }
 
     private String hash(String password) {

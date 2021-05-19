@@ -7,6 +7,7 @@ import paging.Pageble;
 import service.IDistrictService;
 import service.IPostService;
 import utils.FormUtil;
+import utils.SessionUtil;
 import utils.UploadFileUtil;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @WebServlet(urlPatterns = {"/home"})
 public class HomeController extends HttpServlet {
@@ -26,11 +28,19 @@ public class HomeController extends HttpServlet {
     @Inject
     private IPostService postService;
 
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String villageId = req.getParameter("village");
         String square = req.getParameter("square");
         String price = req.getParameter("price");
+        String message = req.getParameter("message");
+        String alert = req.getParameter("alert");
+        if (alert != null && message != null) {
+            req.setAttribute("message", resourceBundle.getString(message));
+            req.setAttribute("alert", alert);
+        }
         List<DistrictModel> districtModels = districtService.selectViewAll();
         List<PostModel> postModels = null;
         Pageble pageble = FormUtil.toModel(Pageble.class, req);
@@ -54,6 +64,8 @@ public class HomeController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        req.setAttribute(SystemConstant.ACCOUNTMODEL,
+                SessionUtil.getInstance().getValue(req, SystemConstant.ACCOUNTMODEL));
         req.setAttribute(SystemConstant.PAGEABLE, pageble);
         req.setAttribute(SystemConstant.POSTMODELS, postModels);
         req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);

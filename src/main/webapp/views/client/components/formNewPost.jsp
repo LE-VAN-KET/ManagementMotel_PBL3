@@ -137,7 +137,7 @@
                                           placeholder="Content's name..."></textarea>
                             </div>
                             <input name="villageId" type="number" hidden>
-                            <input name="userId" type="number" hidden>
+<%--                            <input name="userId" type="number" hidden>--%>
                             <div class="form-group">
                                 <label for="files">Hình ảnh: </label>
                                 <small>Bạn phải nhập tối thiểu 1 hình ảnh, hình ảnh càng nhiều độ tin cậy càng

@@ -43,10 +43,10 @@
             </c:forEach>
         }
 
-        if (${ACCOUNTMODEL != null}) {
-            $("input[name = 'userId']").val(${ACCOUNTMODEL.user.userId});
-            // $("a.singin_up").remove();
-        }
+        <%--if (${ACCOUNTMODEL != null}) {--%>
+        <%--    $("input[name = 'userId']").val(${ACCOUNTMODEL.user.userId});--%>
+        <%--    // $("a.singin_up").remove();--%>
+        <%--}--%>
 
         if (${!DISTRICTSMODELS.isEmpty()}) {
             // set list district option

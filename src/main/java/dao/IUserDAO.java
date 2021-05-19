@@ -12,4 +12,6 @@ public interface IUserDAO {
     void update(UserModel user);
     void delete(Long userId);
     Long addUser(UserModel userModel);
+    UserModel findEmailEdit(String email, Long userId);
+    UserModel findPhonelEdit(String phone, Long userId);
 }

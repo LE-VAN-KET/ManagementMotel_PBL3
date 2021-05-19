@@ -12,4 +12,5 @@ public interface IPostService {
     List<PostModel> findByVillageId(Long villageId, Pageble pageble);
     List<PostModel> findByParameters(String villageId, String square, String price, Pageble pageble);
     int getTotalItem();
+    List<String> validatePost(PostModel postModel);
 }

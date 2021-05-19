@@ -45,7 +45,7 @@ public class LoginController extends HttpServlet {
         accountModel = accountService.findByUserNameAndPassword(accountModel.getUsername(),
                 accountModel.getPassword());
         if (accountModel != null) {
-            SessionUtil.getInstance().putValue(req, "ACCOUNTMODEL", accountModel);
+            SessionUtil.getInstance().putValue(req, SystemConstant.ACCOUNTMODEL, accountModel);
             switch (accountModel.getUser().getRoleMole().getRoleName()) {
                 case SystemConstant.ADMIN:
                     resp.sendRedirect(req.getContextPath() + "/admin/dashboard");

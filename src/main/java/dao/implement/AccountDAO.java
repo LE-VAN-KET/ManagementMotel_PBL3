@@ -1,6 +1,5 @@
 package dao.implement;
 
-import constant.SystemConstant;
 import mapper.implement.AccountMapper;
 import bean.AccountModel;
 import dao.IAccountDAO;
@@ -15,6 +14,16 @@ public class AccountDAO extends AbstractDAO<AccountModel> implements IAccountDAO
         sql.append(" INNER JOIN role AS r ON r.roleId = u.roleId");
         sql.append(" WHERE username = ? LIMIT 1");
         List<AccountModel> accounts = query(sql.toString(), new AccountMapper(), username);
+        return accounts.isEmpty() ? null : accounts.get(0);
+    }
+
+    @Override
+    public AccountModel findByUsernameOrEmail(String userOrEmail) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM account AS acc");
+        sql.append(" INNER JOIN users AS u ON u.userId = acc.userId");
+        sql.append(" INNER JOIN role AS r ON r.roleId = u.roleId");
+        sql.append(" WHERE username = ? OR u.email = ? LIMIT 1");
+        List<AccountModel> accounts = query(sql.toString(), new AccountMapper(), userOrEmail, userOrEmail);
         return accounts.isEmpty() ? null : accounts.get(0);
     }
 
@@ -36,7 +45,23 @@ public class AccountDAO extends AbstractDAO<AccountModel> implements IAccountDAO
 
     @Override
     public void update(AccountModel account) {
-        String sql = "UPDATE account SET username = ?, password = ? WHERE username = ?";
-        update(sql, account.getUsername(), account.getPassword(), account.getUsername());
+        String sql = "UPDATE account SET username = ?, password = ? WHERE accountId = ?";
+        update(sql, account.getUsername(), account.getPassword(), account.getAccountId());
+    }
+
+    @Override
+    public AccountModel findByUsernameEdit(String username, Long userId) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM account AS acc");
+        sql.append(" INNER JOIN users AS u ON u.userId = acc.userId");
+        sql.append(" INNER JOIN role AS r ON r.roleId = u.roleId");
+        sql.append(" WHERE acc.username = ? AND u.userId <> ?  LIMIT 1");
+        List<AccountModel> accounts = query(sql.toString(), new AccountMapper(), username, userId);
+        return accounts.isEmpty() ? null : accounts.get(0);
+    }
+
+    @Override
+    public void updateUsername(AccountModel accountModel) {
+        String sql = "UPDATE account SET username = ? WHERE accountId = ?";
+        update(sql, accountModel.getUsername(), accountModel.getAccountId());
     }
 }

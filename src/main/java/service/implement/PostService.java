@@ -7,30 +7,38 @@ import service.IPostService;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @ManagedBean
 public class PostService implements IPostService {
     @Inject
     private IPostDAO postDAO;
 
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
+
     @Override
     public Long insert(PostModel postModel) {
-        Long postId = null;
-//        if (isAll_Fields_Empty(postModel.getTitle(), postModel.getDesciption(), postModel.getLinkImages(),
-//                postModel.getPrice(), postModel.getSquare(), postModel.getAddress(), postModel.getVillageId(),
-//                postModel.getUserId(), postModel.getStatusPost(), postModel.getStatusRental())) {
-//            // handle errors
-//        } else {
-            // callback method postDAO
-            postId = postDAO.insert(postModel);
-//        }
-        return postId;
+        return postDAO.insert(postModel);
+    }
+
+    @Override
+    public List<String> validatePost(PostModel postModel) {
+        List<String> errors = new ArrayList<>();
+        if (isAll_Fields_Empty(postModel.getTitle(), postModel.getDescription(),
+                postModel.getPrice(), postModel.getSquare(), postModel.getAddress(),
+                postModel.getVillageModel().getVillageId(), postModel.getUserModel().getUserId(),
+                postModel.getStatusPost(), postModel.getStatusRental())) {
+            // handle errors
+            errors.add(resourceBundle.getString("all_fields_not_empty"));
+        }
+        return errors;
     }
 
     private boolean isAll_Fields_Empty(Object... parameters) {
         for (Object parameter: parameters) {
-            if ((parameter == null) || ("".equals((String) parameter))) {
+            if ((parameter == null) || ("".equals(parameter.toString()))) {
                 return true;
             }
         }

@@ -1,9 +1,6 @@
 package controller.client.post;
 
-import bean.DistrictModel;
-import bean.PostModel;
-import bean.UserModel;
-import bean.VillageModel;
+import bean.*;
 import constant.SystemConstant;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -38,23 +35,21 @@ public class PostController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-        if ("show".equals(action)) {
-            req.getRequestDispatcher("/views/client/layouts/DetailPost.jsp").forward(req, resp);
-        } else {
-            List<DistrictModel> districtModels = districtService.selectViewAll();
-            req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
-            req.setAttribute("ACCOUNTMODEL",  SessionUtil.getInstance().getValue(req,"ACCOUNTMODEL"));
-            req.getRequestDispatcher("/views/client/layouts/Post-article.jsp").forward(req, resp);
-        }
+        req.setAttribute(SystemConstant.ACCOUNTMODEL,
+                SessionUtil.getInstance().getValue(req, SystemConstant.ACCOUNTMODEL));
+        List<DistrictModel> districtModels = districtService.selectViewAll();
+        req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
+        req.setAttribute(SystemConstant.ACCOUNTMODEL,  SessionUtil.getInstance().getValue(req,
+                SystemConstant.ACCOUNTMODEL));
+        req.getRequestDispatcher("/views/client/layouts/Post-article.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         // checks if the request actually contains upload file
         if (ServletFileUpload.isMultipartContent(req))  {
             try {
-                req.setCharacterEncoding("UTF-8");
                 List<FileItem> formItems = null;
                 Iterator iter = null;
                 formItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
@@ -72,20 +67,29 @@ public class PostController extends HttpServlet {
                         if (item.isFormField()) {
                             if (item.getFieldName().equals("villageId")) {
                                 BeanUtils.setProperty(villageModel, item.getFieldName(), item.getString());
-                            } else if (item.getFieldName().equals("userId")) {
+                            } /*else if (item.getFieldName().equals("userId")) {
                                 BeanUtils.setProperty(userModel, item.getFieldName(), item.getString());
-                            } else {
+                            }*/ else {
                                 BeanUtils.setProperty(postModel, item.getFieldName(), item.getString());
                             }
                         } else {
                             listImages.add(item);
                         }
                     }
+                    AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(req,
+                            SystemConstant.ACCOUNTMODEL);
+                    userModel.setUserId(accountModel.getUser().getUserId());
                     postModel.setUserModel(userModel);
                     postModel.setVillageModel(villageModel);
                     postModel.setLinkImages("");
                     postModel.setStatusPost(false);
                     postModel.setStatusRental(false);
+                    List<String> errors = postService.validatePost(postModel);
+                    if (!errors.isEmpty()) {
+                        req.setAttribute(SystemConstant.ERRORS, errors);
+                        doGet(req, resp);
+                        return;
+                    }
                     postId = postService.insert(postModel);
                 }
                 String folderId = UploadFileUtil.uploadFile(postId.toString(), listImages);
