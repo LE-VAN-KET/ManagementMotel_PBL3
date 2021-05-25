@@ -77,8 +77,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <form action="/post" method="POST" id="postForm" role="form"
-                              enctype="multipart/form-data">
+                        <form action="/post" method="POST" id="postForm" role="form" accept-charset="utf-8"
+                              enctype="multipart/form-data" onsubmit="return isEmptyField()">
                             <div class="form-group">
                                 <label for="title">Tiêu đề: </label><br>
                                 <small>Ví dụ: <i class="fas fa-check mx-1 text-primary"></i>Cho thuê nhà nguyên căn
@@ -91,17 +91,27 @@
                                     <div class="form-group">
                                         <label for="price">Giá thuê / Tháng: </label><br>
                                         <small>Đơn vị VNĐ (Ví dụ giá 2 triệu bạn cần nhập: <i
-                                                class="fas fa-check mx-1 text-primary"></i>2000000)</small>
-                                        <input type="number" class="form-control" name="price" id="price"
-                                               placeholder="Giá thuê">
+                                                class="fas fa-check mx-1 text-primary"></i>2000)</small>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" name="price" id="price"
+                                                   placeholder="Giá thuê" required min="0" max="999999999999">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">,000 ₫ / Tháng</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                                     <div class="form-group">
                                         <label for="square">Diện tính: </label><br>
                                         <small>Nhập chính xác diện tích nha! Đơn vị m<sup>2</sup></small>
-                                        <input type="number" class="form-control" name="square" id="square"
-                                               placeholder="Diện tích">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" name="square" id="square"
+                                                   placeholder="Diện tích" required min="0">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">m<sup>2</sup></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -146,8 +156,12 @@
                                 <label for="files" class="add-img">
                                     <span>+</span>
                                     <input type="file" name="file"  id="files" multiple="multiple"
-                                           accept=".png, .jpg, .jpeg, .gif" required>
+                                           accept=".png, .jpg, .jpeg, .gif">
                                 </label>
+                                <div class="error-msg">
+                                    <i class="fa fa-times-circle"></i>
+                                    Field file not empty.
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary float-right">Đăng tin ngay</button>
                         </form>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12 edit_information">
-        <form action="/edit-profile"  method="POST">
+        <form action="/edit-profile"  method="POST" accept-charset="utf-8">
             <h3 class="text-center mt-2">Edit Personal Information</h3>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

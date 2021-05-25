@@ -52,7 +52,9 @@ public class PostController extends HttpServlet {
             try {
                 List<FileItem> formItems = null;
                 Iterator iter = null;
-                formItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
+                ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+                upload.setHeaderEncoding("UTF-8");
+                formItems = upload.parseRequest(req);
                 iter = formItems.iterator();
                 Long postId = null;
                 List<FileItem> listImages = new ArrayList<FileItem>();
@@ -66,11 +68,11 @@ public class PostController extends HttpServlet {
                         // processes only fields that are not form fields
                         if (item.isFormField()) {
                             if (item.getFieldName().equals("villageId")) {
-                                BeanUtils.setProperty(villageModel, item.getFieldName(), item.getString());
+                                BeanUtils.setProperty(villageModel, item.getFieldName(), item.getString("UTF-8"));
                             } /*else if (item.getFieldName().equals("userId")) {
                                 BeanUtils.setProperty(userModel, item.getFieldName(), item.getString());
                             }*/ else {
-                                BeanUtils.setProperty(postModel, item.getFieldName(), item.getString());
+                                BeanUtils.setProperty(postModel, item.getFieldName(), item.getString("UTF-8"));
                             }
                         } else {
                             listImages.add(item);

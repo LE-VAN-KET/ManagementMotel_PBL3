@@ -48,13 +48,7 @@
         <%--    // $("a.singin_up").remove();--%>
         <%--}--%>
 
-        if (${!DISTRICTSMODELS.isEmpty()}) {
-            // set list district option
-            $("#district option").remove();
-            <c:forEach items="${DISTRICTMODELS}" var="district">
-            $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
-            </c:forEach>
-        }
+
 
         $('#loading').addClass("show");
         setTimeout(function () {
@@ -63,8 +57,20 @@
         }, 2000);
 
         $(document).ready(function () {
+            if (${!DISTRICTSMODELS.isEmpty()}) {
+                // set list district option
+                $("#district option").remove();
+                <c:forEach items="${DISTRICTMODELS}" var="district">
+                $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
+                </c:forEach>
+            }
+
             // set list village by district
             $("#district").change(() => {
+                setupVillage();
+            })
+
+            const setupVillage = () => {
                 const districtId = $( "#district option:selected" ).data('id');
                 $("#village option").remove();
                 <c:forEach items="${DISTRICTMODELS}" var="district">
@@ -77,7 +83,8 @@
                     }
                 }
                 </c:forEach>
-            })
+            }
+            setupVillage();
 
             $("#postForm").submit(() => {
                 $("input[name='villageId']").val($("#village option:selected").data('id'));

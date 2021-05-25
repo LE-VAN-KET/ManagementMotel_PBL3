@@ -3,9 +3,11 @@ package controller.client;
 import bean.DistrictModel;
 import bean.PostModel;
 import constant.SystemConstant;
+import criteria.Criteria;
 import paging.Pageble;
 import service.IDistrictService;
 import service.IPostService;
+import sort.Sorter;
 import utils.FormUtil;
 import utils.SessionUtil;
 import utils.UploadFileUtil;
@@ -32,30 +34,31 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String villageId = req.getParameter("village");
-        String square = req.getParameter("square");
-        String price = req.getParameter("price");
+        Criteria criteria = FormUtil.toModel(Criteria.class, req);
+        Sorter sorter = FormUtil.toModel(Sorter.class, req);
+        Pageble pageble = FormUtil.toModel(Pageble.class, req);
         String message = req.getParameter("message");
         String alert = req.getParameter("alert");
+
         if (alert != null && message != null) {
             req.setAttribute("message", resourceBundle.getString(message));
             req.setAttribute("alert", alert);
         }
         List<DistrictModel> districtModels = districtService.selectViewAll();
         List<PostModel> postModels = null;
-        Pageble pageble = FormUtil.toModel(Pageble.class, req);
-        pageble.setTotalItem(postService.getTotalItem());
         pageble.setMaxPageItem(SystemConstant.MAXPAGEITEM);
+        pageble.setSorter(sorter);
 
         if (pageble.getPage() == null) {
             pageble.setPage(1);
         }
 
         try {
-            if (villageId != null || square != null || price != null) {
-                postModels = postService.findByParameters(villageId, square, price, pageble);
+            if (criteria.getVillageId() != null ) {
+                postModels = postService.findByCriteria(criteria, pageble);
             } else {
                 postModels = postService.selectAll(pageble);
+                pageble.setTotalItem(postService.getTotalItem());
             }
 
             for (PostModel post: postModels) {

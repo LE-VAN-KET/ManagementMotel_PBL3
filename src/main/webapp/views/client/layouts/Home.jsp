@@ -37,10 +37,10 @@
                     <div class="box-search">
                         <div class="container">
                             <form action="/home" class="form-search row" method="get" id="formSearch">
-                                <div class="col-10 row">
+                                <div class="col-lg-10 col-md-12 col-xs-12 col-sm-12 row">
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="district">District</label>
-                                        <select name="district" id="district"
+                                        <select <%--name="district"--%> id="district"
                                             class="form-control form-control-outline-none">
                                             <option value="all" data-id=0>All</option>
                                         </select>
@@ -48,7 +48,7 @@
 
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="village">Village</label>
-                                        <select name="village" id="village"
+                                        <select name="villageId" id="village"
                                             class="form-control form-control-outline-none">
                                             <option value="0" data-id=0>All</option>
                                         </select>
@@ -56,7 +56,7 @@
 
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="square">Square metre</label>
-                                        <select name="square" id="square"
+                                        <select id="square"
                                             class="form-control form-control-outline-none">
                                             <option value="all" data-square="all">All</option>
                                             <option value="<=20" data-square="<=20">Dưới 20m2</option>
@@ -74,23 +74,26 @@
 
                                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                         <label for="price">Price</label>
-                                        <select name="price" id="price"
+                                        <select id="price"
                                             class="form-control form-control-outline-none">
                                             <option value="all" data-price="all">All</option>
-                                            <option value="<=500000" data-price="<=500000">&lt; 500K</option>
-                                            <option value="500000-1000000" data-price="500000-1000000">500K - 1 triệu</option>
-                                            <option value="1000000-1500000" data-price="1000000-1500000">1 triệu - 1 triệu 5</option>
-                                            <option value="1500000-2000000" data-price="1500000-2000000">1 triệu 5 - 2 triệu</option>
-                                            <option value="2000000-3000000" data-price="2000000-3000000">2 triệu - 3 triệu</option>
-                                            <option value="3000000-4000000" data-price="3000000-4000000">3 triệu - 4 triệu</option>
-                                            <option value="4000000-5000000" data-price="4000000-5000000">4 triệu - 5 triệu</option>
-                                            <option value=">=5000000" data-price=">=5000000">&gt; 5 triệu</option>
+                                            <option value="<=500" data-price="<=500">&lt; 500K</option>
+                                            <option value="500-1000" data-price="500-1000">500K - 1 triệu</option>
+                                            <option value="1000-1500" data-price="1000-1500">1 triệu - 1 triệu 5</option>
+                                            <option value="1500-2000" data-price="1500-2000">1 triệu 5 - 2 triệu</option>
+                                            <option value="2000-3000" data-price="2000-3000">2 triệu - 3 triệu</option>
+                                            <option value="3000-4000" data-price="3000-4000">3 triệu - 4 triệu</option>
+                                            <option value="4000-5000" data-price="4000-5000">4 triệu - 5 triệu</option>
+                                            <option value=">=5000" data-price=">=5000">&gt; 5 triệu</option>
                                         </select>
                                     </div>
                                 </div>
-<%--                                <input type="text" name="data-square" hidden>--%>
-<%--                                <input type="text" name="data-price" hidden>--%>
-<%--                                <input type="number" name="villageId" hidden>--%>
+                                <input type="text" name="square_from" hidden>
+                                <input type="text" name="square_to" hidden>
+                                <input type="text" name="price_from" hidden>
+                                <input type="text" name="price_to" hidden>
+                                <input type="text" name="sort_by" hidden disabled>
+                                <input type="text" name="order_by" hidden disabled>
                                 <input type="hidden" value="1" name = "page" id = "page">
 <%--                                <input type="hidden" value="" name = "maxPageItem" id = "maxPageItem">--%>
                                 <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 position-relative">
@@ -104,9 +107,18 @@
             </div>
         </div>
     </div>
-    <div class="container my-3"><span>Sắp xếp: </span>
-        <a class="post-sort active" href="https://phongtro123.com/cho-thue-phong-tro">Mặc định</a>
-        <a class="post-sort" href="https://phongtro123.com/cho-thue-phong-tro?orderby=moi-nhat">Mới nhất</a>
+    <div class="container my-3">
+        <div class="row mx-2">
+            <span class="mr-2 text-dark">Sắp xếp: </span>
+            <select class="post-sort p-1" id="sort">
+                <option value="none">Thông thường</option>
+                <option value="publishedAt_desc">Tin mới nhất</option>
+                <option value="price_asc">Giá từ bé đến lớn</option>
+                <option value="price_desc">Giá từ lớn đến bé</option>
+                <option value="square_asc">Diện tích từ bé đến lớn</option>
+                <option value="square_desc">Diện tích từ lớn đến bé</option>
+            </select>
+        </div>
     </div>
     <!-- list post -->
     <section>
@@ -133,7 +145,7 @@
                                         <i class="fas fa-dollar-sign text-info"></i>
                                         Giá:
                                         <strong>
-                                            ${postModels.price} ₫ / Tháng
+                                            ${postModels.price}00 ₫ / Tháng
                                         </strong>
                                     </p>
                                     <p class="p-1 m-0"><i class="far fa-building text-info"></i> Diện tích:
@@ -141,6 +153,7 @@
                                     <p class="p-1 m-0"><i class="fas fa-map-marker-alt text-info"></i><span> Khu vực:
                                     <strong>${postModels.villageModel.villageName}-${postModels.villageModel.districtModel.districtName}</strong>
                                 </span></p>
+                                    <time class="float-right text-primary" id="datetime${postModels.postId}"></time>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -296,12 +309,54 @@
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/home.js"></script>
     <script src="../../../assets/javascript/template/pagination.min.js"></script>
+<script>
+    <c:forEach items="${POSTMODELS}" var="postModels">
+        $("#datetime${postModels.postId}").text(timeDifference(new Date(), new Date('${postModels.createAt}')));
+    </c:forEach>
+    function timeDifference(date1,date2) {
+        let difference = date1.getTime() - date2.getTime();
+
+        let daysDifference = Math.floor(difference/1000/60/60/24);
+        if (daysDifference !== 0) {
+            return daysDifference + ' day ago';
+        }
+        difference -= daysDifference*1000*60*60*24;
+
+        let hoursDifference = Math.floor(difference/1000/60/60);
+        if (hoursDifference !== 0) {
+            return hoursDifference + ' hours ago';
+        }
+        difference -= hoursDifference*1000*60*60;
+
+        let minutesDifference = Math.floor(difference/1000/60);
+        if (minutesDifference !== 0) {
+            return minutesDifference + ' minutes ago';
+        }
+        difference -= minutesDifference*1000*60;
+
+        let secondsDifference = Math.floor(difference/1000);
+
+        return secondsDifference + ' seconds ago';
+    }
+</script>
     <script>
+        if (window.location.href == "http://localhost:8080/home") {
+            sessionStorage.clear();
+        }
+
         if (${!DISTRICTSMODELS.isEmpty()}) {
             // set list district option
+            let district_id = sessionStorage.getItem("district_id");
             <c:forEach items="${DISTRICTMODELS}" var="district">
-                $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
+                if (${district.districtId} == district_id) {
+                    $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}' selected>${district.districtName}</option>");
+                } else {
+                    $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
+                }
             </c:forEach>
+        }
+        if (typeof(Storage) !== "undefined") {
+            sessionStorage.setItem("district_id", $("#district option:selected").data("id"));
         }
 
         if (${POSTMODELS.isEmpty()}) {
@@ -314,30 +369,77 @@
             }
             // set list village by district
             $("#district").change(() => {
-                const districtId = $( "#district option:selected" ).data('id');
-                $("#village option").remove();
-                <c:forEach items="${DISTRICTMODELS}" var="district">
-                    if(${district.districtId} === districtId) {
-                        if (${!district.listVillage.isEmpty()}) {
-                            <c:forEach items="${district.listVillage}" var="village">
-                            $('#village').append("<option data-id = ${village.villageId} " +
-                                "value='${village.villageId}'>${village.villageName}</option>");
-                            </c:forEach>
-                        } else {
-                            $('#village').append("<option value='All' data-id = 0 >All</option>");
-                        }
-                    }
-                </c:forEach>
-                if (districtId == 0) {
-                    $('#village').append("<option value='All' data-id=0>All</option>");
+                setupVillage();
+            })
+
+            let square = sessionStorage.getItem("square");
+            let price = sessionStorage.getItem("price");
+            let village_id = sessionStorage.getItem("village_id");
+
+            $("#village option").each(function()
+            {
+                if ($(this).val() == village_id) {
+                    $(this).attr("selected", "selected");
+                }
+            });
+
+            $("#square option").each(function()
+            {
+                if ($(this).val() == square) {
+                    $(this).attr("selected", "selected");
+                }
+            });
+
+            $("#price option").each(function()
+            {
+                if ($(this).val() == price) {
+                    $(this).attr("selected", "selected");
+                }
+            });
+
+            $("#sort option").each(function () {
+                if ($(this).val() == sessionStorage.getItem("sort")) {
+                    $(this).attr("selected", "selected");
+                }
+            })
+
+            $("#village").change(function () {
+                if (typeof(Storage) !== "undefined") {
+                    sessionStorage.setItem("village_id", $(this).val());
+                }
+            })
+
+            $("#square").change(function () {
+                if (typeof(Storage) !== "undefined") {
+                    sessionStorage.setItem("square", $(this).val());
+                }
+            })
+
+            $("#price").change(function () {
+                if (typeof(Storage) !== "undefined") {
+                    sessionStorage.setItem("price", $(this).val());
                 }
             })
 
             //set value param square and price when recieve event submit form
             $("#formSearch").submit(() => {
-                // $("input[name='data-square']").val($("#square option:selected").data("square"));
-                // $("input[name='data-price']").val($("#price option:selected").data("price"));
-                // $("input[name='villageId']").val($("#village option:selected").data("id"));
+                let square = $("#square option:selected").val();
+                let price = $("#price option:selected").val();
+                swithchSquare(square);
+                swithchPrice(price);
+                let sorter = $("#sort option:selected").val();
+                if (sorter !== "none") {
+                    sorter = sorter.split("_");
+                    $("input[name='sort_by']").val(sorter[0]).attr("disabled", false);
+                    $("input[name='order_by']").val(sorter[sorter.length - 1]).attr("disabled", false);
+                }
+            })
+
+            $("#sort").change(function () {
+                $("#formSearch").submit();
+                if (typeof (Storage) !== "undefined") {
+                    sessionStorage.setItem("sort", $(this).val());
+                }
             })
 
             $('#pagination').pagination({
@@ -362,6 +464,74 @@
                 }
             });
 
+            const swithchSquare = (square) => {
+                // case square equals all
+                if (square === "all") {
+                    $("input[name='square_from']").prop("disabled", true);
+                    $("input[name='square_to']").prop("disabled", true);
+                    return;
+                }
+                if (square.startsWith(">=")) {
+                    // greater than
+                    $("input[name='square_from']").val(square.replace(">=", ""));
+                    $("input[name='square_to']").prop("disabled", true);
+                } else if (square.startsWith("<=")) {
+                    // less than
+                    $("input[name='square_to']").val(square.replace("<=", ""));
+                    $("input[name='square_from']").prop("disabled", true);
+                } else {
+                    let _square = square.split("-");
+                    $("input[name='square_from']").val(_square[0]);
+                    $("input[name='square_to']").val(_square[_square.length - 1]);
+                }
+            }
+
+            const swithchPrice = (price) => {
+                // case price equals all
+                if (price === "all") {
+                    $("input[name='price_from']").prop("disabled", true);
+                    $("input[name='price_to']").prop("disabled", true);
+                    return;
+                }
+                if (price.startsWith(">=")) {
+                    // greater than
+                    $("input[name='price_from']").val(price.replace(">=", ""));
+                    $("input[name='price_to']").prop("disabled", true);
+                } else if (price.startsWith("<=")) {
+                    // less than
+                    $("input[name='price_to']").val(price.replace("<=", ""));
+                    $("input[name='price_from']").prop("disabled", true);
+                } else {
+                    let _price = price.split("-");
+                    $("input[name='price_from']").val(_price[0]);
+                    $("input[name='price_to']").val(_price[_price.length - 1]);
+                }
+            }
+
+            const setupVillage = function () {
+                const districtId = $( "#district option:selected" ).data('id');
+                $("#village option").remove();
+                <c:forEach items="${DISTRICTMODELS}" var="district">
+                if(${district.districtId} === districtId) {
+                    if (${!district.listVillage.isEmpty()}) {
+                        <c:forEach items="${district.listVillage}" var="village">
+                        $('#village').append("<option " +
+                            "value='${village.villageId}'>${village.villageName}</option>");
+                        </c:forEach>
+                    } else {
+                        $('#village').append("<option value='0' >All</option>");
+                    }
+                }
+                </c:forEach>
+                if (typeof(Storage) !== "undefined") {
+                    sessionStorage.setItem("villaged_id", $("#village option:selected").val());
+                    sessionStorage.setItem("district_id", $("#district option:selected").data("id"));
+                }
+                if (districtId == 0) {
+                    $('#village').append("<option value='0' data-id=0>All</option>");
+                }
+            }
+            setupVillage();
         })
     </script>
 </body>
