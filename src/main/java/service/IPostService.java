@@ -1,6 +1,7 @@
 package service;
 
 import bean.PostModel;
+import criteria.Criteria;
 import paging.Pageble;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface IPostService {
     void updateLinkImages(Long postId, String linkImages);
     List<PostModel> selectAll(Pageble pageble);
     List<PostModel> findByVillageId(Long villageId, Pageble pageble);
-    List<PostModel> findByParameters(String villageId, String square, String price, Pageble pageble);
+    List<PostModel> findByCriteria(Criteria criteria, Pageble pageble);
     int getTotalItem();
     List<String> validatePost(PostModel postModel);
 }

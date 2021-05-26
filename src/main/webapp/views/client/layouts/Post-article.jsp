@@ -86,7 +86,7 @@
             }
             setupVillage();
 
-            $("#postForm").submit(() => {
+            $("#postForm").submit((e) => {
                 $("input[name='villageId']").val($("#village option:selected").data('id'));
             })
         })

@@ -17,4 +17,9 @@ public class VillageService implements IVillageService {
     public List<VillageModel> selectAll() {
         return villageDAO.selectAll();
     }
+
+    @Override
+    public VillageModel findOneByvillageId(Long villageId) {
+        return villageDAO.findOneByvillageId(villageId);
+    }
 }

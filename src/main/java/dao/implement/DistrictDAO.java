@@ -12,4 +12,5 @@ public class DistrictDAO extends AbstractDAO<DistrictModel> implements IDistrict
         String sql = "SELECT * FROM district";
         return query(sql, new DistrictMapper());
     }
+
 }

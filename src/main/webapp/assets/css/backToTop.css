@@ -18,7 +18,7 @@
     opacity: 0;
 }
 #back-to-top:hover {
-    background: #8e44ad;
+    background: #34ce57;
 }
 #back-to-top.show {
     opacity: 1;

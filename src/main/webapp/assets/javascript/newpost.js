@@ -1,3 +1,4 @@
+let theEditor;
 ClassicEditor.create(document.querySelector('textarea'), {
     toolbar: {
         items: [
@@ -10,10 +11,25 @@ ClassicEditor.create(document.querySelector('textarea'), {
 })
 .then(editor => {
     window.editor = editor;
+    theEditor = editor;
 })
 .catch(error => {
     console.error('Oops, something went wrong!');
 });
+
+const isEmptyField = function () {
+    let count = $(".img-list-img").children().length;
+    if (theEditor.getData() === "") {
+        $(".error-description").css("display", "block");
+        return false;
+    }
+    if (count !== 0) {
+        return true;
+    } else {
+        $(".error-file").css("display", "block");
+        return false;
+    }
+}
 
 const imagesPreview = function (input, placeToInsertImagePreview) {
     if (input.files) {
@@ -35,7 +51,6 @@ const imagesPreview = function (input, placeToInsertImagePreview) {
 };
 
 $(document).ready(function () {
-
     if (window.File && window.FileList && window.FileReader) {
         $('#files').on('change', function () {
             imagesPreview(this, '.img-list-img');

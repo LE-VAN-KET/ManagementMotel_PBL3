@@ -19,7 +19,7 @@
                         <p class="p-0 text-white text-center">Le Van Ket</p>
                     </a>
                 </div>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav p-1">
                     <li class="nav-item py-1">
                         <a class="nav-link " href="/quan-li-dang-tin">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -143,6 +143,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Content</label>
+                                <div class="error-msg error-description">
+                                    <i class="fa fa-times-circle"></i>
+                                    This field is required.
+                                </div>
                                 <textarea class="form-control" rows="50" name="description" id="description"
                                           placeholder="Content's name..."></textarea>
                             </div>
@@ -153,15 +157,15 @@
                                 <small>Bạn phải nhập tối thiểu 1 hình ảnh, hình ảnh càng nhiều độ tin cậy càng
                                     cao</small>
                                 <div class="img-list-img row"></div>
+                                <div class="error-msg error-file">
+                                    <i class="fa fa-times-circle"></i>
+                                    Field file not empty.
+                                </div>
                                 <label for="files" class="add-img">
                                     <span>+</span>
                                     <input type="file" name="file"  id="files" multiple="multiple"
                                            accept=".png, .jpg, .jpeg, .gif">
                                 </label>
-                                <div class="error-msg">
-                                    <i class="fa fa-times-circle"></i>
-                                    Field file not empty.
-                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary float-right">Đăng tin ngay</button>
                         </form>

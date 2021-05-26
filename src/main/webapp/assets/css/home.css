@@ -675,13 +675,11 @@ button.btn-search {
     bottom: 0;
 }
 
-.container a.post-sort {
-    text-decoration: none;
+.container .post-sort {
     padding: 5px;
     border-radius: 5px;
     color: #fff;
-    background-color: rgba(136, 123, 123, 0.466);
-
+    background-color: rgba(52, 97, 196, 0.932);
 }
 
 .container a.active {
@@ -694,7 +692,6 @@ button.btn-search {
     background-color: #fff4f1;
     border: 1px solid #ededed;
     transition: box-shadow .3s;
-    max-height: 150px;
 }
 
 .detail-list:hover {
@@ -734,7 +731,7 @@ button.btn-search {
 
 .section-travel .section-content .grid-item img {
     width: 100%;
-    height: auto;
+    height: 250px;
     position: relative;
     filter: grayscale(30%);
     background-color: rgba(41, 36, 36, 0.521);
@@ -957,7 +954,6 @@ label.add-img span {
     font-size: 40px;
     background: #ededed;
     border: 5px solid #dadada;
-    margin-top: 20px;
     cursor: pointer
 }
 
@@ -1014,8 +1010,13 @@ i.fa-trash-alt {
 }
 
 img.img-fluid {
-    height: 150px !important;
+    padding: 15px;
     max-height: 150px;
+}
+
+.error-msg {
+    color: #D8000C;
+    display: none;
 }
 
 /* #Media

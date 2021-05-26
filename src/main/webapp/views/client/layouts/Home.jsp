@@ -128,14 +128,14 @@
                     <c:forEach items="${POSTMODELS}" var="postModels">
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="row mx-0 detail-list">
-                                <div class="col-6 p-0">
+                                <div class="col-5 p-0">
                                     <a href="/post/show?postId=${postModels.postId}">
                                         <img class="img-fluid lazyload"
                                              data-src="https://drive.google.com/uc?export=view&id=${postModels.linkImages}"
                                              style="width: 100%; height: 200px" alt="...">
                                     </a>
                                 </div>
-                                <div class="info-real col-6">
+                                <div class="info-real col-7">
                                     <h6>
                                         <a href="/post/show?postId=${postModels.postId}">
                                             ${postModels.title}
@@ -309,36 +309,36 @@
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/home.js"></script>
     <script src="../../../assets/javascript/template/pagination.min.js"></script>
-<script>
-    <c:forEach items="${POSTMODELS}" var="postModels">
-        $("#datetime${postModels.postId}").text(timeDifference(new Date(), new Date('${postModels.createAt}')));
-    </c:forEach>
-    function timeDifference(date1,date2) {
-        let difference = date1.getTime() - date2.getTime();
+    <script>
+        <c:forEach items="${POSTMODELS}" var="postModels">
+            $("#datetime${postModels.postId}").text(timeDifference(new Date(), new Date('${postModels.createAt}')));
+        </c:forEach>
+        function timeDifference(date1,date2) {
+            let difference = date1.getTime() - date2.getTime();
 
-        let daysDifference = Math.floor(difference/1000/60/60/24);
-        if (daysDifference !== 0) {
-            return daysDifference + ' day ago';
+            let daysDifference = Math.floor(difference/1000/60/60/24);
+            if (daysDifference !== 0) {
+                return daysDifference + ' day ago';
+            }
+            difference -= daysDifference*1000*60*60*24;
+
+            let hoursDifference = Math.floor(difference/1000/60/60);
+            if (hoursDifference !== 0) {
+                return hoursDifference + ' hours ago';
+            }
+            difference -= hoursDifference*1000*60*60;
+
+            let minutesDifference = Math.floor(difference/1000/60);
+            if (minutesDifference !== 0) {
+                return minutesDifference + ' minutes ago';
+            }
+            difference -= minutesDifference*1000*60;
+
+            let secondsDifference = Math.floor(difference/1000);
+
+            return secondsDifference + ' seconds ago';
         }
-        difference -= daysDifference*1000*60*60*24;
-
-        let hoursDifference = Math.floor(difference/1000/60/60);
-        if (hoursDifference !== 0) {
-            return hoursDifference + ' hours ago';
-        }
-        difference -= hoursDifference*1000*60*60;
-
-        let minutesDifference = Math.floor(difference/1000/60);
-        if (minutesDifference !== 0) {
-            return minutesDifference + ' minutes ago';
-        }
-        difference -= minutesDifference*1000*60;
-
-        let secondsDifference = Math.floor(difference/1000);
-
-        return secondsDifference + ' seconds ago';
-    }
-</script>
+    </script>
     <script>
         if (window.location.href == "http://localhost:8080/home") {
             sessionStorage.clear();
