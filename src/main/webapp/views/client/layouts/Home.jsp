@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="info-real col-7">
                                     <h6>
-                                        <a href="/post/show?postId=${postModels.postId}">
+                                        <a href="/post/show/${postModels.postSlug}">
                                             ${postModels.title}
                                         </a>
                                     </h6>
