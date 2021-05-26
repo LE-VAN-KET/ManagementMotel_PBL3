@@ -10,10 +10,9 @@ import service.IVillageService;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.text.Normalizer;
+import java.util.*;
+import java.util.regex.Pattern;
 
 @ManagedBean
 public class PostService implements IPostService {
@@ -25,8 +24,20 @@ public class PostService implements IPostService {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
+    private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
+    private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
+
+    private String toSlug(String title) {
+        String nowhitespace = WHITESPACE.matcher(title).replaceAll("-");
+        String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
+        String slug = NONLATIN.matcher(normalized).replaceAll("");
+        return slug.toLowerCase(Locale.ENGLISH);
+    }
+
     @Override
     public Long insert(PostModel postModel) {
+        String postSlug = toSlug(postModel.getTitle() + " " + new Date().getTime());
+        postModel.setPostSlug(postSlug);
         return postDAO.insert(postModel);
     }
 
@@ -86,5 +97,10 @@ public class PostService implements IPostService {
     @Override
     public int getTotalItem() {
         return postDAO.getTotalItem();
+    }
+
+    @Override
+    public PostModel findOneByPostSlug(String postSlug) {
+        return postDAO.findOneByPostSlug(postSlug);
     }
 }

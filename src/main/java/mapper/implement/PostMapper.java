@@ -26,6 +26,7 @@ public class PostMapper implements IRowMapper<PostModel> {
             UserModel userModel = new UserMapper().mapRow(resultSet);
             postModel.setUserModel(userModel);
 
+            postModel.setPostSlug(resultSet.getString("postSlug"));
             postModel.setStatusPost(resultSet.getBoolean("statusPost"));
             postModel.setStatusRental(resultSet.getBoolean("statusRental"));
             postModel.setCreateAt(resultSet.getTimestamp("createAt"));

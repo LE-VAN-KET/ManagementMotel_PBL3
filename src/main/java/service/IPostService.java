@@ -14,4 +14,5 @@ public interface IPostService {
     List<PostModel> findByCriteria(Criteria criteria, Pageble pageble);
     int getTotalItem();
     List<String> validatePost(PostModel postModel);
+    PostModel findOneByPostSlug(String postSlug);
 }

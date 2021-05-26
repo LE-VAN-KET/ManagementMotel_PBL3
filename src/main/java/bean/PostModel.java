@@ -17,6 +17,15 @@ public class PostModel extends AbstractModel {
     private Timestamp publishedAt;
     private UserModel userModel;
     private VillageModel villageModel;
+    private String postSlug;
+
+    public String getPostSlug() {
+        return postSlug;
+    }
+
+    public void setPostSlug(String postSlug) {
+        this.postSlug = postSlug;
+    }
 
     public UserModel getUserModel() {
         return userModel;

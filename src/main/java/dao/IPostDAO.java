@@ -15,4 +15,5 @@ public interface IPostDAO {
 
     int getTotalItem();
     int getTotalItemByCriteria(Criteria criteria);
+    PostModel findOneByPostSlug(String postSLug);
 }

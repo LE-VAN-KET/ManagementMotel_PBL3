@@ -12,4 +12,5 @@ public class SystemConstant {
     public static final String PAGEABLE = "PAGEABLE";
     public static final Integer MAXPAGEITEM = 10;
     public static final String ACCOUNTMODEL = "ACCOUNTMODEL";
+    public static final String IMAGES = "IMAGES";
 }

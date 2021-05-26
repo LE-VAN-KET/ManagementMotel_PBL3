@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -131,5 +132,20 @@ public class UploadFileUtil {
         List<File> files = result.getFiles();
 //        System.out.println(files.get(0).getWebViewLink());
         return files.isEmpty() ? null: files.get(0).getId();
+    }
+
+    public static List<String> getLinkImagesByFolderId(String folderId) throws IOException {
+        String query = "mimeType != 'application/vnd.google-apps.folder'"
+                + " and '" + folderId + "' in parents";
+        FileList result = getInstanceDriverService().files().list().setQ(query).setSpaces("drive")
+                .setFields("nextPageToken, files(id, webViewLink)")
+                .execute();
+        List<File> files = result.getFiles();
+        List<String> listFile = new ArrayList<>();
+        for (File file: files
+             ) {
+            listFile.add(file.getId());
+        }
+        return listFile.isEmpty() ? null: listFile;
     }
 }
