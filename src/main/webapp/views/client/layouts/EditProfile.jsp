@@ -51,7 +51,7 @@
             setTimeout(function () {
                 $('#loading').removeClass("show");
                 $('#loading').addClass("hidden");
-            }, 2000);
+            }, 1500);
 
             $("#changePassword").click(function () {
                 $("input[name='password']").prop("disabled", false).focus();

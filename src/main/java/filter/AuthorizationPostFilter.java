@@ -28,7 +28,7 @@ public class AuthorizationPostFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         }
 
-        if (url.startsWith("/post")) {
+        if (url.startsWith("/post") || url.startsWith("/personal-post")) {
             AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(request,
                     SystemConstant.ACCOUNTMODEL);
             if (accountModel != null) {

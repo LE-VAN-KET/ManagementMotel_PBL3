@@ -129,7 +129,7 @@
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="row mx-0 detail-list">
                                 <div class="col-5 p-0">
-                                    <a href="/post/show?postId=${postModels.postId}">
+                                    <a href="/post/show/${postModels.postSlug}">
                                         <img class="img-fluid lazyload"
                                              data-src="https://drive.google.com/uc?export=view&id=${postModels.linkImages}"
                                              style="width: 100%; height: 200px" alt="...">

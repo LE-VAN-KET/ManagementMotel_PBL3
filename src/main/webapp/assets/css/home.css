@@ -860,7 +860,7 @@ footer.bg-dark ul li a:hover {
     position: absolute;
     top: 0;
     left: 0;
-    animation: animateLoading 2.8s infinite linear;
+    animation: animateLoading 1.5s infinite linear;
 }
 
 #loading ul li:nth-of-type(1) {
@@ -871,19 +871,19 @@ footer.bg-dark ul li a:hover {
 
 #loading ul li:nth-of-type(2) {
     background: #8e44ad;
-    animation-delay: .7s;
+    animation-delay: .3s;
     box-shadow: 0 0 30px 5px #8e44ad;
 }
 
 #loading ul li:nth-of-type(3) {
     background: #d35400;
-    animation-delay: 1.4s;
+    animation-delay: 0.6s;
     box-shadow: 0 0 30px 5px #d35400;
 }
 
 #loading ul li:nth-of-type(4) {
     background: #7f8c8d;
-    animation-delay: 2.1s;
+    animation-delay: 1.2s;
     box-shadow: 0 0 30px 5px #7f8c8d;
 }
 
@@ -1019,6 +1019,57 @@ img.img-fluid {
     display: none;
 }
 
+.detail-personal-post {
+    background-color: #fff4f1;
+    border: 1px solid #ededed;
+    transition: box-shadow .3s;
+    font-size: 0.75rem;
+}
+
+.pure-button {
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+}
+
+/*detail post*/
+h1.title-post {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.title-sidebar {
+    background-color: #0069d9;
+    color: #fff4f1;
+    padding: 15px;
+}
+
+.title-sidebar i {
+    color: #e0a800;
+}
+
+.navbar-nav {
+    padding: 10px;
+}
+
+@media screen and (max-width: 991px){
+    .sidebar-post {
+        position: relative !important;
+    }
+}
+
+.description {
+    margin: 15px 0;
+}
+
+.description h5,
+.information h5 {
+    border-bottom: 1px solid #6c757d;
+}
+
+.information .fa-money-bill {
+    color: #28a745;
+}
+/*detail post*/
 /* #Media
 ================================================== */
 @media (max-width: 991px) {

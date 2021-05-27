@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="password">New Password:</label>
                         <input type="password" name="password" id="password" class="form-control"
-                               value="" disabled >
+                               value="" placeholder="new password" disabled >
                     </div>
                     <a href="#" class="btn btn-info my-1" id="changePassword">Change Password</a>
                 </div>

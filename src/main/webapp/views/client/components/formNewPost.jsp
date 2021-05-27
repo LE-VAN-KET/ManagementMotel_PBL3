@@ -16,7 +16,7 @@
                             <img class="lazyload img-thumbnail rounded-circle" width="100"
                                  data-src="https://static123.com/uploads/images/2018/12/12/boy_1544603222.png">
                         </figure>
-                        <p class="p-0 text-white text-center">Le Van Ket</p>
+                        <p class="p-0 text-white text-center">${ACCOUNTMODEL.user.fullName}</p>
                     </a>
                 </div>
                 <ul class="navbar-nav p-1">

@@ -78,6 +78,11 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public List<PostModel> selectAllByStatusPost(Pageble pageble, boolean statusPost) {
+        return postDAO.selectAllByStatusPost(pageble, statusPost);
+    }
+
+    @Override
     public List<PostModel> findByVillageId(Long villageId, Pageble pageble) {
         return postDAO.findByVillageId(villageId, pageble);
     }
@@ -100,7 +105,27 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public int getTotalItemByStatusPost(boolean statusPost) {
+        return postDAO.getTotalItemByStatusPost(statusPost);
+    }
+
+    @Override
     public PostModel findOneByPostSlug(String postSlug) {
         return postDAO.findOneByPostSlug(postSlug);
+    }
+
+    @Override
+    public List<PostModel> findByUserId(Pageble pageble, Long userId) {
+        return postDAO.findByUserId(pageble, userId);
+    }
+
+    @Override
+    public int getTotalIemByUserId(Long userId) {
+        return postDAO.getTotalIemByUserId(userId);
+    }
+
+    @Override
+    public void deleteByPostId(Long postId) {
+        postDAO.deleteByPostId(postId);
     }
 }

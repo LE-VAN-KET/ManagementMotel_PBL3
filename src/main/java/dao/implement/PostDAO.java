@@ -42,6 +42,13 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
     }
 
     @Override
+    public List<PostModel> selectAllByStatusPost(Pageble pageble, boolean statusPost) {
+        StringBuilder sql = sqlQuery();
+        sql.append(" where statusPost = ? LIMIT ?, ?");
+        return query(sql.toString(), new PostMapper(), statusPost, pageble.getOffset(), pageble.getMaxPageItem());
+    }
+
+    @Override
     public List<PostModel> findByVillageId(Long villageId, Pageble pageble) {
         StringBuilder sql = sqlQuery();
         sql.append(" where post.villageId = ? LIMIT ?, ?");
@@ -49,7 +56,7 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
     }
 
     private StringBuilder clauseWhereFindByCriteria(Criteria criteria, StringBuilder sql) {
-        sql.append(" where 1=1");
+        sql.append(" where statusPost = 1");
         if (criteria.getVillageId() != 0) {
             sql.append(" and post.villageId = " + criteria.getVillageId());
         }
@@ -88,6 +95,18 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
     }
 
     @Override
+    public int getTotalItemByStatusPost(boolean statusPost) {
+        String sql = "SELECT count(*) FROM post where statusPost = ?";
+        return count(sql, statusPost);
+    }
+
+    @Override
+    public int getTotalIemByUserId(Long userId) {
+        String sql = "SELECT count(*) FROM post where post.userId = ?";
+        return count(sql, userId);
+    }
+
+    @Override
     public int getTotalItemByCriteria(Criteria criteria) {
         StringBuilder query = new StringBuilder(" select count(*) from post");
         query = clauseWhereFindByCriteria(criteria, query);
@@ -100,5 +119,24 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
         sql.append(" where postSlug = ? LIMIT 1");
         List<PostModel> postModels = query(sql.toString(), new PostMapper(), postSLug);
         return postModels.isEmpty() ? null : postModels.get(0);
+    }
+
+    @Override
+    public List<PostModel> findByUserId(Pageble pageble, Long userId) {
+        StringBuilder sql = sqlQuery();
+        sql.append(" where post.userId = ? LIMIT ?, ?");
+        return query(sql.toString(), new PostMapper(), userId, pageble.getOffset(), pageble.getMaxPageItem());
+    }
+
+    @Override
+    public void deleteByPostId(Long postId) {
+        String sql = "delete from post where postId = ?";
+        delete(sql, postId);
+    }
+
+    @Override
+    public void updateStatusPostByPostId(Long postId, boolean statusPost) {
+        String sql = "update post set statusPost = ? where postId = ?";
+        update(sql, statusPost, postId);
     }
 }

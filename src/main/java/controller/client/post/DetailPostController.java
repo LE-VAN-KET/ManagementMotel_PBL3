@@ -3,6 +3,7 @@ package controller.client.post;
 import bean.PostModel;
 import constant.SystemConstant;
 import service.IPostService;
+import utils.SessionUtil;
 import utils.UploadFileUtil;
 
 import javax.inject.Inject;
@@ -25,6 +26,8 @@ public class DetailPostController extends HttpServlet {
             PostModel postModel = postService.findOneByPostSlug(postSlug);
             req.setAttribute(SystemConstant.POSTMODELS, postModel);
             req.setAttribute(SystemConstant.IMAGES, UploadFileUtil.getLinkImagesByFolderId(postModel.getLinkImages()));
+            req.setAttribute(SystemConstant.ACCOUNTMODEL,  SessionUtil.getInstance().getValue(req,
+                    SystemConstant.ACCOUNTMODEL));
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

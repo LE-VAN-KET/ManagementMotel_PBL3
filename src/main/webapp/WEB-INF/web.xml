@@ -48,6 +48,7 @@
     <filter-mapping>
         <filter-name>authorizationPost</filter-name>
         <url-pattern>/post</url-pattern>
+        <url-pattern>/personal-post</url-pattern>
     </filter-mapping>
 
 <!--    Authorization edit profile-->
@@ -68,7 +69,7 @@
     <filter-mapping>
         <filter-name>authorizationUser</filter-name>
         <url-pattern>/post</url-pattern>
-        <url-pattern>/quan-ly-bai-dang</url-pattern>
+        <url-pattern>/personal-post</url-pattern>
     </filter-mapping>
 
 <!--    error access url-->

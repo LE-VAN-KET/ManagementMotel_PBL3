@@ -11,13 +11,15 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${POSTMODELS.postSlug}</title>
-    <%@include file="../../../common/csslib.jsp"%>
     <link rel="stylesheet" href="${contextPath}/assets/css/slideShowImages.css">
-    <link rel="stylesheet" href="${contextPath}/assets/css/detailPost.css">
+    <%@include file="../../../common/csslib.jsp"%>
 </head>
 
-<body class="hero-anime">
+<body>
     <%--    loading--%>
     <div id="loading" class="">
         <ul>
@@ -93,30 +95,7 @@
 <%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/3.jpg"--%>
 <%--                                    class="coverflow__image lazyload" />--%>
 <%--                            </a>--%>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/2-1.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/2-1.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/2-1.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/2-1.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/2-1.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/2-1.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
+
                             <a class="next-arrow"></a>
                         </div>
                     </div>
@@ -176,7 +155,7 @@
             setTimeout(function () {
                 $('#loading').removeClass("show");
                 $('#loading').addClass("hidden");
-            }, 2000);
+            }, 1500);
             let address = '${POSTMODELS.address}, ${POSTMODELS.villageModel.villageName},' +
                 '${POSTMODELS.villageModel.districtModel.districtName}, Đà Nẵng';
             let query = address.split(" ");

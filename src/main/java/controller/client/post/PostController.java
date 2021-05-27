@@ -39,9 +39,7 @@ public class PostController extends HttpServlet {
                 SessionUtil.getInstance().getValue(req, SystemConstant.ACCOUNTMODEL));
         List<DistrictModel> districtModels = districtService.selectViewAll();
         req.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
-        req.setAttribute(SystemConstant.ACCOUNTMODEL,  SessionUtil.getInstance().getValue(req,
-                SystemConstant.ACCOUNTMODEL));
-        req.getRequestDispatcher("/views/client/layouts/Post-article.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/client/layouts/PostArticle.jsp").forward(req, resp);
     }
 
     @Override
@@ -99,8 +97,10 @@ public class PostController extends HttpServlet {
                 resp.sendRedirect("/home");
             } catch (FileUploadException e1) {
                 e1.printStackTrace();
+                resp.sendRedirect("/home?message=failed_postnew&&alert=danger");
             } catch (Exception ex) {
                 ex.printStackTrace();
+                resp.sendRedirect("/home?message=failed_postnew&&alert=danger");
             }
         } else {
             resp.sendRedirect("/home");

@@ -54,7 +54,7 @@
         setTimeout(function () {
             $('#loading').removeClass("show");
             $('#loading').addClass("hidden");
-        }, 2000);
+        }, 1500);
 
         $(document).ready(function () {
             if (${!DISTRICTSMODELS.isEmpty()}) {

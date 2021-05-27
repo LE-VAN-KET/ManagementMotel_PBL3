@@ -10,10 +10,17 @@ public interface IPostDAO {
     Long insert(PostModel postModel);
     void updateLinkImages(Long postId, String linkImages);
     List<PostModel> selectAll(Pageble pageble);
+    List<PostModel> selectAllByStatusPost(Pageble pageble, boolean statusPost);
     List<PostModel> findByVillageId(Long villageId, Pageble pageble);
     List<PostModel> findByCriteria(Criteria criteria, Pageble pageble);
+    List<PostModel> findByUserId(Pageble pageble, Long userId);
 
     int getTotalItem();
+    int getTotalItemByStatusPost(boolean statusPost);
+    int getTotalIemByUserId(Long userId);
     int getTotalItemByCriteria(Criteria criteria);
     PostModel findOneByPostSlug(String postSLug);
+
+    void deleteByPostId(Long postId);
+    void updateStatusPostByPostId(Long postId, boolean statusPost);
 }

@@ -19,7 +19,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto py-4 py-md-0">
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                <a class="nav-link" href="#"><i class="fas fa-home mr-1"></i></i>Home</a>
+                                <a class="nav-link" href="/home"><i class="fas fa-home mr-1"></i></i>Home</a>
                             </li>
 
                             <li class="nav-item dropdown dropdown-slide dropdown-hover pl-4 pl-md-0 ml-0 ml-md-4">
@@ -46,7 +46,7 @@
                                         <i class="fas fa-user-cog ml-1 text-primary"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Quản lý bài đăng</a>
+                                        <a class="dropdown-item" href="/personal-post">Quản lý bài đăng</a>
                                         <a class="dropdown-item" href="/edit-profile">Tài khoản</a>
                                         <a class="dropdown-item" href="#">Log out</a>
                                     </div>

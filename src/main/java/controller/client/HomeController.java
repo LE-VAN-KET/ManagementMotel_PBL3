@@ -4,6 +4,7 @@ import bean.DistrictModel;
 import bean.PostModel;
 import constant.SystemConstant;
 import criteria.Criteria;
+import dao.IPostDAO;
 import paging.Pageble;
 import service.IDistrictService;
 import service.IPostService;
@@ -57,8 +58,8 @@ public class HomeController extends HttpServlet {
             if (criteria.getVillageId() != null ) {
                 postModels = postService.findByCriteria(criteria, pageble);
             } else {
-                postModels = postService.selectAll(pageble);
-                pageble.setTotalItem(postService.getTotalItem());
+                postModels = postService.selectAllByStatusPost(pageble, true);
+                pageble.setTotalItem(postService.getTotalItemByStatusPost(true));
             }
 
             for (PostModel post: postModels) {
