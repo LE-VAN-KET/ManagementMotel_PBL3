@@ -61,10 +61,10 @@ create table post(
     address nvarchar(100) not null,
     villageId int not null,
     userId int not null,
+    postSlug varchar(150) not null unique,
     statusPost bit not null,
     statusRental bit not null,
-    publishedAt timestamp default current_timestamp
-        on update current_timestamp,
+    publishedAt timestamp default current_timestamp,
     createAt timestamp default current_timestamp,
     modifiedAt timestamp default current_timestamp
         on update current_timestamp,
@@ -102,3 +102,15 @@ create table message(
     constraint fk_toUsers_message foreign key(toUserId) references users(userId)
         on delete cascade on update cascade
 )
+
+DROP TRIGGER IF EXISTS after_statusPost_update;
+DELIMITER $$
+CREATE TRIGGER `statusPost_update`
+    BEFORE UPDATE ON `post`
+    FOR EACH ROW
+BEGIN
+    IF OLD.statusPost <> new.statusPost THEN
+    SET new.publishedAt = NOW();
+END IF;
+END$$
+DELIMITER ;
