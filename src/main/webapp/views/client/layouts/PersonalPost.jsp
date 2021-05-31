@@ -18,11 +18,10 @@
 	<title>Personal post</title>
 	<%@include file="../../../common/csslib.jsp"%>
 	<link rel="stylesheet" href="${contextPath}/assets/css/detailPost.css">
-	<link href="${contextPath}/assets/css/home.css" rel="stylesheet">
 	<link rel="stylesheet" href="${contextPath}/assets/css/template/pagination.min.css">
 </head>
 
-<body class="hero-anime">
+<body class="hero-anime" style="background-color: #f5f5f5;">
 	<%--    loading--%>
 	<div id="loading" class="">
 		<ul>
@@ -36,32 +35,7 @@
 	<%@include file="../components/navigation.jsp"%>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-				<div class="sidebar-post">
-					<div class="title-sidebar bg-primary p-2">
-						<span class="text-light">Thông tin</span>
-					</div>
-					<div class="user-info bg-white">
-						<a href="javascript:void(0)" class="clearfix text-center">
-							<figure class="avatar">
-								<img class="lazyload img-thumbnail rounded-circle" width="100"
-									data-src="https://static123.com/uploads/images/2018/12/12/boy_1544603222.png">
-							</figure>
-							<p class="p-0 text-primary text-center">Le Van Ket</p>
-						</a>
-					</div>
-					<ul class="navbar-nav bg-white">
-						<div class="py-1">
-							<span class="text-primary">Phone number:</span>
-							<span class="ml-1 text-muted">0328560055</span>
-						</div>
-						<div class="py-1">
-							<span class="text-primary">Email:</span>
-							<small class="ml-1 text-muted">anhle1512001@gmail.com</small>
-						</div>
-					</ul>
-				</div>
-			</div>
+            <%@include file="../components/sidebarPersonalPost.jsp"%>
 			<div class="col-lg-9 col-md-12 col-xs-12 col-sm-12 my-1">
 				<div class="personal-post bg-dark p-2">
 					<span class="text-light">Tin đăng</span>
@@ -91,7 +65,8 @@
 								<p class="p-1 m-0"><i class="far fa-building text-info"></i> Diện tích:
 									<span>25m<sup>2</sup></span></p>
 								<p class="p-1 m-0"><i class="fas fa-map-marker-alt text-info"></i><span> Address:
-								<span>${postModels.address}-${postModels.villageModel.villageName}-${postModels.villageModel.districtModel.districtName}</span>
+								<span>${postModels.address}-${postModels.villageModel.villageName}-
+										${postModels.villageModel.districtModel.districtName}</span>
 							</span></p>
 								<div class="row">
 									<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -110,7 +85,8 @@
 										</c:if>
 									</div>
 									<div class="mx-auto">
-										<a class="pure-button m-1 px-1 text-light bg-success" href="#">update</a>
+										<a class="pure-button m-1 px-1 text-light bg-success"
+										   href="/post/update/${postModels.postSlug}">update</a>
 										<a class="pure-button bg-danger m-1 px-1 text-light"
                                            data-href="/personal-post/delete/${postModels.postId}" data-toggle="modal"
                                            data-target="#confirm-delete" href="#">delete</a>
@@ -120,7 +96,8 @@
 							<div class="clearfix"></div>
 						</div>
 					</c:forEach>
-                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+					 aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
 							<div class="modal-header">
@@ -167,7 +144,7 @@
 			}, 1500);
 
 			if("${message}" !== "") {
-				info('${message}');
+				toastr.info('${message}');
 			}
 
 			$('#confirm-delete').on('show.bs.modal', function(e) {

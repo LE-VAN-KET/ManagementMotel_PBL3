@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../../common/taglib.jsp"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="${contextPath}/assets/css/slideShowImages.css">
     <%@include file="../../../common/csslib.jsp"%>
 </head>
-
-<body>
+<body style="background-color: #f5f5f5;">
     <%--    loading--%>
     <div id="loading" class="">
         <ul>
@@ -35,7 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-0 col-sm-0 col-xs-0">
-                <div class="position-fixed sidebar-post">
+                <div class="sidebar-post">
                     <div class="title-sidebar">
                         <i class="fas fa-list-ul" class="bg-primary mr-2"></i>
                         <span>Phòng Trọ</span>
@@ -81,20 +80,20 @@
                     <div class="nine columns">
                         <div class="coverflow top10 bot10">
                             <a class="prev-arrow"></a>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/nha-06-nam-thanh1.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
+                            <%--                            <a href="">--%>
+                            <%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/nha-06-nam-thanh1.jpg"--%>
+                            <%--                                    class="coverflow__image lazyload" />--%>
+                            <%--                            </a>--%>
                             <c:forEach items="${IMAGES}" var="image">
-                                <a href="">
+                                <a href="" class="image-post">
                                     <img data-src="https://drive.google.com/uc?export=view&id=${image}"
-                                         class="coverflow__image lazyload" />
+                                        class="coverflow__image lazyload" />
                                 </a>
                             </c:forEach>
-<%--                            <a href="">--%>
-<%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/3.jpg"--%>
-<%--                                    class="coverflow__image lazyload" />--%>
-<%--                            </a>--%>
+                            <%--                            <a href="">--%>
+                            <%--                                <img data-src="https://phongtrodn.com/wp-content/uploads/2021/03/3.jpg"--%>
+                            <%--                                    class="coverflow__image lazyload" />--%>
+                            <%--                            </a>--%>
 
                             <a class="next-arrow"></a>
                         </div>
@@ -161,15 +160,14 @@
             let query = address.split(" ");
             query = query.join("+");
             $("#map").append('<iframe' +
-            ' width="100%"' +
-            ' height="400"' +
-            ' style="border:0"' +
-            ' loading="lazy"' +
-            ' allowfullscreen' +
-            ' src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBm5cVeHG1x831muJ_Q7NiNUbFRt0R3Mug&q=' +
-            query + '"></iframe>');
+                ' width="100%"' +
+                ' height="400"' +
+                ' style="border:0"' +
+                ' loading="lazy"' +
+                ' allowfullscreen' +
+                ' src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBm5cVeHG1x831muJ_Q7NiNUbFRt0R3Mug&q=' +
+                query + '"></iframe>');
         })
     </script>
 </body>
-
 </html>

@@ -15,7 +15,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phong Tro Da Nang</title>
-    <link href="${contextPath}/assets/css/home.css" rel="stylesheet">
     <%@include file="../../../common/csslib.jsp"%>
     <link rel="stylesheet" href="${contextPath}/assets/css/template/pagination.min.css">
 </head>

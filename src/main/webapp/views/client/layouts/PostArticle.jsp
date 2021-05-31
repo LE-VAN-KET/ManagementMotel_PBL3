@@ -61,7 +61,7 @@
                 // set list district option
                 $("#district option").remove();
                 <c:forEach items="${DISTRICTMODELS}" var="district">
-                $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
+                    $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
                 </c:forEach>
             }
 
