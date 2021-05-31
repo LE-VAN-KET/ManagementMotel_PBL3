@@ -26,12 +26,20 @@ public class AuthorizationPostFilter implements Filter {
 //        check authorization post
         if (url.startsWith("/post/show")) {
             filterChain.doFilter(servletRequest, servletResponse);
+            return;
         }
 
         if (url.startsWith("/post") || url.startsWith("/personal-post")) {
             AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(request,
                     SystemConstant.ACCOUNTMODEL);
             if (accountModel != null) {
+                // check information account
+                if (accountModel.getUser().getFullName() == null || "".equals(accountModel.getUser().getFullName())
+                        || accountModel.getUser().getEmail() == null || "".equals(accountModel.getUser().getEmail())
+                        || accountModel.getUser().getSDT() == null || "".equals(accountModel.getUser().getSDT())) {
+                    response.sendRedirect("/edit-profile?error=finish_filled_information_profile&&alert=danger");
+                    return;
+                }
                 /*permission access case role that*/
                 switch (accountModel.getUser().getRoleMole().getRoleName()) {
                     case SystemConstant.ADMIN: {

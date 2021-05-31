@@ -122,6 +122,14 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
     }
 
     @Override
+    public PostModel findByPostId(Long postId) {
+        StringBuilder sql = sqlQuery();
+        sql.append(" where postId = ? LIMIT 1");
+        List<PostModel> postModels = query(sql.toString(), new PostMapper(), postId);
+        return postModels.isEmpty() ? null : postModels.get(0);
+    }
+
+    @Override
     public List<PostModel> findByUserId(Pageble pageble, Long userId) {
         StringBuilder sql = sqlQuery();
         sql.append(" where post.userId = ? LIMIT ?, ?");
@@ -138,5 +146,14 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
     public void updateStatusPostByPostId(Long postId, boolean statusPost) {
         String sql = "update post set statusPost = ? where postId = ?";
         update(sql, statusPost, postId);
+    }
+
+    @Override
+    public void updateByPostId(PostModel postModel) {
+        StringBuilder sql = new StringBuilder("update post set title = ?, description = ?, price = ?, square = ?,");
+        sql.append(" address = ?, villageId = ?, postSlug = ? where postId = ?");
+        update(sql.toString(), postModel.getTitle(), postModel.getDescription(), postModel.getPrice(),
+                postModel.getSquare(), postModel.getAddress(), postModel.getVillageModel().getVillageId(),
+                postModel.getPostSlug(), postModel.getPostId());
     }
 }

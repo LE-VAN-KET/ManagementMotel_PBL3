@@ -148,4 +148,20 @@ public class UploadFileUtil {
         }
         return listFile.isEmpty() ? null: listFile;
     }
+
+    public static void deleteFile(String fileId) {
+        try {
+            getInstanceDriverService().files().delete(fileId).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateFileByFolderId(String folderId, List<FileItem> listImages) throws IOException {
+        for (FileItem item: listImages) {
+            InputStreamContent uploadStreamContent = new InputStreamContent(
+                    item.getContentType(), item.getInputStream());
+            uploadFileItem(uploadStreamContent, item.getName(), folderId);
+        }
+    }
 }

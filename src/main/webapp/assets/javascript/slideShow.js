@@ -2,8 +2,8 @@
         Album Cover Slider
 --------------------------------*/
 //start added by Chase
-const a = document.getElementsByTagName("a");
-const cfImg = document.getElementsByClassName("coverflow__image")
+const a = document.getElementsByClassName("image-post");
+const cfImg = document.getElementsByClassName("coverflow__image");
 
 let scaleI = 0;
 for (scaleI; scaleI < a.length; scaleI++) {

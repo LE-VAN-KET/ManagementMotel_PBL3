@@ -19,6 +19,8 @@ public interface IPostService {
     List<String> validatePost(PostModel postModel);
     PostModel findOneByPostSlug(String postSlug);
     List<PostModel> findByUserId(Pageble pageble, Long userId);
+    PostModel findByPostId(Long postId);
 
     void deleteByPostId(Long postId);
+    void updateByPostId(PostModel postModel);
 }

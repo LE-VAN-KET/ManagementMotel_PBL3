@@ -969,7 +969,8 @@ i.fa-trash-alt {
     color:rgba(209, 208, 208, 0.877);
 }
 
-.img-list-img a.delete {
+.img-list-img a.delete,
+.img-list-img a.delete_file_add {
     position: absolute;
     top: 0;
     right: 0;
@@ -1049,6 +1050,10 @@ h1.title-post {
 
 .navbar-nav {
     padding: 10px;
+}
+
+.sidebar-post {
+    position: fixed;
 }
 
 @media screen and (max-width: 991px){

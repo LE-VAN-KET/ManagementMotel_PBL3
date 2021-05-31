@@ -20,7 +20,9 @@ public interface IPostDAO {
     int getTotalIemByUserId(Long userId);
     int getTotalItemByCriteria(Criteria criteria);
     PostModel findOneByPostSlug(String postSLug);
+    PostModel findByPostId(Long postId);
 
     void deleteByPostId(Long postId);
+    void updateByPostId(PostModel postModel);
     void updateStatusPostByPostId(Long postId, boolean statusPost);
 }

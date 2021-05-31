@@ -128,4 +128,16 @@ public class PostService implements IPostService {
     public void deleteByPostId(Long postId) {
         postDAO.deleteByPostId(postId);
     }
+
+    @Override
+    public PostModel findByPostId(Long postId) {
+        return postDAO.findByPostId(postId);
+    }
+
+    @Override
+    public void updateByPostId(PostModel postModel) {
+        String postSlug = toSlug(postModel.getTitle() + " " + new Date().getTime());
+        postModel.setPostSlug(postSlug);
+        postDAO.updateByPostId(postModel);
+    }
 }

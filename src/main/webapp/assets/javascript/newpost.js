@@ -31,25 +31,8 @@ const isEmptyField = function () {
     }
 }
 
-const imagesPreview = function (input, placeToInsertImagePreview) {
-    if (input.files) {
-        let filesAmount = input.files.length;
-        for (i = 0; i < filesAmount; i++) {
-            let reader = new FileReader();
-
-            reader.onload = function (event) {
-                $(`<div class="col-2"><img class="img-thumbnail" src="${event.target.result}">
-                            <a class="delete" ><i class="far fa-trash-alt"></i></a></div>`).appendTo(
-                    placeToInsertImagePreview);
-                $('a.delete').click(function () {
-                    $(this).parent(".col-2").remove();
-                })
-            }
-            reader.readAsDataURL(input.files[i]);
-        }
-    }
-};
-
+let delId = 0;
+let files = [];
 $(document).ready(function () {
     if (window.File && window.FileList && window.FileReader) {
         $('#files').on('change', function () {
@@ -57,4 +40,42 @@ $(document).ready(function () {
         });
     }
 
+    const imagesPreview = function (input, placeToInsertImagePreview) {
+        if (input.files) {
+            files.push(...input.files);
+            $('#files').val(null);
+            input.files = new FileListItems(files);
+            $(".delete_file_add").parent(".col-2").remove();
+
+            let length = files.length;
+            for (let i = 0; i < length; i++) {
+                let reader = new FileReader();
+
+                reader.onload = function (event) {
+                    $(`<div class="col-2"><img class="img-thumbnail" src="${event.target.result}">
+                    <a class="delete_file_add" data-name="${files[i].name}" ><i class="far fa-trash-alt"></i></a></div>`)
+                        .appendTo(placeToInsertImagePreview);
+                    $(".delete_file_add").click(function () {
+                        for (let index = 0; index < files.length; index++) {
+                            if (files[index].name == $(this).data("name")) {
+                                files.splice(index, 1);
+                                $('#files').val(null);
+                                input.files = new FileListItems(files);
+                            }
+                        }
+                        $(this).parent(".col-2").remove();
+                    })
+                };
+                reader.readAsDataURL(files[i]);
+            };
+        }
+    };
+
+    function FileListItems (files) {
+        let b = new ClipboardEvent("").clipboardData || new DataTransfer()
+        for (let i = 0, len = files.length; i<len; i++) {
+            b.items.add(files[i]);
+        }
+        return b.files;
+    }
 })

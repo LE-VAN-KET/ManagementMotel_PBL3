@@ -47,7 +47,7 @@
     </filter>
     <filter-mapping>
         <filter-name>authorizationPost</filter-name>
-        <url-pattern>/post</url-pattern>
+        <url-pattern>/post/*</url-pattern>
         <url-pattern>/personal-post</url-pattern>
     </filter-mapping>
 
@@ -61,17 +61,15 @@
         <url-pattern>/edit-profile</url-pattern>
     </filter-mapping>
 
-<!--    Authorization user-->
+<!--    Authorization admin-->
     <filter>
-        <filter-name>authorizationUser</filter-name>
-        <filter-class>filter.AuthorizationUser</filter-class>
+        <filter-name>authorizationAdmin</filter-name>
+        <filter-class>filter.AuthorizationAdminFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>authorizationUser</filter-name>
-        <url-pattern>/post</url-pattern>
-        <url-pattern>/personal-post</url-pattern>
+        <filter-name>authorizationAdmin</filter-name>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
-
 <!--    error access url-->
     <error-page>
         <error-code>404</error-code>
