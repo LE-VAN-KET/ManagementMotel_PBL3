@@ -39,7 +39,7 @@
                 </div> -->
             </li>
             <li class="">
-                <a class="nav-link text-left" role="button">
+                <a class="nav-link text-left" role="button" href="/admin/user" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user"></i><span class="px-2">User</span>
                 </a>
             </li>
@@ -55,13 +55,18 @@
                 </a>
             </li>
             <li class="">
-                <a class="nav-link text-left" role="button">
-                    <i class="fas fa-chart-area"></i><span class="px-2">Analysis</span>
+                <a class="nav-link text-left" role="button" href="/admin/account">
+                    <i class="fas fa-chart-area"></i><span class="px-2">Account</span>
                 </a>
             </li>
             <li class="">
                 <a class="nav-link text-left" role="button" href="/admin/village" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-chart-area"></i><span class="px-2">Village</span>
+                </a>
+            </li>
+            <li class="">
+                <a class="nav-link text-left" role="button" href="/admin/district" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-chart-area"></i><span class="px-2">District</span>
                 </a>
             </li>
         </ul>

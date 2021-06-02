@@ -14,7 +14,8 @@ public class VillageMapper implements IRowMapper<VillageModel> {
         try {
             villageModel.setVillageId(resultSet.getLong("villageId"));
             villageModel.setVillageName(resultSet.getString("villageName"));
-            villageModel.setDistrictId(resultSet.getLong("districtId"));
+            DistrictModel districtModel = new DistrictMapper().mapRow(resultSet);
+            villageModel.setDistrictModel(districtModel);
             villageModel.setCreateAt(resultSet.getTimestamp("createAt"));
             villageModel.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
             return villageModel;

@@ -5,11 +5,21 @@ import java.sql.Timestamp;
 public class PostModel extends AbstractModel {
     private Long postId;
     private String title;
-    private String desciption;
+    private String description;
     private String linkImages;
     private Double price;
     private Long square;
     private String address;
+    private String postSlug;
+
+    public String getPostSlug() {
+        return postSlug;
+    }
+
+    public void setPostSlug(String postSlug) {
+        this.postSlug = postSlug;
+    }
+
     private VillageModel villageModel;
     private UserModel userModel;
     private Boolean statusPost;
@@ -32,12 +42,12 @@ public class PostModel extends AbstractModel {
         this.title = title;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLinkImages() {
@@ -111,4 +121,5 @@ public class PostModel extends AbstractModel {
     public void setPublishedAt(Timestamp publishedAt) {
         this.publishedAt = publishedAt;
     }
+
 }

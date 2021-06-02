@@ -8,8 +8,14 @@
         <span></span>
     </div>
 
+    <div>
+        <a class="nav-link" href="#" id="userDropdown" role="button">
+            <img class="img-profile rounded-circle" src="../../assets/img/logo.png">
+        </a>
+    </div>
+
     <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline navbar-search">
+    <form class="d-none d-sm-inline-block form-inline navbar-search ml-auto mr-3">
         <div class="input-group">
             <input type="text" class="form-control bg-light " placeholder="Search for..."
                    aria-label="Search">
@@ -20,7 +26,7 @@
             </div>
         </div>
     </form>
-
+<%--
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
@@ -104,10 +110,10 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Vishweb Design</span>
-                <img class="img-profile rounded-circle" src="img/logo3.png">
+                &lt;%&ndash;<span class="mr-2 d-none d-lg-inline text-gray-600 small">Vishweb Design</span>&ndash;%&gt;
+                <img class="img-profile rounded-circle" src="../../assets/img/logo.png">
             </a>
         </li>
 
-    </ul>
+    </ul>--%>
 </nav>

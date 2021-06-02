@@ -18,6 +18,14 @@ public class AccountDAO extends AbstractDAO<AccountModel> implements IAccountDAO
     }
 
     @Override
+    public List<AccountModel> selectAll() {
+        StringBuilder sql = new StringBuilder("SELECT * FROM account AS acc");
+        sql.append(" INNER JOIN users AS u ON u.userId = acc.userId");
+        sql.append(" INNER JOIN role AS r ON r.roleId = u.roleId");
+        return query(sql.toString(), new AccountMapper());
+    }
+
+    @Override
     public Long insert(AccountModel account) {
         String sql = "INSERT INTO account(username, password) VALUES(?, ?)";
         return insert(sql, account.getUsername(), account.getPassword());

@@ -16,7 +16,7 @@ public class PostMapper implements IRowMapper<PostModel> {
         try {
             postModel.setPostId(resultSet.getLong("postId"));
             postModel.setTitle(resultSet.getString("title"));
-            postModel.setDesciption(resultSet.getString("description"));
+            postModel.setDescription(resultSet.getString("description"));
             postModel.setLinkImages(resultSet.getString("linkImages"));
             postModel.setPrice(resultSet.getDouble("price"));
             postModel.setSquare(resultSet.getLong("square"));
@@ -30,6 +30,7 @@ public class PostMapper implements IRowMapper<PostModel> {
             postModel.setCreateAt(resultSet.getTimestamp("createAt"));
             postModel.setPublishedAt(resultSet.getTimestamp("publishedAt"));
             postModel.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
+            postModel.setPostSlug(resultSet.getString("postSlug"));
             return postModel;
         } catch (SQLException e) {
             e.printStackTrace();

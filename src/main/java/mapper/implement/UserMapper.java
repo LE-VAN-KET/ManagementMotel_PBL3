@@ -13,12 +13,16 @@ public class UserMapper implements IRowMapper<UserModel> {
         try {
             UserModel user = new UserModel();
             user.setUserId(resultSet.getLong("userId"));
-            user.setFullName(resultSet.getString("fullName"));
-            user.setEmail(resultSet.getString("email"));
-            RoleModel roleModel = new RoleMapper().mapRow(resultSet);
-            user.setRoleModel(roleModel);
-            user.setCreateAt(resultSet.getTimestamp("createAt"));
-            user.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
+            if (resultSet.getString("fullName") != null) {
+                user.setFullName(resultSet.getString("fullName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setSDT(resultSet.getString("SDT"));
+                RoleModel roleModel = new RoleMapper().mapRow(resultSet);
+                user.setRoleModel(roleModel);
+                user.setCreateAt(resultSet.getTimestamp("createAt"));
+                user.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
+            }
+
             return user;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -6,6 +6,7 @@ import service.IAccountService;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
+import java.util.List;
 
 @ManagedBean
 public class AccountService implements IAccountService {
@@ -15,6 +16,11 @@ public class AccountService implements IAccountService {
     @Override
     public AccountModel findUsernameAndPassword(String username, String password) {
         return accountDAO.findUsernameAndPassword(username, password);
+    }
+
+    @Override
+    public List<AccountModel> selectAll() {
+        return accountDAO.selectAll();
     }
 
     @Override
