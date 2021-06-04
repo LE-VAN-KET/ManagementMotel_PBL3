@@ -7,7 +7,7 @@
 <script src="${contextPath}/assets/javascript/navigation.js"></script>
 <script>
     toastr.options = {
-        "closeButton": false,
+        "closeButton": true,
         "debug": false,
         "newestOnTop": false,
         "progressBar": false,
@@ -21,6 +21,10 @@
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
+        "hideMethod": "fadeOut",
+        "closeHtml": '<button><i class="icon-off text-light"></i></button>',
+        "closeMethod": 'fadeOut',
+        "closeDuration": 300,
+        "closeEasing": "swing"
     }
 </script>

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-md navbar-light py-0">
+                <nav class="navbar navbar-expand-md navbar-light p-0">
 
                     <a class="navbar-brand p-0" href="#">
                         <img data-src="${contextPath}/assets/images/logo-pbl3.png" class="lazyload m-0" alt="...">

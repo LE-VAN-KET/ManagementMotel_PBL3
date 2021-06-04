@@ -23,4 +23,5 @@ public interface IPostService {
 
     void deleteByPostId(Long postId);
     void updateByPostId(PostModel postModel);
+    void updateStatusRentalByPostId(Long postId, boolean statusRental);
 }

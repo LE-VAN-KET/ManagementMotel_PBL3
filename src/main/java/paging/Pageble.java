@@ -7,6 +7,11 @@ public class Pageble implements IPageble{
     private Integer maxPageItem;
     private Integer totalItem;
     private Sorter sorter;
+    private Integer totalPage;
+
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
+    }
 
     public Sorter getSorter() {
         return sorter;

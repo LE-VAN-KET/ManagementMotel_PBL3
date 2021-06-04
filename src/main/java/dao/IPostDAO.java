@@ -25,4 +25,6 @@ public interface IPostDAO {
     void deleteByPostId(Long postId);
     void updateByPostId(PostModel postModel);
     void updateStatusPostByPostId(Long postId, boolean statusPost);
+    void updateStatusRentalByPostId(Long postId, boolean statusRental);
+    int countByPostId(Long postId);
 }

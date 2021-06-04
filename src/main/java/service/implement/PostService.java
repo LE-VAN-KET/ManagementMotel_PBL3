@@ -140,4 +140,10 @@ public class PostService implements IPostService {
         postModel.setPostSlug(postSlug);
         postDAO.updateByPostId(postModel);
     }
+
+    @Override
+    public void updateStatusRentalByPostId(Long postId, boolean statusRental) {
+        postDAO.updateStatusRentalByPostId(postId, statusRental);
+    }
+
 }

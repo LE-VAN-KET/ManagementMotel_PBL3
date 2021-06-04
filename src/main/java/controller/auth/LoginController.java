@@ -48,13 +48,13 @@ public class LoginController extends HttpServlet {
             SessionUtil.getInstance().putValue(req, SystemConstant.ACCOUNTMODEL, accountModel);
             switch (accountModel.getUser().getRoleMole().getRoleName()) {
                 case SystemConstant.ADMIN:
-                    resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+                    resp.sendRedirect(req.getContextPath() + "/admin/home");
                     break;
                 case SystemConstant.LANDLORD:
                     resp.sendRedirect(req.getContextPath() + "/home");
                     break;
                 case SystemConstant.USER:
-                    resp.sendRedirect(req.getContextPath() + "/home-user");
+                    resp.sendRedirect(req.getContextPath() + "/home");
                     break;
             }
         } else {

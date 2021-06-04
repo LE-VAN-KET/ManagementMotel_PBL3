@@ -1,17 +1,17 @@
 package bean;
 
 public class CommentModel extends AbstractModel {
-    private Long commnentId;
+    private Long commentId;
     private String content;
     private Long postId;
     private Long userId;
 
-    public Long getCommnentId() {
-        return commnentId;
+    public Long getCommentId() {
+        return commentId;
     }
 
-    public void setCommnentId(Long commnentId) {
-        this.commnentId = commnentId;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     public String getContent() {

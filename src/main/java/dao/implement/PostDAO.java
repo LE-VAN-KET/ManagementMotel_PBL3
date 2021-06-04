@@ -156,4 +156,16 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
                 postModel.getSquare(), postModel.getAddress(), postModel.getVillageModel().getVillageId(),
                 postModel.getPostSlug(), postModel.getPostId());
     }
+
+    @Override
+    public void updateStatusRentalByPostId(Long postId, boolean statusRental) {
+        String sql = "update post set statusRental = ? where postId = ?";
+        update(sql, statusRental, postId);
+    }
+
+    @Override
+    public int countByPostId(Long postId) {
+        String sql = "SELECT count(*) FROM post where postId = ?";
+        return count(sql, postId);
+    }
 }

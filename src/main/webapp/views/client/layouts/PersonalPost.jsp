@@ -17,7 +17,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Personal post</title>
 	<%@include file="../../../common/csslib.jsp"%>
-	<link rel="stylesheet" href="${contextPath}/assets/css/detailPost.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/template/pagination.min.css">
 </head>
 
@@ -155,7 +154,7 @@
 				total: ${PAGEABLE.totalItem}, // 总数据条数
 				current: ${PAGEABLE.page}, // 当前页码
 				length: ${PAGEABLE.maxPageItem}, // 每页数据量
-				size: 2, // 显示按钮个数
+				size: ${PAGEABLE.totalPage}, // 显示按钮个数
 				/**
 				 * [click description]
 				 * @param  {[object]} options = {

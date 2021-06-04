@@ -127,6 +127,23 @@
                     </div>
                     <button type="submit" class="btn btn-primary float-right">Update post</button>
                 </form>
+                <div class="widget switch">
+                    <fieldset>
+                        <legend>Trọ này được thuê chưa?</legend>
+                        <span>
+                            <c:if test="${POSTMODEL.statusRental == true}">
+                                <input type="checkbox" id="chsw1" name="status_rent" value="1" checked>
+                                <label for="chsw1" class="mb-0" id="btn_status"></label>
+                                <span class="_status_rental text-primary">Thuê rồi</span>
+                            </c:if>
+                            <c:if test="${POSTMODEL.statusRental == false}">
+                                <input type="checkbox" id="chsw1" name="status_rent" value="0">
+                                <label for="chsw1" class="mb-0" id="btn_status"></label>
+                                <span class="_status_rental text-primary">Chưa thuê</span>
+                            </c:if>
+                        </span>
+                    </fieldset>
+                </div>
             </div>
         </div>
     </div>
@@ -216,6 +233,30 @@
 
             $("#postForm").submit((e) => {
                 $("input[name='villageId']").val($("#village option:selected").data('id'));
+            })
+
+            $("#btn_status").click(function (e) {
+                e.preventDefault();
+                let statusRental = $("input:checkbox").prop("checked") ? true: false;
+                $.ajax({
+                    type: "POST",
+                    url : "/post/update-status-rental/${POSTMODEL.postId}",
+                    data: {statusRental: statusRental},
+                    success: function (result) {
+                        if (result.success == "OK") {
+                            if (result.statusRental == true) {
+                                $("#chsw1").prop("checked", true);
+                                $("._status_rental").text("Thuê rồi");
+                            } else {
+                                $("#chsw1").prop("checked", false);
+                                $("._status_rental").text("Chưa thuê");
+                            }
+                            toastr.success("update status rental success");
+                        } else {
+                            toastr.error(result.success);
+                        }
+                    }
+                })
             })
         });
     </script>
