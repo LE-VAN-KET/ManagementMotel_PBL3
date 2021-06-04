@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../common/taglib.jsp" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -41,8 +39,8 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Village Name</th>
-                        <th scope="col">District ID</th>
+                        <th scope="col">Village name</th>
+                        <th scope="col">District name</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -237,6 +235,7 @@
     }
 
     $(document).ready(function () {
+        $('navbar-search').attr('action','/admin/village');
         $('.btn-edit').click(function () {
             let id = $(this).data('id');
             editVillage(id);
@@ -252,7 +251,7 @@
         total: ${pageble.totalItem}, // 总数据条数
         current: ${pageble.page}, // 当前页码
         length: ${pageble.maxPageItem}, // 每页数据量
-        size: 2, // 显示按钮个数
+        size: ${pageble.totalPage}, // 显示按钮个数
         /**
          * [click description]
          * @param  {[object]} options = {

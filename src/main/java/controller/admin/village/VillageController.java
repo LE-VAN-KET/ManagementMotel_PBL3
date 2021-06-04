@@ -44,17 +44,19 @@ public class VillageController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        set list districts id = districtId value districtName
+        String searchText = request.getParameter("searchText");
         Pageble pageble = new Pageble();
         if (request.getParameter("page") == null) {
             pageble.setPage(1);
         } else {
             pageble.setPage(Integer.parseInt(request.getParameter("page")));
         }
-        pageble.setTotalItem(villageService.getTotalItem());
+        pageble.setTotalItem(villageService.getTotalItem(searchText));
         pageble.setMaxPageItem(SystemConstant.MAXPAGEITEM);
+        pageble.setTotalPage(pageble.getTotalItem());
 
         List<DistrictModel> districtModels = districtService.selectAll();
-        List<VillageModel> villageModels = villageService.selectAll(pageble);
+        List<VillageModel> villageModels = villageService.selectAll(searchText, pageble);
 
         request.setAttribute("pageble", pageble);
         request.setAttribute("districts", districtModels);

@@ -46,16 +46,18 @@ public class UserController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String searchText = request.getParameter("searchText");
         Pageble pageble = new Pageble();
         if (request.getParameter("page") == null) {
             pageble.setPage(1);
         } else {
             pageble.setPage(Integer.parseInt(request.getParameter("page")));
         }
-        pageble.setTotalItem(userService.getTotalItem());
+        pageble.setTotalItem(userService.getTotalItem(searchText));
         pageble.setMaxPageItem(SystemConstant.MAXPAGEITEM);
+        pageble.setTotalPage(pageble.getTotalItem());
 
-        List<UserModel> userModels = userService.findAll(pageble);
+        List<UserModel> userModels = userService.findAll(searchText, pageble);
         List<RoleModel> roleModels = roleService.findAll();
 
         request.setAttribute("pageble", pageble);

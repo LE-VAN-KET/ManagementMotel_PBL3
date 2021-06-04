@@ -72,7 +72,7 @@ public class NewPostController extends HttpServlet {
                     postModel.setStatusPost(false);
                     postModel.setStatusRental(false);
                     //validate post
-                    Map<String, String> errors = postService.validatePost(postModel);
+                    Map<String, String> errors = postService.validatePostAdmin(postModel);
                     if (!errors.isEmpty()) {
                         request.setAttribute("errors", errors);
                         doGet(request, response);

@@ -1,10 +1,6 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../../common/taglib.jsp" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -149,7 +145,7 @@
 
 <%@include file="../../common/javasciptlib.jsp" %>
 <script src="../../assets/javascript/admin.home.js"></script>
-<script src="../../assets/javascript/ckeditor.js"></script>
+<script src="../../assets/javascript/template/ckeditor.js"></script>
 <script>
     $(document).ready(function () {
         /*$('#loading').addClass("show");
@@ -212,7 +208,7 @@
                     // console.log("ajax delete " + id);
                     $.ajax({
                         type: "POST",
-                        url : "/post/delete-image/${POSTMODEL.postSlug}",
+                        url : "/admin/delete-image/${POSTMODEL.postSlug}",
                         data: {fileId: id},
                         success: function(responseText){
                             toastr.success("Delete file success");
@@ -227,6 +223,6 @@
         })
     });
 </script>
-<script src="../../assets/javascript/newPost.js"></script>
+<script src="../../assets/javascript/newpost.js"></script>
 </body>
 </html>

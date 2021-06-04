@@ -71,11 +71,11 @@ public class DistrictService implements IDistrictService {
     }
 
     @Override
-    public int getTotalItem() {
-        return districtDAO.getTotalItem();
+    public int getTotalItem(String searchText) {
+        return districtDAO.getTotalItem(searchText);
     }
 
-    public List<DistrictModel> selectAll(Pageble pageble) {
-        return districtDAO.selectAll(pageble);
+    public List<DistrictModel> selectAll(String searchText, Pageble pageble) {
+        return districtDAO.selectAll(searchText, pageble);
     }
 }

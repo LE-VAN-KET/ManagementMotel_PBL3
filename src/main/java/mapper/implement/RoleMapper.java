@@ -12,7 +12,9 @@ public class RoleMapper implements IRowMapper<RoleModel> {
         try {
             RoleModel role = new RoleModel();
             role.setRoleId(resultSet.getLong("roleId"));
-            role.setRoleName(resultSet.getString("roleName"));
+            if (resultSet.getString("roleName") != null) {
+                role.setRoleName(resultSet.getString("roleName"));
+            }
             role.setCreateAt(resultSet.getTimestamp("createAt"));
             role.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
             return role;

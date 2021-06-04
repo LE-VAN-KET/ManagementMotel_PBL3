@@ -9,25 +9,34 @@ import java.util.List;
 
 public class VillageDAO extends AbstractDAO<VillageModel> implements IVillageDAO {
 
-    @Override
-    public List<VillageModel> selectAll(Pageble pageble) {
+    private StringBuilder sqlQuery() {
         StringBuilder sql = new StringBuilder("SELECT * FROM village");
         sql.append(" INNER JOIN district ON village.districtId = district.districtId");
-        sql.append(" LIMIT ?,?");
-        return query(sql.toString(),new VillageMapper(), pageble.getOffset(), pageble.getMaxPageItem());
+        return sql;
+    }
+    @Override
+    public List<VillageModel> selectAll(String searchText, Pageble pageble) {
+        StringBuilder sql = sqlQuery();
+        if(searchText != null && searchText != "") {
+            sql.append(" where villageName like N? or districtName like N?");
+            sql.append(" LIMIT ?, ?");
+            return query(sql.toString(), new VillageMapper(),
+                    "%" + searchText + "%", "%" + searchText + "%",
+                    pageble.getOffset(), pageble.getMaxPageItem());
+        }
+        sql.append(" LIMIT ?, ?");
+        return query(sql.toString(), new VillageMapper(), pageble.getOffset(), pageble.getMaxPageItem());
     }
 
     @Override
     public List<VillageModel> selectAll() {
-        StringBuilder sql = new StringBuilder("SELECT * FROM village");
-        sql.append(" INNER JOIN district ON village.districtId = district.districtId");
+        StringBuilder sql = sqlQuery();
         return query(sql.toString(),new VillageMapper());
     }
 
     @Override
     public List<VillageModel> findOne(Long villageId) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM village");
-        sql.append(" INNER JOIN district ON village.districtId = district.districtId");
+        StringBuilder sql = sqlQuery();
         sql.append(" WHERE villageId = ?");
         return query(sql.toString(),new VillageMapper(),villageId);
     }
@@ -50,17 +59,33 @@ public class VillageDAO extends AbstractDAO<VillageModel> implements IVillageDAO
         delete(sql,villageModel.getVillageId());
     }
 
-    public int getTotalItem() {
-        String sql = "SELECT count(*) FROM village";
-        return count(sql);
+    public int getTotalItem(String searchText) {
+        StringBuilder sql = new StringBuilder("SELECT count(*) FROM village");
+        sql.append(" INNER JOIN district ON village.districtId = district.districtId");
+        if(searchText != null && searchText != "") {
+            sql.append(" where villageName like N? or districtName like N?");
+            return count(sql.toString(), "%" + searchText + "%",
+                    "%" + searchText + "%");
+        }
+        return count(sql.toString());
     }
 
     public static void main(String[] args) {
         Pageble pageble = new Pageble();
-        pageble.setMaxPageItem(2);
-        pageble.setPage(3);
+        pageble.setMaxPageItem(10);
+        pageble.setPage(1);
         VillageDAO villageDAO = new VillageDAO();
-        List<VillageModel> villageModels = villageDAO.selectAll(pageble);
+        List<VillageModel> villageModels = villageDAO.selectAll("", pageble);
         villageModels.forEach(System.out::println);
+
+        System.out.println(new VillageDAO().getTotalItem(""));
+    }
+
+    @Override
+    public VillageModel findOneByvillageId(Long villageId) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM village INNER JOIN district ON village.districtId");
+        sql.append(" = district.districtId WHERE villageId = ? LIMIT 1");
+        List<VillageModel> villageModels = query(sql.toString(), new VillageMapper(), villageId);
+        return villageModels.isEmpty() ? null: villageModels.get(0);
     }
 }

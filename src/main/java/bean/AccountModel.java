@@ -6,6 +6,14 @@ public class AccountModel extends AbstractModel {
     private String password;
     private UserModel user;
 
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
     public Long getAccountId() {
         return accountId;
     }
@@ -28,13 +36,5 @@ public class AccountModel extends AbstractModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
     }
 }

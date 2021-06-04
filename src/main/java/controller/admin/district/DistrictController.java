@@ -37,16 +37,18 @@ public class DistrictController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String searchText = request.getParameter("searchText");
         Pageble pageble = new Pageble();
         if (request.getParameter("page") == null) {
             pageble.setPage(1);
         } else {
             pageble.setPage(Integer.parseInt(request.getParameter("page")));
         }
-        pageble.setTotalItem(districtService.getTotalItem());
+        pageble.setTotalItem(districtService.getTotalItem(searchText));
         pageble.setMaxPageItem(SystemConstant.MAXPAGEITEM);
+        pageble.setTotalPage(pageble.getTotalItem());
 
-        List<DistrictModel> districtModels = districtService.selectAll(pageble);
+        List<DistrictModel> districtModels = districtService.selectAll(searchText, pageble);
         request.setAttribute("pageble", pageble);
         request.setAttribute("districts", districtModels);
         request.getRequestDispatcher("../views/admin/District.jsp").forward(request, response);

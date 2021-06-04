@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-expand navbar-light my-navbar">
 
     <!-- Sidebar Toggle (Topbar) -->
@@ -14,24 +15,38 @@
         </a>
     </div>
 
-    <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline navbar-search ml-auto mr-3">
-        <div class="input-group">
-            <input type="text" class="form-control bg-light " placeholder="Search for..."
-                   aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
-        </div>
-    </form>
-<%--
+
     <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto py-4 py-md-0">
+        <li class="nav-item dropdown dropdown-slide dropdown-hover pl-4 pl-md-0 ml-0 ml-md-4">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Setting
+                <i class="fas fa-user-cog ml-1 text-primary"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/admin/edit-profile">Tài khoản</a>
+                <a class="dropdown-item" href="#">Log out</a>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <!-- Topbar Search -->
+            <form method="GET"
+                  class="d-none d-sm-inline-block form-inline navbar-search ml-auto mr-3">
+                <div class="input-group">
+                    <input type="text" class="form-control bg-light " placeholder="Search for..."
+                           aria-label="Search" name="searchText">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </li>
 
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-        <li class="nav-item dropdown  d-sm-none">
+        <%--<li class="nav-item dropdown  d-sm-none">
 
             <!-- Dropdown - Messages -->
             <div class="dropdown-menu dropdown-menu-right p-3">
@@ -113,7 +128,7 @@
                 &lt;%&ndash;<span class="mr-2 d-none d-lg-inline text-gray-600 small">Vishweb Design</span>&ndash;%&gt;
                 <img class="img-profile rounded-circle" src="../../assets/img/logo.png">
             </a>
-        </li>
+        </li>--%>
 
-    </ul>--%>
+    </ul>
 </nav>

@@ -23,8 +23,8 @@ public class VillageService implements IVillageService {
     }
 
     @Override
-    public List<VillageModel> selectAll(Pageble pageble) {
-        return villageDAO.selectAll(pageble);
+    public List<VillageModel> selectAll(String searchText, Pageble pageble) {
+        return villageDAO.selectAll(searchText, pageble);
     }
 
     @Override
@@ -59,8 +59,12 @@ public class VillageService implements IVillageService {
     }
 
     @Override
-    public int getTotalItem() {
-        return villageDAO.getTotalItem();
+    public int getTotalItem(String searchText) {
+        return villageDAO.getTotalItem(searchText);
     }
 
+    @Override
+    public VillageModel findOneByvillageId(Long villageId) {
+        return villageDAO.findOneByvillageId(villageId);
+    }
 }

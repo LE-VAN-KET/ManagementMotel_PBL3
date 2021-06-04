@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface IDistrictDAO {
     List<DistrictModel> selectAll();
+    List<DistrictModel> selectAll(String searchText, Pageble pageble);
     Long insert(DistrictModel districtModel);
     void update(DistrictModel districtModel);
     void delete(DistrictModel districtModel);
     List<DistrictModel> findOne(Long districtId);
-    int getTotalItem();
-    List<DistrictModel> selectAll(Pageble pageble);
+    int getTotalItem(String searchText);
 }

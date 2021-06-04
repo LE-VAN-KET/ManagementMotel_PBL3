@@ -14,6 +14,6 @@ public interface IDistrictService {
     void delete(DistrictModel districtModel);
     Map<String, String> validateDistrict(DistrictModel districtModel);
     List<DistrictModel> selectViewAll();
-    int getTotalItem();
-    List<DistrictModel> selectAll(Pageble pageble);
+    int getTotalItem(String searchText);
+    List<DistrictModel> selectAll(String searchText, Pageble pageble);
 }

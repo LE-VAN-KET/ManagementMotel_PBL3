@@ -15,24 +15,47 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
         return query(sql.toString(), new UserMapper());
     }
 
-    public List<UserModel> findAll(Pageble pageble) {
+    public List<UserModel> findAll(String searchText, Pageble pageble) {
         StringBuffer sql = new StringBuffer("SELECT * FROM users");
         sql.append(" INNER JOIN role ON users.roleId = role.roleId");
+        if(searchText != null && searchText != "") {
+            sql.append(" where fullName like N? or SDT like ?");
+            sql.append(" or email like ? or roleName like ?");
+            sql.append(" LIMIT ?, ?");
+            return query(sql.toString(), new UserMapper(),
+                    "%" + searchText + "%", "%" + searchText + "%",
+                    "%" + searchText + "%", "%" + searchText + "%",
+                    pageble.getOffset(), pageble.getMaxPageItem());
+        }
         sql.append(" LIMIT ?, ?");
         return query(sql.toString(), new UserMapper(), pageble.getOffset(), pageble.getMaxPageItem());
     }
 
     @Override
     public UserModel findOne(Long userId) {
-        String sql = "SELECT * FROM users WHERE userId = ?";
+        String sql = "SELECT * FROM users INNER JOIN role ON users.roleId = role.roleId WHERE userId = ? LIMIT 1";
         List<UserModel> users = query(sql, new UserMapper(), userId);
         return users.isEmpty() ? null : users.get(0);
     }
 
     @Override
+    public UserModel findEmailUser(String email) {
+        String sql = "SELECT * FROM users INNER JOIN role ON users.roleId = role.roleId WHERE email = ? LIMIT 1";
+        List<UserModel> users = query(sql, new UserMapper(), email);
+        return users.isEmpty() ? null: users.get(0);
+    }
+
+    @Override
     public Long insert(UserModel user) {
         String sql = "INSERT INTO users(fullName, email, SDT, roleId) VALUES(?, ?, ?, ?)";
-        return insert(sql, user.getFullName(), user.getEmail(), user.getSDT(),user.getRoleModel().getRoleId());
+        return insert(sql, user.getFullName(), user.getEmail(), user.getSDT(),
+                user.getRoleModel().getRoleId());
+    }
+
+    @Override
+    public Long addUser(UserModel userModel) {
+        String sql = "INSERT INTO users(email, roleId) VALUES(?, ?)";
+        return insert(sql, userModel.getEmail(), userModel.getRoleModel().getRoleId());
     }
 
     @Override
@@ -51,8 +74,39 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
         delete(sql, userId);
     }
 
-    public int getTotalItem() {
-        String sql = "SELECT count(*) FROM users";
-        return count(sql);
+    @Override
+    public UserModel findEmailEdit(String email, Long userId) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM users INNER JOIN role ON");
+        sql.append(" users.roleId = role.roleId WHERE email = ? AND users.userId <> ? LIMIT 1");
+        List<UserModel> users = query(sql.toString(), new UserMapper(), email, userId);
+        return users.isEmpty() ? null: users.get(0);
+    }
+
+    @Override
+    public UserModel findPhonelEdit(String phone, Long userId) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM users INNER JOIN role ON");
+        sql.append(" users.roleId = role.roleId WHERE SDT = ? AND users.userId <> ? LIMIT 1");
+        List<UserModel> users = query(sql.toString(), new UserMapper(), phone, userId);
+        return users.isEmpty() ? null: users.get(0);
+    }
+
+    public int getTotalItem(String searchText) {
+        StringBuilder sql = new StringBuilder("SELECT count(*) FROM users");
+        sql.append(" INNER JOIN role ON users.roleId = role.roleId");
+        if(searchText != null && searchText != "") {
+            sql.append(" where fullName like N? or SDT like ?");
+            sql.append(" or email like ? or roleName like ?");
+            return count(sql.toString(), "%" + searchText + "%",
+                    "%" + searchText + "%","%" + searchText + "%","%" + searchText + "%");
+        }
+        return count(sql.toString());
+    }
+
+    public static void main(String[] args) {
+        Pageble pageble = new Pageble();
+        pageble.setMaxPageItem(10);
+        pageble.setPage(1);
+        List<UserModel> userModels = new UserDAO().findAll("KHÁNH VY",pageble);
+        userModels.forEach(System.out::println);
     }
 }

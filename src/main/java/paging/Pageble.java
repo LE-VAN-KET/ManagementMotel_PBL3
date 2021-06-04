@@ -1,10 +1,21 @@
 package paging;
 
-public class Pageble implements IPageble {
+import sort.Sorter;
+
+public class Pageble implements IPageble{
     private Integer page;
     private Integer maxPageItem;
-    private Integer totalPage;
     private Integer totalItem;
+    private Integer totalPage;
+    private Sorter sorter;
+
+    public Sorter getSorter() {
+        return sorter;
+    }
+
+    public void setSorter(Sorter sorter) {
+        this.sorter = sorter;
+    }
 
     public Integer getPage() {
         return page;
@@ -23,11 +34,11 @@ public class Pageble implements IPageble {
     }
 
     public Integer getTotalPage() {
-        return (int) Math.ceil((double) this.getTotalItem() / this.getMaxPageItem());
+        return this.totalPage;
     }
 
     public void setTotalPage(Integer totalPage) {
-        this.totalPage = totalPage;
+        this.totalPage = (int) Math.ceil((double) this.getTotalItem() / this.getMaxPageItem());
     }
 
     public Integer getTotalItem() {

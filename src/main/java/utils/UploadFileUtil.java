@@ -5,6 +5,7 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -170,11 +171,11 @@ public class UploadFileUtil {
             /*final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
             getCredentials(HTTP_TRANSPORT);*/
             getInstanceDriverService();
-            List<String> files = getLinkImagesByFolderId("1t-Xod9AOwSM9-qNqSohmgWFDv-6dWGHX");
+            /*List<String> files = getLinkImagesByFolderId("1t-Xod9AOwSM9-qNqSohmgWFDv-6dWGHX");
             for(String file : files) {
                 System.out.println(file);
-            }
-
+            }*/
+            System.out.println(getLinkOneImagesByFolderId("1OyPzMLo1f48XM4h7iJz9j9QOcxX9vd9K"));
             System.out.println("success");
         } catch (IOException e) {
             e.printStackTrace();

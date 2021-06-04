@@ -9,19 +9,23 @@ import java.util.List;
 
 public class DistrictDAO extends AbstractDAO<DistrictModel> implements IDistrictDAO {
 
-    public static void main(String[] args) {
-        System.out.println(new DistrictDAO().findOne(100L).size());
-    }
-
     @Override
     public List<DistrictModel> selectAll() {
         String sql = "SELECT * FROM district";
         return query(sql, new DistrictMapper());
     }
 
-    public List<DistrictModel> selectAll(Pageble pageble) {
-        String sql = "SELECT * FROM district LIMIT ?,?";
-        return query(sql, new DistrictMapper(),pageble.getOffset(),pageble.getMaxPageItem());
+    public List<DistrictModel> selectAll(String searchText, Pageble pageble) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM district");
+        if(searchText != null && searchText != "") {
+            sql.append(" where districtName like N?");
+            sql.append(" LIMIT ?, ?");
+            return query(sql.toString(), new DistrictMapper(),
+                    "%" + searchText + "%",
+                    pageble.getOffset(), pageble.getMaxPageItem());
+        }
+        sql.append(" LIMIT ?, ?");
+        return query(sql.toString(), new DistrictMapper(), pageble.getOffset(), pageble.getMaxPageItem());
     }
 
     @Override
@@ -31,9 +35,13 @@ public class DistrictDAO extends AbstractDAO<DistrictModel> implements IDistrict
     }
 
     @Override
-    public int getTotalItem() {
-        String sql = "SELECT count(*) FROM district";
-        return count(sql);
+    public int getTotalItem(String searchText) {
+        StringBuilder sql = new StringBuilder("SELECT count(*) FROM district");
+        if(searchText != null && searchText != "") {
+            sql.append(" where districtName like N?");
+            return count(sql.toString(), "%" + searchText + "%");
+        }
+        return count(sql.toString());
     }
 
     @Override

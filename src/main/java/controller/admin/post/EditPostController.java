@@ -108,7 +108,7 @@ public class EditPostController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String postSlug = request.getPathInfo().substring(1);
-        System.out.println(postSlug);
+
         try {
             PostModel postModel = postService.findOneByPostSlug(postSlug);
             if (postModel != null) {
@@ -124,11 +124,11 @@ public class EditPostController extends HttpServlet {
                 request.setAttribute(SystemConstant.DISTRICTSMODELS, districtModels);
                 request.getRequestDispatcher("/views/admin/EditPost.jsp").forward(request, response);
             } else {
-                response.sendRedirect("home?message=not_permission&&alert=danger");
+                response.sendRedirect("/admin/post?message=not_permission&&alert=danger");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("/home?message=not_permission&&alert=danger");
+            response.sendRedirect("/admin/post?message=not_permission&&alert=danger");
         }
     }
 }

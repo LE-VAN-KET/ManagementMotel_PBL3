@@ -1,16 +1,17 @@
 package filter;
 
+import bean.AccountModel;
+import constant.SystemConstant;
+import utils.SessionUtil;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AuthorizationFilter implements Filter {
-    private ServletContext context;
+public class AuthorizationEditProfileFilter implements Filter {
 
-    public AuthorizationFilter() {
-        super();
-    }
+    private ServletContext context;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,8 +23,15 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-//        check url authorization
-        filterChain.doFilter(servletRequest, servletResponse);
+        if (url.startsWith("/edit-profile")) {
+            AccountModel accountModel = (AccountModel) SessionUtil.getInstance().getValue(request,
+                    SystemConstant.ACCOUNTMODEL);
+            if (accountModel == null) {
+                response.sendRedirect("/login?message=not_permission&&alert=danger");
+            } else {
+                filterChain.doFilter(servletRequest, servletResponse);
+            }
+        }
     }
 
     @Override

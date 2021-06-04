@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 @ManagedBean
 public class UserService implements IUserService {
@@ -24,18 +25,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<UserModel> findAll(Pageble pageble) {
-        return userDAO.findAll(pageble);
+    public List<UserModel> findAll(String searchText, Pageble pageble) {
+        return userDAO.findAll(searchText, pageble);
     }
 
     @Override
     public UserModel findOne(Long userId) {
         return userDAO.findOne(userId);
-    }
-
-    @Override
-    public Long insert(UserModel user) {
-        return userDAO.insert(user);
     }
 
     @Override
@@ -49,8 +45,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public int getTotalItem() {
-        return userDAO.getTotalItem();
+    public int getTotalItem(String searchText) {
+        return userDAO.getTotalItem(searchText);
     }
 
     @Override
@@ -71,5 +67,30 @@ public class UserService implements IUserService {
         /*if(new DistrictDAO().findOne(villageModel.getDistrictModel().getDistrictId()).size() == 0)
             errors.put("districtName_error","Quận không trùng khớp với dữ liệu");*/
         return errors;
+    }
+
+    @Override
+    public UserModel findEmailUser(String email) {
+        return userDAO.findEmailUser(email);
+    }
+
+    @Override
+    public Long addUser(UserModel userModel) {
+        return userDAO.addUser(userModel);
+    }
+
+    @Override
+    public Long insert(UserModel userModel) {
+        return userDAO.insert(userModel);
+    }
+
+    @Override
+    public UserModel findByEmailEdit(String email, Long userId) {
+        return userDAO.findEmailEdit(email, userId);
+    }
+
+    @Override
+    public UserModel findPhonelEdit(String phone, Long userId) {
+        return userDAO.findPhonelEdit(phone, userId);
     }
 }

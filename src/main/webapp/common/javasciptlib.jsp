@@ -1,9 +1,27 @@
 <script src="${contextPath}/assets/javascript/jquery.min.js"></script>
 <script src="${contextPath}/assets/javascript/template/toastr.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+<script src="${contextPath}/assets/javascript/template/jquery.min.js"></script>
+<%--<script src="${contextPath}/assets/javascript/jquery-3.2.1.slim.min.js"></script>--%>
+<script src="${contextPath}/assets/javascript/template/bootstrap/popper.min.js" async></script>
+<script src="${contextPath}/assets/javascript/template/bootstrap/bootstrap.min.js" async></script>
+<script src="${contextPath}/assets/javascript/template/lazyloading.min.js" async></script>
+<script src="${contextPath}/assets/javascript/navigation.js"></script>
+<script>
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "10000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 </script>

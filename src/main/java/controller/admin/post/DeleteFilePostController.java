@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/post/delete-image/*"})
+@WebServlet(urlPatterns = {"/admin/delete-image/*"})
 public class DeleteFilePostController extends HttpServlet {
     @Inject
     private IPostService postService;
