@@ -310,7 +310,7 @@
     <script src="../../../assets/javascript/template/pagination.min.js"></script>
     <script>
         <c:forEach items="${POSTMODELS}" var="postModels">
-            $("#datetime${postModels.postId}").text(timeDifference(new Date(), new Date('${postModels.createAt}')));
+            $("#datetime${postModels.postId}").text(timeDifference(new Date(), new Date('${postModels.publishedAt}')));
         </c:forEach>
         function timeDifference(date1,date2) {
             let difference = date1.getTime() - date2.getTime();

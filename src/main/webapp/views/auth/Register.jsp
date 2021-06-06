@@ -23,8 +23,9 @@
                 <form action="/register" method="POST" class="register-form w-100" id="register-form"
                       onsubmit="return validateUserPW()">
                     <div class="form-group">
-                        <label for="username"><i class="far fa-user"></i></label>
-                        <input type="text" name="username" id="username" placeholder="User Name" required pattern="[0-9a-zA-Z_.-]*"/>
+                        <label for="username" ><i class="far fa-user"></i></label>
+                        <input type="text" name="username" id="username" placeholder="User Name"
+                               required pattern="^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$"/>
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope-open"></i></label>

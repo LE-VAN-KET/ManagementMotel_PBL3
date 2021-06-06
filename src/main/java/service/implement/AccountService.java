@@ -93,7 +93,7 @@ public class AccountService implements IAccountService {
                 errors.add(resourceBundle.getString("repeat_password_invalid"));
             }
 
-            String usernameregex = "[0-9a-zA-Z_.-]*";
+            String usernameregex = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
             if (!accountModel.getUsername().matches(usernameregex)) {
                 errors.add(resourceBundle.getString("username_invalid"));
             }

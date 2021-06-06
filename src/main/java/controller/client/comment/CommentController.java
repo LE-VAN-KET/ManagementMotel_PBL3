@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/comment/add"})
@@ -47,7 +46,7 @@ public class CommentController extends HttpServlet {
         if (errors.isEmpty()) {
             Long commentId = commentService.insert(commentModel);
             commentModel.setCommentId(commentId);
-            commentModel.setCreateAt(new Timestamp(new Date().getTime()));
+            commentModel.setCreateAt(new Timestamp(System.currentTimeMillis()));
             String commentJson = gson.toJson(commentModel);
             out.write("{\"errors\":\"\", \"comment\":" + commentJson + "}");
             out.flush();

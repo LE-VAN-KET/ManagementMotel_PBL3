@@ -48,7 +48,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" href="/personal-post">Quản lý bài đăng</a>
                                         <a class="dropdown-item" href="/edit-profile">Tài khoản</a>
-                                        <a class="dropdown-item" href="#">Log out</a>
+                                        <a class="dropdown-item" href="/logout">Log out</a>
                                     </div>
                                 </li>
                             </c:if>

@@ -282,7 +282,7 @@
                                 'alt="image..."></div><div class="comment-box col-10"><div class="comment-head">' +
                                 '<h6 class="comment-name by-author"><a href="#">' + '${ACCOUNTMODEL.user.fullName}' +
                                 '</a></h6><span class="posted-time">Posted on ' +
-                                '<fmt:formatDate type = "both" value = "${data.comment.createAt}" /></span>' +
+                                '<fmt:formatDate pattern = "yyyy-MM-dd" value="${data.comment.createAt}" /></span>' +
                                 '<div class="comments-list-action action-toggle bg-transparent">' +
                                 '<div class="dropdown"><a href="#" data-toggle="dropdown">' +
                                 '<i class="fas fa-ellipsis-h"></i></a><div class="dropdown-menu dropdown-menu-right">' +
