@@ -29,4 +29,5 @@ public interface IPostService {
     void updateStatusPostByPostId(Long postId, boolean statusPost);
 
     List<PostModel> selectAll(String searchText, Pageble pageble);
+    void updateStatusRentalByPostId(Long postId, boolean statusRental);
 }

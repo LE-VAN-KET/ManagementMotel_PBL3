@@ -178,6 +178,11 @@ public class PostService implements IPostService {
         return postDAO.selectAll(searchText, pageble);
     }
 
+    @Override
+    public void updateStatusRentalByPostId(Long postId, boolean statusRental) {
+        postDAO.updateStatusRentalByPostId(postId, statusRental);
+    }
+
     /*public static void main(String[] args) {
         Pageble pageble = new Pageble();
         pageble.setMaxPageItem(20);

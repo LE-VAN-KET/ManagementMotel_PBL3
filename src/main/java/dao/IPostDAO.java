@@ -27,4 +27,6 @@ public interface IPostDAO {
     void updateStatusPostByPostId(Long postId, boolean statusPost);
 
     List<PostModel> selectAll(String searchText, Pageble pageble);
+    void updateStatusRentalByPostId(Long postId, boolean statusRental);
+    int countByPostId(Long postId);
 }

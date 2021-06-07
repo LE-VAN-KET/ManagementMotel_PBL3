@@ -5,9 +5,11 @@ import bean.PostModel;
 import constant.SystemConstant;
 import criteria.Criteria;
 import dao.IPostDAO;
+import dao.implement.PostDAO;
 import paging.Pageble;
 import service.IDistrictService;
 import service.IPostService;
+import service.implement.PostService;
 import sort.Sorter;
 import utils.FormUtil;
 import utils.SessionUtil;
@@ -20,8 +22,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 @WebServlet(urlPatterns = {"/home"})
 public class HomeController extends HttpServlet {
@@ -82,6 +87,22 @@ public class HomeController extends HttpServlet {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(UploadFileUtil.getLinkOneImagesByFolderId("1OyPzMLo1f48XM4h7iJz9j9QOcxX9vd9K"));
+        List<PostModel> postModels = null;
+        Pageble pageble = new Pageble();
+        pageble.setMaxPageItem(20);
+        pageble.setPage(1);
+        Date startDate = new Date();
+
+        postModels = new PostDAO().selectAll(pageble);
+        for (PostModel post: postModels) {
+            post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
+        }
+
+        Date endDate = new Date();
+
+        long duration  = endDate.getTime() - startDate.getTime();
+        long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
+        postModels.forEach(System.out::println);
+        System.out.println(diffInSeconds);
     }
 }

@@ -37,7 +37,7 @@ public class AuthorizationPostFilter implements Filter {
                 if (accountModel.getUser().getFullName() == null || "".equals(accountModel.getUser().getFullName())
                         || accountModel.getUser().getEmail() == null || "".equals(accountModel.getUser().getEmail())
                         || accountModel.getUser().getSDT() == null || "".equals(accountModel.getUser().getSDT())) {
-                    response.sendRedirect("/edit-profile?error=finish_filled_information_profile&&alert=danger");
+                    response.sendRedirect("/edit-profile?message=finish_filled_information_profile&&alert=danger");
                     return;
                 }
                 /*permission access case role that*/

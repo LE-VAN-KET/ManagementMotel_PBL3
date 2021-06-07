@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter {
                 /*permission access case role that*/
                 switch (accountModel.getUser().getRoleModel().getRoleName()) {
                     case SystemConstant.ADMIN: {
-                        response.sendRedirect("/admin");
+                        response.sendRedirect("/admin/home");
                         break;
                     }
                     case SystemConstant.USER:
