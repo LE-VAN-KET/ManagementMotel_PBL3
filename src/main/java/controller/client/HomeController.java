@@ -61,10 +61,10 @@ public class HomeController extends HttpServlet {
                 postModels = postService.selectAllByStatusPost(pageble, true);
                 pageble.setTotalItem(postService.getTotalItemByStatusPost(true));
             }
-
-            for (PostModel post: postModels) {
-                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
-            }
+            UploadFileUtil.getListLinkOneImagesByFolderId(postModels);
+//            for (PostModel post: postModels) {
+//                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }

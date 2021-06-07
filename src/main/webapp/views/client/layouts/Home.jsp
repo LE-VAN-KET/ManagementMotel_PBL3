@@ -181,9 +181,9 @@
                         <div class="row grid-destination">
                             <div class="grid-lg col-lg-8 col-md-6 col-sm-12">
                                 <div class="grid-item">
-                                    <a href="https://phongtrodn.com/lien-chieu" class="w-100">
+                                    <a href="#" class="w-100">
                                         <img class="lazyload"
-                                            data-src="https://phongtrodn.com/img/750x275/43/2018/06/lien-chieu.jpg"
+                                            data-src="${contextPath}/assets/images/lien-chieu.jpg"
                                             alt="Liên chiểu">
                                         <div class="backdrop-overlay">
                                             <div class="place-name">
@@ -197,9 +197,9 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="https://phongtrodn.com/hai-chau">
+                                    <a href="#">
                                         <img class="lazyload"
-                                            data-src="https://phongtrodn.com/img/360x260/43/2018/06/hanh-chinh.jpg"
+                                            data-src="${contextPath}/assets/images/hanh-chinh.jpg"
                                             alt="Hải Châu">
                                         <div class="backdrop-overlay">
                                             <div class="place-name">
@@ -213,9 +213,9 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="https://phongtrodn.com/thanh-khe">
+                                    <a href="#">
                                         <img class="lazyload"
-                                            data-src="https://phongtrodn.com/img/360x260/43/2018/06/menu.jpg"
+                                            data-src="${contextPath}/assets/images/thanh-khe.jpg"
                                             alt="Thanh khê">
                                         <div class="backdrop-overlay">
                                             <div class="place-name">
@@ -229,9 +229,9 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="https://phongtrodn.com/hoa-vang">
+                                    <a href="#">
                                         <img class="lazyload"
-                                            data-src="https://phongtrodn.com/img/360x260/43/2018/06/hoa-vang.jpg"
+                                            data-src="${contextPath}/assets/images/hoa-vang.jpg"
                                             alt="Hòa Vang">
                                         <div class="backdrop-overlay">
                                             <div class="place-name">
@@ -245,9 +245,9 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="https://phongtrodn.com/cam-le">
+                                    <a href="#">
                                         <img class="lazyload"
-                                            data-src="https://phongtrodn.com/img/360x260/43/2018/06/1_Mq-Vr6OmIoy02I7TMwZzCQ.jpeg"
+                                            data-src="${contextPath}/assets/images/cam-le.jpeg"
                                             alt="Cẩm Lệ">
                                         <div class="backdrop-overlay">
                                             <div class="place-name">
@@ -261,9 +261,9 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="https://phongtrodn.com/son-tra">
+                                    <a href="#">
                                         <img class="lazyload"
-                                            data-src="https://phongtrodn.com/img/360x260/43/2018/06/tour-ban-dao-son-tra.png"
+                                            data-src="${contextPath}/assets/images/son-tra.png"
                                             alt="Sơn Trà">
                                         <div class="backdrop-overlay">
                                             <div class="place-name">
@@ -277,9 +277,9 @@
                             </div>
                             <div class="grid-lg col-lg-8 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="https://phongtrodn.com/ngu-hanh-son">
+                                    <a href="#">
                                         <img class="lazyload"
-                                            data-src="https://phongtrodn.com/img/750x275/43/2018/06/ngu-hanh-son.jpg"
+                                            data-src="${contextPath}/assets/images/ngu-hanh-son.jpg"
                                             alt="Ngũ Hành Sơn">
                                         <div class="backdrop-overlay">
                                             <div class="place-name">

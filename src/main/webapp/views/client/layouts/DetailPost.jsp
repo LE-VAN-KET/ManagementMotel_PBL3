@@ -281,8 +281,7 @@
                                 'data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png" ' +
                                 'alt="image..."></div><div class="comment-box col-10"><div class="comment-head">' +
                                 '<h6 class="comment-name by-author"><a href="#">' + '${ACCOUNTMODEL.user.fullName}' +
-                                '</a></h6><span class="posted-time">Posted on ' +
-                                '<fmt:formatDate pattern = "yyyy-MM-dd" value="${data.comment.createAt}" /></span>' +
+                                '</a></h6><span class="posted-time">Posted on ' + data.createAt + '</span>' +
                                 '<div class="comments-list-action action-toggle bg-transparent">' +
                                 '<div class="dropdown"><a href="#" data-toggle="dropdown">' +
                                 '<i class="fas fa-ellipsis-h"></i></a><div class="dropdown-menu dropdown-menu-right">' +
