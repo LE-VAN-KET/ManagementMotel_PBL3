@@ -10,6 +10,14 @@ import java.util.List;
 
 public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
 
+    private static PostDAO instance;
+    public static PostDAO getInstance() {
+        if (instance == null) {
+            instance = new PostDAO();
+        }
+        return instance;
+    }
+
     private StringBuilder sqlQuery() {
         StringBuilder _sqlQuery = new StringBuilder("select * from post INNER JOIN users ON post.userId = users.userId ");
         _sqlQuery.append("INNER JOIN role ON users.roleId = role.roleId INNER JOIN village ON post.villageId = ");

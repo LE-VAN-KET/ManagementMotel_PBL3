@@ -89,8 +89,8 @@ public class UploadFileUtil {
                             @Override
                             public void initialize(HttpRequest httpRequest) throws IOException {
                                 credential.initialize(httpRequest);
-                                httpRequest.setConnectTimeout(2 * 60000);  // 300 minutes connect timeout
-                                httpRequest.setReadTimeout(2 * 60000);  // 300 minutes read timeout
+                                httpRequest.setConnectTimeout(3 * 60000);  // 300 minutes connect timeout
+                                httpRequest.setReadTimeout(3 * 60000);  // 300 minutes read timeout
                             }
                         })
                         .setApplicationName(GoogleAPIConstant.APPLICATION_NAME)

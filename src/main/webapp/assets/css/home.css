@@ -1328,6 +1328,11 @@ legend {
     border-bottom: .5px solid #e5e5e5;
 }
 
+.comment-box .comment-content p {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word
+}
+
 .comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
 .comment-box .comment-name.by-author:after {
     /*content: '';*/
@@ -1414,6 +1419,10 @@ form .form-buttons .btn {
     display: block;
 }
 /*comments post*/
+
+#formEdit {
+    display: none;
+}
 
 /* #Media reponsive
 ================================================== */
