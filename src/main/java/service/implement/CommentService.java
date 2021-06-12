@@ -7,7 +7,11 @@ import dao.IPostDAO;
 import service.ICommentService;
 
 import javax.annotation.ManagedBean;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;

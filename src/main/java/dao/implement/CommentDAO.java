@@ -1,7 +1,10 @@
 package dao.implement;
 
+import bean.AccountModel;
 import bean.CommentModel;
+import constant.SystemConstant;
 import dao.ICommentDAO;
+import utils.SessionUtil;
 
 public class CommentDAO extends AbstractDAO<CommentModel> implements ICommentDAO {
     @Override

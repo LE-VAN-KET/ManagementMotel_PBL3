@@ -149,7 +149,7 @@
                                     <!-- Avatar -->
                                     <div class="comment-avatar col-1 p-0">
                                         <img class="img-fluid img-thumbnail lazyload p-0"
-                                             data-src="${contextPath}/assets/images/logo_user.png"
+                                             data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png"
                                              alt="image...">
                                     </div>
                                     <!-- Contenedor del Comentario -->
@@ -184,7 +184,7 @@
 
                                     <div class="comment-avatar col-1 p-0">
                                         <img class="img-fluid img-thumbnail lazyload p-0"
-                                             data-src="${contextPath}/assets/images/logo_user.png"
+                                             data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png"
                                              alt="image...">
                                     </div>
 
@@ -231,6 +231,7 @@
                 $('#loading').removeClass("show");
                 $('#loading').addClass("hidden");
             }, 1500);
+
             let address = '${POSTMODELS.address}, ${POSTMODELS.villageModel.villageName},' +
                 '${POSTMODELS.villageModel.districtModel.districtName}, Đà Nẵng';
             let query = address.split(" ");
@@ -250,6 +251,7 @@
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight) + 'px';
             });
+
             $("#formComment").submit( function (e) {
                 $.ajax({
                     type: "POST",
@@ -276,11 +278,10 @@
                             $("#comments-list").append('<li><div class="comment-main-level row m-0">' +
                                 '<div class="comment-avatar col-1 p-0">' +
                                 '<img class="img-fluid img-thumbnail lazyload p-0 "' +
-                                'data-src="${contextPath}/assets/images/logo_user.png" ' +
+                                'data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png" ' +
                                 'alt="image..."></div><div class="comment-box col-10"><div class="comment-head">' +
                                 '<h6 class="comment-name by-author"><a href="#">' + '${ACCOUNTMODEL.user.fullName}' +
-                                '</a></h6><span class="posted-time">Posted on ' +
-                                '<fmt:formatDate pattern = "yyyy-MM-dd" value="${data.comment.createAt}" /></span>' +
+                                '</a></h6><span class="posted-time">Posted on ' + data.createAt + '</span>' +
                                 '<div class="comments-list-action action-toggle bg-transparent">' +
                                 '<div class="dropdown"><a href="#" data-toggle="dropdown">' +
                                 '<i class="fas fa-ellipsis-h"></i></a><div class="dropdown-menu dropdown-menu-right">' +

@@ -65,11 +65,12 @@ public class HomeController extends HttpServlet {
             } else {
                 postModels = postService.selectAllByStatusPost(pageble, true);
                 pageble.setTotalItem(postService.getTotalItemByStatusPost(true));
+                pageble.setTotalPage(postService.getTotalItem(null));
             }
-
-            for (PostModel post: postModels) {
-                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
-            }
+            UploadFileUtil.getListLinkOneImagesByFolderId(postModels);
+//            for (PostModel post: postModels) {
+//                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,23 +87,4 @@ public class HomeController extends HttpServlet {
 
     }
 
-    public static void main(String[] args) throws IOException {
-        List<PostModel> postModels = null;
-        Pageble pageble = new Pageble();
-        pageble.setMaxPageItem(20);
-        pageble.setPage(1);
-        Date startDate = new Date();
-
-        postModels = new PostDAO().selectAll(pageble);
-        for (PostModel post: postModels) {
-            post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
-        }
-
-        Date endDate = new Date();
-
-        long duration  = endDate.getTime() - startDate.getTime();
-        long diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(duration);
-        postModels.forEach(System.out::println);
-        System.out.println(diffInSeconds);
-    }
 }

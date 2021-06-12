@@ -7,7 +7,7 @@
     <title>Trang-chu</title>
     <%@include file="../../common/csslib.jsp"%>
     <link rel="stylesheet" href="../../assets/css/admin.home.css">
-    <link rel="stylesheet" href="../../assets/css/pagination.min.css">
+    <link rel="stylesheet" href="../../assets/css/template/pagination.min.css">
 </head>
 <body>
 <div id="wrapper">
@@ -150,7 +150,7 @@
 
 <%@include file="../../common/javasciptlib.jsp"%>
 <script src="../../assets/javascript/admin.home.js"></script>
-<script src="../../assets/javascript/pagination.min.js"></script>
+<script src="../../assets/javascript/template/pagination.min.js"></script>
 <script>
     if(${not empty errors_add}) {
         $(window).on('load', function() {

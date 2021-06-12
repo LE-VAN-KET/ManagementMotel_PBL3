@@ -1,6 +1,7 @@
 package utils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class SessionUtil {
     private static SessionUtil _Instance;
@@ -21,5 +22,9 @@ public class SessionUtil {
 
     public void removeValue(HttpServletRequest request, String key) {
         request.getSession().removeAttribute(key);
+    }
+
+    public Object getProperties(String key, HttpSession httpSession) {
+        return httpSession.getAttribute(key);
     }
 }

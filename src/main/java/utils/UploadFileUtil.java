@@ -1,11 +1,11 @@
 package utils;
 
+import bean.PostModel;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class UploadFileUtil {
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -84,14 +87,11 @@ public class UploadFileUtil {
                 final Credential credential = getCredentials(HTTP_TRANSPORT);
                 _driverService = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
                         .setHttpRequestInitializer(new HttpRequestInitializer() {
-
                             @Override
                             public void initialize(HttpRequest httpRequest) throws IOException {
-
                                 credential.initialize(httpRequest);
-                                httpRequest.setConnectTimeout(3 * 60000);  // 300 minutes connect timeout
-                                httpRequest.setReadTimeout(3 * 60000);  // 300 minutes read timeout
-
+                                httpRequest.setConnectTimeout(2 * 60000);  // 300 minutes connect timeout
+                                httpRequest.setReadTimeout(2 * 60000);  // 300 minutes read timeout
                             }
                         })
                         .setApplicationName(GoogleAPIConstant.APPLICATION_NAME)
@@ -123,16 +123,17 @@ public class UploadFileUtil {
         return file.getWebViewLink();
     }
 
-    public static String getLinkOneImagesByFolderId(String folderId) throws IOException {
-        String query = "mimeType != 'application/vnd.google-apps.folder'"
-                + " and '" + folderId + "' in parents";
-        FileList result = getInstanceDriverService().files().list().setQ(query).setSpaces("drive")
-                .setFields("nextPageToken, files(id, webViewLink)")
-                .setPageSize(1)
-                .execute();
-        List<File> files = result.getFiles();
-//        System.out.println(files.get(0).getWebViewLink());
-        return files.isEmpty() ? null : files.get(0).getId();
+    public static void getListLinkOneImagesByFolderId(List<PostModel> postModels) throws IOException {
+        ExecutorService es = Executors.newCachedThreadPool();
+         for (PostModel postModel: postModels) {
+             es.execute(new Thread(new GetImageId(postModel, getInstanceDriverService())));
+         }
+        es.shutdown();
+        try {
+            es.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static List<String> getLinkImagesByFolderId(String folderId) throws IOException {
@@ -147,7 +148,7 @@ public class UploadFileUtil {
         ) {
             listFile.add(file.getId());
         }
-        return listFile.isEmpty() ? null : listFile;
+        return listFile.isEmpty() ? null: listFile;
     }
 
     public static void deleteFile(String fileId) {
@@ -166,19 +167,33 @@ public class UploadFileUtil {
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            /*final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            getCredentials(HTTP_TRANSPORT);*/
-            getInstanceDriverService();
-            /*List<String> files = getLinkImagesByFolderId("1t-Xod9AOwSM9-qNqSohmgWFDv-6dWGHX");
-            for(String file : files) {
-                System.out.println(file);
-            }*/
-            System.out.println(getLinkOneImagesByFolderId("1OyPzMLo1f48XM4h7iJz9j9QOcxX9vd9K"));
-            System.out.println("success");
-        } catch (IOException e) {
-            e.printStackTrace();
+}
+
+class GetImageId implements Runnable {
+    private Drive _driver = null;
+    private PostModel postModel = null;
+
+    public GetImageId(PostModel postModel, Drive drive) {
+        this.postModel = postModel;
+        this._driver = drive;
+    }
+
+    @Override
+    public void run() {
+        synchronized(postModel){
+            try {
+                String query = "mimeType != 'application/vnd.google-apps.folder'"
+                        + " and '" + postModel.getLinkImages() + "' in parents";
+                FileList result = null;
+                result = this._driver.files().list().setQ(query).setSpaces("drive")
+                        .setFields("nextPageToken, files(id, webViewLink)")
+                        .setPageSize(1)
+                        .execute();
+                List<File> files = result.getFiles();
+                if (!files.isEmpty()) postModel.setLinkImages(files.get(0).getId());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

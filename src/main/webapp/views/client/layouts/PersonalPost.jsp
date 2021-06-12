@@ -17,7 +17,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Personal post</title>
 	<%@include file="../../../common/csslib.jsp"%>
-	<link rel="stylesheet" href="${contextPath}/assets/css/detailPost.css">
 	<link rel="stylesheet" href="${contextPath}/assets/css/template/pagination.min.css">
 </head>
 

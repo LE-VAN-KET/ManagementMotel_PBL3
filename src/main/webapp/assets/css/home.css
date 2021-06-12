@@ -1052,9 +1052,9 @@ h1.title-post {
     padding: 10px;
 }
 
-.sidebar-post {
-    /*position: fixed;*/
-}
+/*.sidebar-post {
+    position: fixed;
+}*/
 
 @media screen and (max-width: 991px){
     .sidebar-post {
@@ -1416,6 +1416,7 @@ form .form-buttons .btn {
 /*comments post*/
 
 /* #Media reponsive
+================================================== */
 @media (max-width: 991px) {
     button.btn-search {
         position: relative;
@@ -1489,4 +1490,5 @@ form .form-buttons .btn {
         margin-top: 10px !important;
         margin-bottom: 20px !important;
     }
+
 }

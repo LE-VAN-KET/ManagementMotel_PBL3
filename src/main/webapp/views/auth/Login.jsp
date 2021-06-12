@@ -13,7 +13,6 @@
     <link href="${contextPath}/assets/css/login.css" rel="stylesheet">
     <link href="${contextPath}/assets/css/backToTop.css" rel="stylesheet">
     <link href="${contextPath}/assets/css/fonts.min.css" rel="stylesheet">
-    <%--<link href="${contextPath}/assets/fonts/fontawesomeone.min.css" rel="stylesheet">--%>
     <link rel="stylesheet" href="${contextPath}/assets/css/template/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet" />
     <link href="${contextPath}/assets/css/template/toastr.min.css" rel="stylesheet">
@@ -86,6 +85,7 @@
             </div>
         </div>
     </div>
+
     <script src="${contextPath}/assets/javascript/particle.js"></script>
     <script src="${contextPath}/assets/javascript/particle.data.js"></script>
     <script src="${contextPath}/assets/javascript/validateLogin.js"></script>
