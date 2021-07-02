@@ -41,7 +41,7 @@
                             </li>
                         </ul>
 
-                        <c:if test="${'LANDLORD'.equals(ACCOUNTMODEL.user.roleMole.roleName)}">
+                        <c:if test="${'LANDLORD'.equals(ACCOUNTMODEL.user.roleModel.roleName)}">
                             <a type="button" href="/post" class="animated-dang-tin btn btn-white ml-3"
                                style="color: #111;">
                                 <span></span>
@@ -65,7 +65,7 @@
                                         <%--                                        Setting--%>
                                 </a>
                                 <div class="dropdown-menu dropdown-setting" aria-labelledby="navbarDropdownMenuLink">
-                                    <c:if test="${'LANDLORD'.equals(ACCOUNTMODEL.user.roleMole.roleName)}">
+                                    <c:if test="${'LANDLORD'.equals(ACCOUNTMODEL.user.roleModel.roleName)}">
                                         <a class="dropdown-item" href="/personal-post">
                                             <i class="far fa-list-alt mr-1"></i>Quản lý bài đăng</a>
                                     </c:if>

@@ -45,7 +45,7 @@ public class MessageMapper implements IRowMapper<MessageModel> {
         senderRole.setRoleName(resultSet.getString("sender_role.roleName"));
         senderRole.setCreateAt(resultSet.getTimestamp("sender_role.createAt"));
         senderRole.setModifiedAt(resultSet.getTimestamp("sender_role.modifiedAt"));
-        sender.setRoleMole(senderRole);
+        sender.setRoleModel(senderRole);
         return sender;
     }
 
@@ -63,7 +63,7 @@ public class MessageMapper implements IRowMapper<MessageModel> {
         recipientRole.setRoleName(resultSet.getString("recipient_role.roleName"));
         recipientRole.setCreateAt(resultSet.getTimestamp("recipient_role.createAt"));
         recipientRole.setModifiedAt(resultSet.getTimestamp("recipient_role.modifiedAt"));
-        recipient.setRoleMole(recipientRole);
+        recipient.setRoleModel(recipientRole);
         return recipient;
     }
 }

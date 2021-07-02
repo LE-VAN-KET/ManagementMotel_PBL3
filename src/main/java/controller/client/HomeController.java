@@ -4,12 +4,9 @@ import bean.DistrictModel;
 import bean.PostModel;
 import constant.SystemConstant;
 import criteria.Criteria;
-import dao.IPostDAO;
-import dao.implement.PostDAO;
 import paging.Pageble;
 import service.IDistrictService;
 import service.IPostService;
-import service.implement.PostService;
 import sort.Sorter;
 import utils.FormUtil;
 import utils.SessionUtil;
@@ -22,21 +19,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 @WebServlet(urlPatterns = {"/home"})
 public class HomeController extends HttpServlet {
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
     @Inject
     private IDistrictService districtService;
-
     @Inject
     private IPostService postService;
-
-    ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,13 +52,13 @@ public class HomeController extends HttpServlet {
         }
 
         try {
-            if (criteria.getVillageId() != null ) {
+            if (criteria.getVillageId() != null) {
                 postModels = postService.findByCriteria(criteria, pageble);
             } else {
                 postModels = postService.selectAllByStatusPost(pageble, true);
                 pageble.setTotalItem(postService.getTotalItemByStatusPost(true));
-                pageble.setTotalPage(postService.getTotalItem(null));
             }
+            pageble.setTotalPage(postService.getTotalItem(null));
             UploadFileUtil.getListLinkOneImagesByFolderId(postModels);
 //            for (PostModel post: postModels) {
 //                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));

@@ -354,26 +354,23 @@
         if (window.location.href == "http://localhost:8080/home") {
             sessionStorage.clear();
         }
-
         if (${!DISTRICTSMODELS.isEmpty()}) {
             // set list district option
             let district_id = sessionStorage.getItem("district_id");
             <c:forEach items="${DISTRICTMODELS}" var="district">
-                if (district_id === ${district.districtId}) {
-                    $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}' selected>${district.districtName}</option>");
-                } else {
-                    $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
-                }
+            if (district_id == ${district.districtId}) {
+                $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}' selected>${district.districtName}</option>");
+            } else {
+                $('#district').append("<option data-id = ${district.districtId} value='${district.districtName}'>${district.districtName}</option>");
+            }
             </c:forEach>
         }
         if (typeof(Storage) !== "undefined") {
             sessionStorage.setItem("district_id", $("#district option:selected").data("id"));
         }
-
         if (${POSTMODELS.isEmpty()}) {
             toastr.info("No posts found", "Notification:");
         }
-
         $(document).ready(function () {
             if ("${message}" != "" && "${alert}" == "danger") {
                 toastr.error('${message}', 'falied!');
@@ -382,56 +379,47 @@
             $("#district").change(() => {
                 setupVillage();
             })
-
             let square = sessionStorage.getItem("square");
             let price = sessionStorage.getItem("price");
             let village_id = sessionStorage.getItem("village_id");
-
             $("#village option").each(function()
             {
                 if ($(this).val() == village_id) {
                     $(this).attr("selected", "selected");
                 }
             });
-
             $("#square option").each(function()
             {
                 if ($(this).val() == square) {
                     $(this).attr("selected", "selected");
                 }
             });
-
             $("#price option").each(function()
             {
                 if ($(this).val() == price) {
                     $(this).attr("selected", "selected");
                 }
             });
-
             $("#sort option").each(function () {
                 if ($(this).val() == sessionStorage.getItem("sort")) {
                     $(this).attr("selected", "selected");
                 }
             })
-
             $("#village").change(function () {
                 if (typeof(Storage) !== "undefined") {
                     sessionStorage.setItem("village_id", $(this).val());
                 }
             })
-
             $("#square").change(function () {
                 if (typeof(Storage) !== "undefined") {
                     sessionStorage.setItem("square", $(this).val());
                 }
             })
-
             $("#price").change(function () {
                 if (typeof(Storage) !== "undefined") {
                     sessionStorage.setItem("price", $(this).val());
                 }
             })
-
             //set value param square and price when recieve event submit form
             $("#formSearch").submit(() => {
                 let square = $("#square option:selected").val();
@@ -445,14 +433,12 @@
                     $("input[name='order_by']").val(sorter[sorter.length - 1]).attr("disabled", false);
                 }
             })
-
             $("#sort").change(function () {
                 $("#formSearch").submit();
                 if (typeof (Storage) !== "undefined") {
                     sessionStorage.setItem("sort", $(this).val());
                 }
             })
-
             $('#pagination').pagination({
                 total: ${PAGEABLE.totalItem}, // 总数据条数
                 current: ${PAGEABLE.page}, // 当前页码
@@ -474,7 +460,6 @@
                     $("#formSearch").submit();
                 }
             });
-
             const swithchSquare = (square) => {
                 // case square equals all
                 if (square === "all") {
@@ -496,7 +481,6 @@
                     $("input[name='square_to']").val(_square[_square.length - 1]);
                 }
             }
-
             const swithchPrice = (price) => {
                 // case price equals all
                 if (price === "all") {
@@ -518,7 +502,6 @@
                     $("input[name='price_to']").val(_price[_price.length - 1]);
                 }
             }
-
             const setupVillage = function () {
                 const districtId = $( "#district option:selected" ).data('id');
                 $("#village option").remove();
