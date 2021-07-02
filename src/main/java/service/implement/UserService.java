@@ -43,4 +43,9 @@ public class UserService implements IUserService {
     public UserModel findPhonelEdit(String phone, Long userId) {
         return userDAO.findPhonelEdit(phone, userId);
     }
+
+    @Override
+    public UserModel findOne(Long userId) {
+        return userDAO.findOne(userId);
+    }
 }

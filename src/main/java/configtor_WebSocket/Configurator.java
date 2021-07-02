@@ -3,20 +3,18 @@ package configtor_WebSocket;
 import constant.SystemConstant;
 import utils.SessionUtil;
 
-import javax.servlet.ServletContainerInitializer;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import javax.websocket.HandshakeResponse;
 import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpointConfig;
-import java.util.Set;
 
 public class Configurator extends ServerEndpointConfig.Configurator {
-    //     CDI Endpoint
+//    @Inject
+//    private static Injector injector;
+//    //     CDI Endpoint
 //    @Override
 //    public <T> T getEndpointInstance(Class<T> endpointClass) throws InstantiationException {
-//        return CDI.current().select(endpointClass).get();
+//        return injector.getInstance(endpointClass);
 //    }
 
     // getHttpSession

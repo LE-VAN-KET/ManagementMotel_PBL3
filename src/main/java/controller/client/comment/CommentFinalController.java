@@ -9,15 +9,19 @@ import configtor_WebSocket.Configurator;
 import constant.SystemConstant;
 import service.ICommentService;
 import service.implement.CommentService;
+import socket_common.SocketRooms;
 
-import javax.ejb.Singleton;
+import javax.inject.Singleton;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
@@ -35,17 +39,8 @@ public class CommentFinalController {
     @OnOpen
     public void connect(@PathParam("postId")String postId, Session session, EndpointConfig config) {
 //        log.info("roomName={}", postId);
-        List<CommentModel> commentModels = commentService.findAll();
-        if (!rooms.containsKey(postId)) {
-            // Create a room when the room does not exist
-            Set<Session> room = new HashSet<>();
-            room.add(session); //Add user
-            rooms.put(postId, room);
-        } else {
-            // The room already exists, add users directly to the corresponding room
-            rooms.get(postId).add(session);
-        }
-
+//        List<CommentModel> commentModels = commentService.findAll();
+        SocketRooms.connection(postId, rooms, session);
         if (config.getUserProperties().containsKey(SystemConstant.ACCOUNTMODEL)) {
             this.accountModel = (AccountModel) config.getUserProperties().get(SystemConstant.ACCOUNTMODEL);
         }
@@ -55,7 +50,7 @@ public class CommentFinalController {
     @OnClose
     public void disConnect(@PathParam("postId") String postId, Session session) {
         rooms.get(postId).remove(session);
-        System.out.println("Client has disconnected");
+//        System.out.println("Client has disconnected");
     }
 
     @OnMessage
@@ -97,13 +92,14 @@ public class CommentFinalController {
     }
 
     private void sendMessageYourSelf(String postId, String msg, Session session) throws IOException {
-        for(Session sessionItem: rooms.get(postId)) {
-            if (sessionItem.equals(session)) {
-                // send yourself redirect authorization
-                sessionItem.getBasicRemote().sendText(msg);
-                break;
-            }
-        }
+//        for(Session sessionItem: rooms.get(postId)) {
+//            if (sessionItem.equals(session)) {
+//                // send yourself redirect authorization
+//                sessionItem.getBasicRemote().sendText(msg);
+//                break;
+//            }
+//        }
+        session.getBasicRemote().sendText(msg);
     }
 
     private void addMessage(String postId, Session session, JsonObject data) throws IOException {

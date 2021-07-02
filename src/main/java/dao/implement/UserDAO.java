@@ -7,6 +7,14 @@ import mapper.implement.UserMapper;
 import java.util.List;
 
 public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
+    private static UserDAO instance;
+    public static UserDAO getInstance() {
+        if (instance == null) {
+            instance = new UserDAO();
+        }
+        return instance;
+    }
+
     @Override
     public List<UserModel> findAll() {
         String sql = "SELECT * FROM users INNER JOIN role ON users.roleId = role.roleId";

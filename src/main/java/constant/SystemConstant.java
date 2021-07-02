@@ -14,4 +14,7 @@ public class SystemConstant {
     public static final String ACCOUNTMODEL = "ACCOUNTMODEL";
     public static final String IMAGES = "IMAGES";
     public static final String POSTMODEL = "POSTMODEL";
+    public static final String LISTLASTMESSAGE = "LISTLASTMESSAGE";
+    public static final String SENDER = "SENDER";
+    public static final String RECIPIENT = "RECIPIENT";
 }
