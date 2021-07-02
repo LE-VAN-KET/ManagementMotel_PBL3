@@ -46,7 +46,7 @@
                         </a>
                     </li>
                     <li class="nav-item py-1">
-                        <a class="nav-link" href="https://phongtro123.com/lien-he">
+                        <a class="nav-link" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="feather feather-message-circle">
@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item py-1">
-                        <a class="nav-link" href="https://phongtro123.com/thoat">
+                        <a class="nav-link" href="/logout">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="feather feather-log-out">

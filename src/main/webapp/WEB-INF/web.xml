@@ -39,7 +39,7 @@
     </context-param>
     <context-param>
         <param-name>javax.faces.CONFIG_FILES</param-name>
-        <param-value>/WEB-INF/jboss-web.xml</param-value>
+        <param-value>/WEB-INF/jboss-web.xml,/views/client/layouts/faces-config.xml</param-value>
     </context-param>
 
     <!--    Authentication-->
@@ -93,4 +93,11 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+<!--    Websocket Endpoint-->
+    <context-param>
+        <param-name>javax.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
 </web-app>

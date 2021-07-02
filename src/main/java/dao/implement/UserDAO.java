@@ -8,6 +8,14 @@ import paging.Pageble;
 import java.util.List;
 
 public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
+    private static UserDAO instance;
+    public static UserDAO getInstance() {
+        if (instance == null) {
+            instance = new UserDAO();
+        }
+        return instance;
+    }
+
     @Override
     public List<UserModel> findAll() {
         StringBuffer sql = new StringBuffer("SELECT * FROM users");

@@ -50,7 +50,7 @@ public class CommentService implements ICommentService {
                 commentModel.getPostModel().getPostId())) {
             errors.add(resourceBundle.getString("all_fields_not_empty"));
         } else {
-            if (postDAO == null) System.out.println("null pointer");
+//            if (postDAO == null) System.out.println("null pointer");
             int count = postDAO.countByPostId(commentModel.getPostModel().getPostId());
             if (count == 0) {
                 errors.add(resourceBundle.getString("comment_failed"));

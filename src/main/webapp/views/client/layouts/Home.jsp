@@ -315,6 +315,18 @@
         function timeDifference(date1,date2) {
             let difference = date1.getTime() - date2.getTime();
 
+            if (date2.getFullYear() !== date1.getFullYear()) {
+                let options = {
+                    year: "numeric", month: "numeric",
+                    day: "numeric", hour: "2-digit", minute: "2-digit"
+                };
+                return date2.toLocaleTimeString("en-us", options);
+            }
+
+            if (date2.getMonth() !== date1.getMonth()) {
+                return date1.getMonth() - date2.getMonth() + ' months ago';
+            }
+
             let daysDifference = Math.floor(difference/1000/60/60/24);
             if (daysDifference !== 0) {
                 return daysDifference + ' day ago';

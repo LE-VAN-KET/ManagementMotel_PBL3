@@ -21,4 +21,5 @@ public interface IUserService {
     Long addUser(UserModel userModel);
     UserModel findByEmailEdit(String email, Long userId);
     UserModel findPhonelEdit(String phone, Long userId);
+    UserModel findOne(Long userId);
 }

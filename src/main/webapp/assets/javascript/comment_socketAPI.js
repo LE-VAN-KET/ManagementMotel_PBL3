@@ -13,7 +13,7 @@ function CommentSocketAPI(postId, userId) {
         };
 
         function processOpen(message) {
-            console.log("Server connect...");
+            // console.log("Server connect...");
         }
         function processMessage(message) {
             let data = JSON.parse(message.data);
@@ -53,6 +53,7 @@ function CommentSocketAPI(postId, userId) {
                     method : 'add'
                 }));
                 $('textarea[name="content"]').val('');
+                $('textarea[name="content"]').height('auto');
             }
             e.preventDefault();
         });
@@ -114,6 +115,24 @@ function CommentSocketAPI(postId, userId) {
                 Comments.update(data);
             }
         }
+
+        $("#formComment textarea[name='content']").on("keyup", function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                // Trigger the button element with a submit
+                $("#formComment").submit();
+            }
+        });
+
+        $("#formEdit textarea[name='content']").on("keyup", function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                // Trigger the button element with a submit
+                $("#formEdit").submit();
+            }
+        });
     } else {
         toastr.info('The browser does not support websocket');
     }

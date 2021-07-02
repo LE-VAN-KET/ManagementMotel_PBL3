@@ -3,8 +3,10 @@ package bean;
 public class MessageModel extends AbstractModel {
     private Long messageId;
     private String body;
-    private Long fromUserId;
-    private Long toUserId;
+    private UserModel sender;
+    private UserModel recipient;
+//    private Long fromUserId;
+//    private Long toUserId;
     private Boolean isSeen;
 
     public Long getMessageId() {
@@ -23,27 +25,27 @@ public class MessageModel extends AbstractModel {
         this.body = body;
     }
 
-    public Long getFromUserId() {
-        return fromUserId;
-    }
-
-    public void setFromUserId(Long fromUserId) {
-        this.fromUserId = fromUserId;
-    }
-
-    public Long getToUserId() {
-        return toUserId;
-    }
-
-    public void setToUserId(Long toUserId) {
-        this.toUserId = toUserId;
-    }
-
     public Boolean getSeen() {
         return isSeen;
     }
 
     public void setSeen(Boolean seen) {
         isSeen = seen;
+    }
+
+    public UserModel getSender() {
+        return sender;
+    }
+
+    public void setSender(UserModel sender) {
+        this.sender = sender;
+    }
+
+    public UserModel getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(UserModel recipient) {
+        this.recipient = recipient;
     }
 }
