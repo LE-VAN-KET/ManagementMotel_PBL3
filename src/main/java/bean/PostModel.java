@@ -1,6 +1,7 @@
 package bean;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class PostModel extends AbstractModel {
     private Long postId;
@@ -11,6 +12,15 @@ public class PostModel extends AbstractModel {
     private Long square;
     private String address;
     private String postSlug;
+    private List<CommentModel> commentModelList;
+
+    public List<CommentModel> getCommentModelList() {
+        return commentModelList;
+    }
+
+    public void setCommentModelList(List<CommentModel> commentModelList) {
+        this.commentModelList = commentModelList;
+    }
 
     public String getPostSlug() {
         return postSlug;

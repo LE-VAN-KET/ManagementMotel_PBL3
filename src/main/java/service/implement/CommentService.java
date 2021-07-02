@@ -4,6 +4,8 @@ import bean.AccountModel;
 import bean.CommentModel;
 import dao.ICommentDAO;
 import dao.IPostDAO;
+import dao.implement.CommentDAO;
+import dao.implement.PostDAO;
 import service.ICommentService;
 
 import javax.annotation.ManagedBean;
@@ -26,13 +28,30 @@ public class CommentService implements ICommentService {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
+    private static CommentService instance; //singleton
+    public static CommentService getInstance() {
+        if (instance == null) {
+            instance = new CommentService(CommentDAO.getInstance(), PostDAO.getInstance());
+        }
+        return instance;
+    }
+
+    public CommentService() {}
+
+    private CommentService(ICommentDAO commentDao, IPostDAO postDAO) {
+        this.commentDAO = commentDao;
+        this.postDAO = postDAO;
+    }
+
     @Override
     public List<String> validateComment(CommentModel commentModel) {
         List<String> errors = new ArrayList<>();
-        if (isAll_Fields_Empty(commentModel.getContent(), commentModel.getUserId(), commentModel.getPostId())) {
+        if (isAll_Fields_Empty(commentModel.getContent(), commentModel.getUserModel().getUserId(),
+                commentModel.getPostModel().getPostId())) {
             errors.add(resourceBundle.getString("all_fields_not_empty"));
         } else {
-            int count = postDAO.countByPostId(commentModel.getPostId());
+            if (postDAO == null) System.out.println("null pointer");
+            int count = postDAO.countByPostId(commentModel.getPostModel().getPostId());
             if (count == 0) {
                 errors.add(resourceBundle.getString("comment_failed"));
             }
@@ -56,12 +75,12 @@ public class CommentService implements ICommentService {
 
     @Override
     public void delete(Long commentId) {
-        delete(commentId);
+        commentDAO.delete(commentId);
     }
 
     @Override
     public void update(CommentModel commentModel) {
-        update(commentModel);
+        commentDAO.update(commentModel);
     }
 
     @Override
@@ -69,17 +88,30 @@ public class CommentService implements ICommentService {
         if (accountModel != null) {
             // check information account
             if (accountModel.getUser().getFullName() == null || "".equals(accountModel.getUser().getFullName())
-                    || accountModel.getUser().getEmail() == null || "".equals(accountModel.getUser().getEmail())
                     || accountModel.getUser().getSDT() == null || "".equals(accountModel.getUser().getSDT())) {
                 return "/edit-profile?error=finish_filled_information_profile&&alert=danger";
             }
             return null;
         } else {
-            /*
-             * not permission access, done
+            /* not permit access, done
              * redirect /home
              * */
             return "/home?message=not_permission_comment&&alert=danger";
         }
+    }
+
+    @Override
+    public CommentModel findByCommentId(Long commentId) {
+        return commentDAO.findByCommentId(commentId);
+    }
+
+    @Override
+    public List<CommentModel> findAll() {
+        return commentDAO.findAll();
+    }
+
+    @Override
+    public List<CommentModel> findByPostId(Long postId) {
+        return commentDAO.findByPostId(postId);
     }
 }

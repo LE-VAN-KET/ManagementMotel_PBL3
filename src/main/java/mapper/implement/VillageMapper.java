@@ -12,12 +12,14 @@ public class VillageMapper implements IRowMapper<VillageModel> {
     public VillageModel mapRow(ResultSet resultSet) {
         VillageModel villageModel = new VillageModel();
         try {
-            villageModel.setVillageId(resultSet.getLong("villageId"));
-            villageModel.setVillageName(resultSet.getString("villageName"));
+            villageModel.setVillageId(resultSet.getLong("village.villageId"));
+            villageModel.setVillageName(resultSet.getString("village.villageName"));
+
             DistrictModel districtModel = new DistrictMapper().mapRow(resultSet);
             villageModel.setDistrictModel(districtModel);
-            villageModel.setCreateAt(resultSet.getTimestamp("createAt"));
-            villageModel.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
+
+            villageModel.setCreateAt(resultSet.getTimestamp("village.createAt"));
+            villageModel.setModifiedAt(resultSet.getTimestamp("village.modifiedAt"));
             return villageModel;
         } catch (SQLException e) {
             e.printStackTrace();

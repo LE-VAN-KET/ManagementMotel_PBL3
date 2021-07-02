@@ -144,63 +144,91 @@
                     <h5>User Comments</h5>
                     <div class="comments-container">
                         <ul id="comments-list" class="comments-list p-0">
-                            <li>
-                                <div class="comment-main-level row m-0">
-                                    <!-- Avatar -->
-                                    <div class="comment-avatar col-1 p-0">
-                                        <img class="img-fluid img-thumbnail lazyload p-0"
-                                             data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png"
-                                             alt="image...">
-                                    </div>
-                                    <!-- Contenedor del Comentario -->
-                                    <div class="comment-box col-10">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name by-author"><a href="#">User Name</a></h6>
-                                            <span class="posted-time">Posted on 10-FEB-2015 12:00</span>
-                                            <div class="comments-list-action action-toggle bg-transparent">
-                                                <div class="dropdown">
-                                                    <a href="#" data-toggle="dropdown">
-                                                        <i class="fas fa-ellipsis-h"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item text-dark" href="#">
-                                                            <i class="far fa-edit mr-2"></i>Edit</a>
-                                                        <a class="dropdown-item text-dark" href="#">
-                                                            <i class="fas fa-trash mr-2"></i>Remove</a>
+                            <c:forEach items="${POSTMODELS.commentModelList}" var="comment">
+                                <c:if test="${ACCOUNTMODEL.user.userId == comment.userModel.userId}">
+                                    <li>
+                                        <div class="comment-main-level row m-0" data-userid="${comment.userModel.userId}"
+                                            data-commentid="${comment.commentId}">
+                                            <!-- Avatar -->
+                                            <div class="comment-avatar col-1 p-0">
+                                                <img class="img-fluid img-thumbnail lazyload p-0"
+                                                     data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png"
+                                                     alt="image...">
+                                            </div>
+                                            <!-- Contenedor del Comentario -->
+                                            <div class="comment-box col-10">
+                                                <div class="comment-head">
+                                                    <h6 class="comment-name by-author">
+                                                        <a href="#">${comment.userModel.fullName}</a>
+                                                    </h6>
+                                                    <span class="posted-time">
+                                                        Posted on <fmt:formatDate pattern = "yyyy-MM-dd HH:mm:ss"
+                                                                                  value = "${comment.createAt}" />
+                                                    </span>
+                                                    <div class="comments-list-action action-toggle bg-transparent">
+                                                        <div class="dropdown">
+                                                            <a href="#" data-toggle="dropdown">
+                                                                <i class="fas fa-ellipsis-h"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item text-dark"
+                                                                   href="javascript:void(0)" onclick="editComment(this)">
+                                                                    <i class="far fa-edit mr-2"></i>Edit</a>
+                                                                <a class="dropdown-item text-dark"
+                                                                   href="javascript:void(0)" data-toggle="modal"
+                                                                   data-target="#confirm-delete">
+                                                                    <i class="fas fa-trash mr-2"></i>Remove</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                </div>
+                                                <div class="comment-content">
+                                                    <p class="p-0 m-0">${comment.content}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="comment-content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi
-                                            et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                    </li>
+                                </c:if>
 
-                            <li>
-                                <div class="comment-main-level row m-0">
-
-                                    <div class="comment-avatar col-1 p-0">
-                                        <img class="img-fluid img-thumbnail lazyload p-0"
-                                             data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png"
-                                             alt="image...">
-                                    </div>
-
-                                    <div class="comment-box col-10">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6>
-                                            <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span>
+                                <c:if test="${ACCOUNTMODEL.user.userId != comment.userModel.userId}">
+                                    <li>
+                                        <div class="comment-main-level row m-0" data-userid="${comment.userModel.userId}"
+                                             data-commentid="${comment.commentId}">
+                                            <!-- Avatar -->
+                                            <div class="comment-avatar col-1 p-0">
+                                                <img class="img-fluid img-thumbnail lazyload p-0"
+                                                     data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png"
+                                                     alt="image...">
+                                            </div>
+                                            <!-- Contenedor del Comentario -->
+                                            <div class="comment-box col-10">
+                                                <div class="comment-head">
+                                                    <h6 class="comment-name">
+                                                        <a href="#">${comment.userModel.fullName}</a>
+                                                    </h6>
+                                                    <span class="posted-time">
+                                                        Posted on <fmt:formatDate pattern = "yyyy-MM-dd HH:mm:ss"
+                                                                                  value = "${comment.createAt}" />
+                                                    </span>
+                                                </div>
+                                                <div class="comment-content">
+                                                    <p class="p-0 m-0">${comment.content}</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="comment-content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi
-                                            et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
                         </ul>
+                        <form action="" method="post" class="mx-5" id="formEdit">
+                            <div class="form-group">
+                                <textarea name="content" class="form-control" ></textarea>
+                            </div>
+                            <button class="btn btn-light bg-warning float-right mb-2" type="submit">
+                                <i class="far fa-edit text-light  mr-1"></i>
+                                <span class="text-light">Edit</span>
+                            </button>
+                        </form>
                         <form action="" method="post" class="mx-5" id="formComment">
                             <div class="form-group">
                                 <textarea name="content" class="form-control" rows="1"
@@ -219,12 +247,48 @@
 
     <!-- footer -->
     <%@include file="../components/footer.jsp"%>
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        Please Confirm delete comment this
+                        <i class="fas fa-check-circle ml-2"></i>
+                    </span>
+                </div>
+                <div class="modal-body mx-auto">
+                    <span>Are you sure?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger text-light" id="btnRemove">
+                        <i class="far fa-trash-alt mr-1 text-light"></i>
+                        Delete
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/slideShow.js"></script>
     <script>
         let width = $(".comment-avatar").width()/2;
         $('head').append('<style>.comments-list:before{left:' + width + 'px !important;}</style>');
+
+        let elementRemoveComment;
+        function editComment(e) {
+            $("#formEdit").css({"display": "block"});
+            $("#formEdit").attr("data-commentid", $(e).parents(".comment-main-level").data("commentid"));
+            let content = $(e).parents(".comment-main-level").find(".comment-content p").text();
+            let body = $("#formEdit textarea[name='content']");
+            body.val(content);
+            body.focus();
+            elementRemoveComment = $(e).parent(".dropdown-menu").find(".dropdown-item").last();
+        };
+
         $(document).ready(function () {
             $('#loading').addClass("show");
             setTimeout(function () {
@@ -252,53 +316,15 @@
                 this.style.height = (this.scrollHeight) + 'px';
             });
 
-            $("#formComment").submit( function (e) {
-                $.ajax({
-                    type: "POST",
-                    contentType: "application/json",
-                    url: "/comment/add",
-                    data: JSON.stringify({
-                        content : $.trim($("textarea[name='content']").val()),
-                        postId : ${POSTMODELS.postId}
-                    }),
-                    contentType: "application/json;charset=utf-8",
-                    cache: false,
-                    timeout: 600000,
-                    success: function (data) {
-                        if (data.urlRedirect) {
-                            location.replace(data.urlRedirect);
-                            return;
-                        }
-                        let listErrors = Object.keys(data.errors).length;
-                        if (listErrors > 0) {
-                            data.errors.forEach(err => {
-                                toastr.error(err, "Comment failed");
-                            })
-                        } else {
-                            $("#comments-list").append('<li><div class="comment-main-level row m-0">' +
-                                '<div class="comment-avatar col-1 p-0">' +
-                                '<img class="img-fluid img-thumbnail lazyload p-0 "' +
-                                'data-src="${contextPath}/assets/images/143086968_2856368904622192_1959732218791162458_n.png" ' +
-                                'alt="image..."></div><div class="comment-box col-10"><div class="comment-head">' +
-                                '<h6 class="comment-name by-author"><a href="#">' + '${ACCOUNTMODEL.user.fullName}' +
-                                '</a></h6><span class="posted-time">Posted on ' + data.createAt + '</span>' +
-                                '<div class="comments-list-action action-toggle bg-transparent">' +
-                                '<div class="dropdown"><a href="#" data-toggle="dropdown">' +
-                                '<i class="fas fa-ellipsis-h"></i></a><div class="dropdown-menu dropdown-menu-right">' +
-                                '<a class="dropdown-item text-dark" href="#"><i class="far fa-edit mr-2"></i>Edit</a>' +
-                                '<a class="dropdown-item text-dark" href="#"><i class="fas fa-trash mr-2"></i>Remove</a>' +
-                                '</div></div></div></div><div class="comment-content">' + data.comment.content +
-                                '</div></div></div></li>');
-                        }
-                    },
-                    error: function (e) {
-                        toastr.error("Comment failed");
-                    }
-                });
-                $('textarea[name="content"]').val('');
-                e.preventDefault();
-            })
+            $('#confirm-delete').on('show.bs.modal', function(e) {
+                let btn = $(this).find('#btnRemove');
+                btn.attr('data-userid', $(e.relatedTarget).parents(".comment-main-level").data("userid"));
+                btn.attr('data-commentid', $(e.relatedTarget).parents(".comment-main-level").data("commentid"));
+            });
+
+            CommentSocketAPI(${POSTMODELS.postId}, ${ACCOUNTMODEL.user.userId});
         })
     </script>
+    <script src="../../../assets/javascript/comment_socketAPI.js" defer></script>
 </body>
 </html>

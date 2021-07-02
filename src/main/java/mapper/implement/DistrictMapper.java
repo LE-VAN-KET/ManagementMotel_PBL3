@@ -12,10 +12,10 @@ public class DistrictMapper implements IRowMapper<DistrictModel> {
     public DistrictModel mapRow(ResultSet resultSet) {
         try {
             DistrictModel districtModel = new DistrictModel();
-            districtModel.setDistrictId(resultSet.getLong("districtId"));
-            districtModel.setDistrictName(resultSet.getString("districtName"));
-            districtModel.setCreateAt(resultSet.getTimestamp("createAt"));
-            districtModel.setModifiedAt(resultSet.getTimestamp("modifiedAt"));
+            districtModel.setDistrictId(resultSet.getLong("district.districtId"));
+            districtModel.setDistrictName(resultSet.getString("district.districtName"));
+            districtModel.setCreateAt(resultSet.getTimestamp("district.createAt"));
+            districtModel.setModifiedAt(resultSet.getTimestamp("district.modifiedAt"));
             return districtModel;
         } catch (SQLException e) {
             e.printStackTrace();
