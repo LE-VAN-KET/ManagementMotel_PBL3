@@ -381,7 +381,8 @@
             })
             let square = sessionStorage.getItem("square");
             let price = sessionStorage.getItem("price");
-            let village_id = sessionStorage.getItem("village_id");
+            let village_id = sessionStorage.getItem("villaged_id");
+
             $("#village option").each(function()
             {
                 if ($(this).val() == village_id) {
@@ -407,7 +408,7 @@
             })
             $("#village").change(function () {
                 if (typeof(Storage) !== "undefined") {
-                    sessionStorage.setItem("village_id", $(this).val());
+                    sessionStorage.setItem("villaged_id", $(this).val());
                 }
             })
             $("#square").change(function () {

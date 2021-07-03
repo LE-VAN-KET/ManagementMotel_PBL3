@@ -273,11 +273,11 @@
     </div>
 
 <%--    icon chat with landlord--%>
-    <c:if test="${POSTMODELS.userModel.userId} != ${ACCOUNTMODEL.user.userId}">
+<%--    <c:if test="${POSTMODELS.userModel.userId} != ${ACCOUNTMODEL.user.userId}">--%>
         <a href="/message" class="btn-whatsapp-pulse" id="chat">
             <i class="far fa-comment-dots"></i>
         </a>
-    </c:if>
+<%--    </c:if>--%>
 
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/slideShow.js"></script>
@@ -334,13 +334,10 @@
             localStorage.removeItem("_fullname");
 
             $("#chat").click(function () {
-                <c:if test="${POSTMODELS.userModel.userId} != ${ACCOUNTMODEL.user.userId}">
-                if (window.localStorage) {
+                if (window.localStorage && ${POSTMODELS.userModel.userId} != ${ACCOUNTMODEL.user.userId}) {
                     localStorage.setItem("_recipient_id", ${POSTMODELS.userModel.userId});
                     localStorage.setItem("_fullname", '${POSTMODELS.userModel.fullName}');
                 }
-                </c:if>
-
             })
         })
     </script>

@@ -42,6 +42,7 @@ public class PersonalPostController extends HttpServlet {
         try {
             postModels = postService.findByUserId(pageble,accountModel.getUser().getUserId());
             pageble.setTotalItem(postService.getTotalIemByUserId(accountModel.getUser().getUserId()));
+            pageble.setTotalPage(postService.getTotalItem(null));
 //            for (PostModel post: postModels) {
 //                post.setLinkImages(UploadFileUtil.getLinkOneImagesByFolderId(post.getLinkImages()));
 //            }
