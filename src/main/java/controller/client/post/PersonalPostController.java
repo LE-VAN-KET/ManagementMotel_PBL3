@@ -3,6 +3,7 @@ package controller.client.post;
 import bean.AccountModel;
 import bean.PostModel;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import paging.Pageble;
 import service.IPostService;
 import utils.FormUtil;
@@ -26,6 +27,8 @@ public class PersonalPostController extends HttpServlet {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
+    private static final Logger logger = Logger.getLogger(PersonalPostController.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Pageble pageble = FormUtil.toModel(Pageble.class, req);
@@ -48,6 +51,7 @@ public class PersonalPostController extends HttpServlet {
             UploadFileUtil.getListLinkOneImagesByFolderId(postModels);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.toString());
         }
 
         if (message != null) {

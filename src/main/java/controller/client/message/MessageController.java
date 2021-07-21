@@ -27,13 +27,13 @@ public class MessageController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AccountModel sender = (AccountModel) SessionUtil.getInstance().getValue(req, SystemConstant.ACCOUNTMODEL);
         List<MessageModel> messageModelList = messageService.getLastMessageChat(sender.getUser().getUserId());
-        if (!messageModelList.isEmpty()) {
+//        if (!messageModelList.isEmpty()) {
 //            req.setAttribute(SystemConstant.LISTLASTMESSAGE, messageModelList);
             req.setAttribute(SystemConstant.SENDER, sender.getUser());
 //            req.setAttribute(SystemConstant.RECIPIENT, recipient);
             req.getRequestDispatcher("/views/client/layouts/Chat.jsp").forward(req, resp);
-        } else {
-            resp.sendRedirect("/home?message=no_message&&alert=danger");
-        }
+//        } else {
+//            resp.sendRedirect("/home?message=no_message&&alert=danger");
+//        }
     }
 }

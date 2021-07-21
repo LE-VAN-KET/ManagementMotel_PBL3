@@ -2,6 +2,7 @@ package controller.auth;
 
 import bean.AccountModel;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import service.IAccountService;
 import utils.FormUtil;
 import utils.SessionUtil;
@@ -19,6 +20,8 @@ import java.util.ResourceBundle;
 public class LoginController extends HttpServlet {
     @Inject
     private IAccountService accountService;
+
+    private static final Logger logger = Logger.getLogger(LoginController.class);
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
@@ -40,26 +43,32 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AccountModel accountModel = FormUtil.toModel(AccountModel.class, req);
-        // toLowerCase Username
-        accountModel.setUsername(accountModel.getUsername().toLowerCase());
-        accountModel = accountService.findByUserNameAndPassword(accountModel.getUsername(),
-                accountModel.getPassword());
-        if (accountModel != null) {
-            SessionUtil.getInstance().putValue(req, SystemConstant.ACCOUNTMODEL, accountModel);
-            switch (accountModel.getUser().getRoleMole().getRoleName()) {
-                case SystemConstant.ADMIN:
-                    resp.sendRedirect(req.getContextPath() + "/admin/home");
-                    break;
-                case SystemConstant.LANDLORD:
-                    resp.sendRedirect(req.getContextPath() + "/home");
-                    break;
-                case SystemConstant.USER:
-                    resp.sendRedirect(req.getContextPath() + "/home");
-                    break;
+        try {
+            // toLowerCase Username
+            accountModel.setUsername(accountModel.getUsername().toLowerCase());
+            accountModel = accountService.findByUserNameAndPassword(accountModel.getUsername(),
+                    accountModel.getPassword());
+            if (accountModel != null) {
+                logger.info("singin successfully");
+                SessionUtil.getInstance().putValue(req, SystemConstant.ACCOUNTMODEL, accountModel);
+                switch (accountModel.getUser().getRoleMole().getRoleName()) {
+                    case SystemConstant.ADMIN:
+                        resp.sendRedirect(req.getContextPath() + "/admin/home");
+                        break;
+                    case SystemConstant.LANDLORD:
+                        resp.sendRedirect(req.getContextPath() + "/home");
+                        break;
+                    case SystemConstant.USER:
+                        resp.sendRedirect(req.getContextPath() + "/home");
+                        break;
+                }
+            } else {
+                logger.error("singin failed! Username or password invalid.");
+                resp.sendRedirect(req.getContextPath()
+                        + "/login?message=username_password_invalid&&alert=danger");
             }
-        } else {
-            resp.sendRedirect(req.getContextPath()
-                    + "/login?message=username_password_invalid&&alert=danger");
+        } catch (Exception e) {
+            logger.fatal(e);
         }
     }
 }

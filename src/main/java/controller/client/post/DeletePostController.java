@@ -3,6 +3,7 @@ package controller.client.post;
 import bean.AccountModel;
 import bean.PostModel;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import service.IPostService;
 import utils.SessionUtil;
 import utils.UploadFileUtil;
@@ -23,6 +24,8 @@ public class DeletePostController extends HttpServlet {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
+    private static final Logger logger = Logger.getLogger(DeletePostController.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -37,12 +40,14 @@ public class DeletePostController extends HttpServlet {
                 postService.deleteByPostId(postId);
                 UploadFileUtil.deleteFile(postModel.getLinkImages());
                 req.setAttribute("message", resourceBundle.getString("delete_success"));
+                logger.info("delete post successfully");
             } else {
                 throw new Exception("not permission");
             }
         } catch (Exception e) {
             req.setAttribute("message", resourceBundle.getString("delete_failed"));
-            e.printStackTrace();
+//            e.printStackTrace();
+            logger.error("delete post failed: " + e.toString());
         } finally {
             resp.sendRedirect("/personal-post");
         }

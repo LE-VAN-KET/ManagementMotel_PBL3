@@ -22,7 +22,7 @@
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut",
-        "closeHtml": '<button><i class="icon-off text-light"></i></button>',
+        "closeHtml": '<button><i class="fas fa-times text-light"></i></button>',
         "closeMethod": 'fadeOut',
         "closeDuration": 300,
         "closeEasing": "swing"

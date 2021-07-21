@@ -1,5 +1,6 @@
 package controller.auth;
 
+import org.apache.log4j.Logger;
 import service.IAccountService;
 import utils.EmailUtil;
 
@@ -24,6 +25,8 @@ public class ForgotPassword extends HttpServlet {
     private String port;
     private String email;
     private String pass;
+
+    private static final Logger logger = Logger.getLogger(ForgotPassword.class);
 
     @Inject
     private IAccountService accountService;
@@ -65,12 +68,14 @@ public class ForgotPassword extends HttpServlet {
                 EmailUtil.sendMail(host, port, email, pass, recipientEmail,
                         resourceBundleEmail.getString("subject"), multipart);
                 // success, done
+                logger.info("send mail successfully");
                 req.setAttribute("message", resourceBundleMessaage.getString("email_sent_success"));
                 req.getRequestDispatcher("/views/auth/Login.jsp").forward(req, resp);
             }
         } catch (MessagingException e) {
             // failed, done
             e.printStackTrace();
+            logger.error("send mail failed: " + e.toString());
             req.setAttribute("message", resourceBundleMessaage.getString("email_sent_failed"));
             req.getRequestDispatcher("/views/auth/ForgotPassword.jsp").forward(req,resp);
         }

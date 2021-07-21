@@ -173,6 +173,7 @@
 			});
 		});
 	</script>
+	<%@include file="../components/notifyMessage.jsp"%>
 </body>
 
 </html>

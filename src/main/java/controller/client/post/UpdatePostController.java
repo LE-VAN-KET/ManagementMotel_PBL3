@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 import service.IDistrictService;
 import service.IPostService;
 import utils.SessionUtil;
@@ -30,6 +31,8 @@ public class UpdatePostController extends HttpServlet {
 
     @Inject
     private IDistrictService districtService;
+
+    private static final Logger logger = Logger.getLogger(UpdatePostController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -109,6 +112,7 @@ public class UpdatePostController extends HttpServlet {
                     List<String> errors = postService.validatePost(postModel);
                     if (!errors.isEmpty()) {
                         req.setAttribute(SystemConstant.ERRORS, errors);
+                        logger.error("update post failed: info no valid");
                         doGet(req, resp);
                         return;
                     }
@@ -117,12 +121,15 @@ public class UpdatePostController extends HttpServlet {
                         UploadFileUtil.updateFileByFolderId(postModelOld.getLinkImages(), listImages);
                     }
                 }
+                logger.info("update post successfully");
                 resp.sendRedirect("/personal-post?message=update_successed");
             } catch (FileUploadException e1) {
                 e1.printStackTrace();
+                logger.error("update post failed: FileUpload excpt " + e1.toString());
                 resp.sendRedirect("/personal-post?message=update_failed");
             } catch (Exception ex) {
                 ex.printStackTrace();
+                logger.error(ex.toString());
                 resp.sendRedirect("/personal-post?message=update_failed");
             }
         } else {

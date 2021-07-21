@@ -3,6 +3,7 @@ package controller.client.post;
 import bean.CommentModel;
 import bean.PostModel;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import service.ICommentService;
 import service.IPostService;
 import utils.SessionUtil;
@@ -25,6 +26,8 @@ public class DetailPostController extends HttpServlet {
     @Inject
     private ICommentService commentService;
 
+    private static final Logger logger = Logger.getLogger(DetailPostController.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String postSlug = req.getPathInfo().substring(1);
@@ -38,6 +41,7 @@ public class DetailPostController extends HttpServlet {
                     SystemConstant.ACCOUNTMODEL));
         } catch (NullPointerException e) {
             e.printStackTrace();
+            logger.error(e.toString());
         }
 
         req.getRequestDispatcher("/views/client/layouts/DetailPost.jsp").forward(req, resp);

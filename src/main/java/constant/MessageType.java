@@ -10,4 +10,5 @@ public class MessageType {
     public static final String REFRESH_USERS_ONLINE = "REFRESH_USERS_ONLINE";
     public static final String UPDATE_MSG_SEEN = "UPDATE_MSG_SEEN";
     public static final String NOTIFICATION_MSG = "NOTIFICATION_MSG";
+    public static final String TOTAL_NOTIFICATION_MSG = "TOTAL_NOTIFICATION_MSG";
 }

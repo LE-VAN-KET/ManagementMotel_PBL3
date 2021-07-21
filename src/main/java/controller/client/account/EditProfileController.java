@@ -3,6 +3,7 @@ package controller.client.account;
 import bean.AccountModel;
 import bean.UserModel;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import service.IAccountService;
 import utils.FormUtil;
 import utils.SessionUtil;
@@ -21,6 +22,8 @@ import java.util.ResourceBundle;
 public class EditProfileController extends HttpServlet {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
+
+    private static final Logger logger = Logger.getLogger(EditProfileController.class);
 
     @Inject
     private IAccountService accountService;
@@ -63,6 +66,7 @@ public class EditProfileController extends HttpServlet {
             List<String> errors = accountService.validateEdit(accountModel);
             if (!errors.isEmpty()) {
                 req.setAttribute(SystemConstant.ERRORS, errors);
+                logger.error("edit profile failed: ");
                 doGet(req, resp);
             } else {
                 accountModel.setAccountId(accountModelOld.getAccountId());
@@ -70,12 +74,14 @@ public class EditProfileController extends HttpServlet {
 
                 // update information user
                 accountService.editProfile(accountModel);
+                logger.info("edit profile success");
                 SessionUtil.getInstance().putValue(req, SystemConstant.ACCOUNTMODEL, accountModel);
                 resp.sendRedirect("/home");
             }
         } catch (Exception e) {
+            logger.fatal("Error exception: " + e.toString());
             resp.sendRedirect("/home?message=edit_failed&&alert=danger");
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 }
