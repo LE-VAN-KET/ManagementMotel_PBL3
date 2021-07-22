@@ -23,11 +23,13 @@
                 <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-hotel"></i></a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Liên Chiểu</a>
-                    <a class="dropdown-item" href="#">Thanh Khê</a>
-                    <a class="dropdown-item" href="#">Sơn Trà</a>
-                    <a class="dropdown-item" href="#">Hải Châu</a>
-                    <a class="dropdown-item" href="#">Cẩm Lệ</a>
+                    <a class="dropdown-item" href="/home?districtName=lien+chieu" >Liên Chiểu</a>
+                    <a class="dropdown-item" href="/home?districtName=thanh+khe">Thanh Khê</a>
+                    <a class="dropdown-item" href="/home?districtName=son+tra">Sơn Trà</a>
+                    <a class="dropdown-item" href="/home?districtName=hai+chau">Hải Châu</a>
+                    <a class="dropdown-item" href="/home?districtName=cam+le">Cẩm Lệ</a>
+                    <a class="dropdown-item" href="/home?districtName=hoa+vang">Hòa Vang</a>
+                    <a class="dropdown-item" href="/home?districtName=ngu+hanh+son">Ngũ Hành Sơn</a>
                 </div>
             </li>
             <li class="brackets" ><a href="/contact" data-toggle="tooltip" data-placement="right" title="Liên hệ">
