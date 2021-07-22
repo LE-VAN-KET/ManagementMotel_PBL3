@@ -42,13 +42,13 @@
                     </div>
                     <ul class="navbar-nav bg-white">
                         <li class="nav-item py-1">
-                            <a class="nav-link " href="/quan-li-dang-tin">
+                            <a class="nav-link " href="/home?districtName=lien+chieu">
                                 <i class="fas fa-search-location mr-1"></i>
                                 <span>Phòng trọ tại Liên Chiểu</span>
                             </a>
                         </li>
                         <li class="nav-item py-1">
-                            <a class="nav-link " href="/quan-li-dang-tin">
+                            <a class="nav-link " href="/home?districtName=hai+chau">
                                 <i class="fas fa-search-location mr-1"></i>
                                 <span>Phòng trọ tại Hải Châu</span>
                             </a>
@@ -60,9 +60,27 @@
                             </a>
                         </li>
                         <li class="nav-item py-1">
-                            <a class="nav-link " href="/quan-li-dang-tin">
+                            <a class="nav-link " href="/home?districtName=cam+le">
                                 <i class="fas fa-search-location mr-1"></i>
                                 <span>Phòng trọ tại Cẩm Lệ</span>
+                            </a>
+                        </li>
+                        <li class="nav-item py-1">
+                            <a class="nav-link " href="/home?districtName=son+tra">
+                                <i class="fas fa-search-location mr-1"></i>
+                                <span>Phòng trọ tại Sơn Trà</span>
+                            </a>
+                        </li>
+                        <li class="nav-item py-1">
+                            <a class="nav-link " href="/home?districtName=hoa+vang">
+                                <i class="fas fa-search-location mr-1"></i>
+                                <span>Phòng trọ tại Hòa Vang</span>
+                            </a>
+                        </li>
+                        <li class="nav-item py-1">
+                            <a class="nav-link " href="/home?districtName=ngu+hanh+son">
+                                <i class="fas fa-search-location mr-1"></i>
+                                <span>Phòng trọ tại Ngũ Hành Sơn</span>
                             </a>
                         </li>
                     </ul>
@@ -273,11 +291,11 @@
     </div>
 
 <%--    icon chat with landlord--%>
-<%--    <c:if test="${POSTMODELS.userModel.userId} != ${ACCOUNTMODEL.user.userId}">--%>
+    <c:if test="${POSTMODELS.userModel.userId != ACCOUNTMODEL.user.userId && ACCOUNTMODEL != null}">
         <a href="/message" class="btn-whatsapp-pulse" id="chat">
             <i class="far fa-comment-dots"></i>
         </a>
-<%--    </c:if>--%>
+    </c:if>
 
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/slideShow.js"></script>
@@ -342,5 +360,6 @@
         })
     </script>
     <script src="../../../assets/javascript/comment_socketAPI.js" defer></script>
+    <%@include file="../components/notifyMessage.jsp"%>
 </body>
 </html>

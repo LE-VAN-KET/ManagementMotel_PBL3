@@ -33,32 +33,32 @@
                 <h5 class="col-12 text-primary">Phòng Trọ, Nhà Trọ</h5>
                 <ul class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
                     <li>
-                        <a href="#">Phòng trọ Liên chiểu</a>
+                        <a href="/home?districtName=lien+chieu">Phòng trọ Liên chiểu</a>
                     </li>
                     <li>
-                        <a href="#">Phòng trọ Hải Châu</a>
+                        <a href="/home?districtName=hai+chau">Phòng trọ Hải Châu</a>
                     </li>
                     <li>
-                        <a href="#">Phòng trọ Cẩm Lệ</a>
+                        <a href="/home?districtName=cam+le">Phòng trọ Cẩm Lệ</a>
                     </li>
                     <li>
-                        <a href="#">Phòng trọ Hòa Vang</a>
+                        <a href="/home?districtName=hoa+vang">Phòng trọ Hòa Vang</a>
                     </li>
                 </ul>
                 <ul class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
                     <li>
-                        <a href="#">Phòng trọ Thanh Khê</a>
+                        <a href="/home?districtName=thanh+khe">Phòng trọ Thanh Khê</a>
                     </li>
                     <li>
-                        <a href="#">Phòng trọ Sơn Trà</a>
+                        <a href="/home?districtName=son+tra">Phòng trọ Sơn Trà</a>
                     </li>
                     <li>
-                        <a href="#">Phòng trọ Ngũ Hành Sơn</a>
+                        <a href="/home?districtName=ngu+hanh+son">Phòng trọ Ngũ Hành Sơn</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <p class="text-center py-2 m-0 text-secondary">Copyright @ by Team DUTer: Le van Ket && Nguyen tan Khanh</p>
+        <p class="text-center py-2 m-0 text-secondary">Copyright @ by Team DUT K19</p>
     </div>
 </footer>
 <%--    <!-- Back to top button -->--%>

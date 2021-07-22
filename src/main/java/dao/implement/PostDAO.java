@@ -67,7 +67,11 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
 
     private StringBuilder clauseWhereFindByCriteria(Criteria criteria, StringBuilder sql) {
         sql.append(" where statusPost = 1");
-        if (criteria.getVillageId() != 0) {
+        if (criteria.getDistrictName() != null) {
+            sql.append(" and lower(district.districtName) = '" + criteria.getDistrictName().toLowerCase() + "'");
+        }
+
+        if (criteria.getVillageId() != null && criteria.getVillageId() != 0) {
             sql.append(" and post.villageId = " + criteria.getVillageId());
         }
         if (criteria.getPrice_from() != null) {
@@ -125,7 +129,8 @@ public class PostDAO extends AbstractDAO<PostModel> implements IPostDAO {
 
     @Override
     public int getTotalItemByCriteria(Criteria criteria) {
-        StringBuilder query = new StringBuilder(" select count(*) from post");
+        StringBuilder query = new StringBuilder(" select count(*) from post INNER JOIN village ON post.villageId =");
+        query.append(" village.villageId INNER JOIN district ON village.districtId = district.districtId");
         query = clauseWhereFindByCriteria(criteria, query);
         return count(query.toString());
     }

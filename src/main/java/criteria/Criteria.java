@@ -6,6 +6,7 @@ public class Criteria {
     private Long square_from;
     private Long square_to;
     private Long villageId;
+    private String districtName;
 
     public Double getPrice_from() {
         return price_from;
@@ -45,5 +46,13 @@ public class Criteria {
 
     public void setVillageId(Long villageId) {
         this.villageId = villageId;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
     }
 }

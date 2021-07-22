@@ -7,6 +7,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 import service.IDistrictService;
 import service.IPostService;
 import utils.SessionUtil;
@@ -32,6 +33,8 @@ public class PostController extends HttpServlet {
 
     @Inject
     private IDistrictService districtService;
+
+    private static final Logger logger = Logger.getLogger(PostController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -94,12 +97,15 @@ public class PostController extends HttpServlet {
                 }
                 String folderId = UploadFileUtil.uploadFile(postId.toString(), listImages);
                 postService.updateLinkImages(postId, folderId);
+                logger.info("create new post successfully");
                 resp.sendRedirect("/home");
             } catch (FileUploadException e1) {
+                logger.error("create post failed: " + e1.toString());
                 e1.printStackTrace();
                 resp.sendRedirect("/home?message=failed_postnew&&alert=danger");
             } catch (Exception ex) {
                 ex.printStackTrace();
+                logger.error(ex.toString());
                 resp.sendRedirect("/home?message=failed_postnew&&alert=danger");
             }
         } else {

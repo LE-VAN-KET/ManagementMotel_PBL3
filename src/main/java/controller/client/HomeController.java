@@ -4,6 +4,8 @@ import bean.DistrictModel;
 import bean.PostModel;
 import constant.SystemConstant;
 import criteria.Criteria;
+import dao.IPostDAO;
+import org.apache.log4j.Logger;
 import paging.Pageble;
 import service.IDistrictService;
 import service.IPostService;
@@ -24,11 +26,15 @@ import java.util.ResourceBundle;
 
 @WebServlet(urlPatterns = {"/home"})
 public class HomeController extends HttpServlet {
-    ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
     @Inject
     private IDistrictService districtService;
+
     @Inject
     private IPostService postService;
+
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
+
+    private static final Logger logger = Logger.getLogger(HomeController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +58,7 @@ public class HomeController extends HttpServlet {
         }
 
         try {
-            if (criteria.getVillageId() != null) {
+            if (criteria.getVillageId() != null || criteria.getDistrictName() != null) {
                 postModels = postService.findByCriteria(criteria, pageble);
             } else {
                 postModels = postService.selectAllByStatusPost(pageble, true);
@@ -65,6 +71,7 @@ public class HomeController extends HttpServlet {
 //            }
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("find post failed: " + e.toString());
         }
         req.setAttribute(SystemConstant.ACCOUNTMODEL,
                 SessionUtil.getInstance().getValue(req, SystemConstant.ACCOUNTMODEL));
@@ -78,5 +85,4 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
-
 }

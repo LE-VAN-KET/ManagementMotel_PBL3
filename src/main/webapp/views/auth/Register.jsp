@@ -33,7 +33,8 @@
                     </div>
                     <div class="form-group">
                         <label for="pass"><i class="fas fa-lock"></i></label>
-                        <input type="password" name="password" id="pass" placeholder="Password" required />
+                        <input type="password" name="password" id="pass" placeholder="Password"
+                               required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/>
                     </div>
                     <div class="form-group">
                         <label for="repeat-password"><i class="fas fa-redo"></i></label>

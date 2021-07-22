@@ -3,6 +3,7 @@ package controller.client.post;
 import bean.AccountModel;
 import bean.PostModel;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import service.IPostService;
 import utils.SessionUtil;
 
@@ -19,6 +20,8 @@ import java.io.PrintWriter;
 public class UpdateStatusRentalController extends HttpServlet {
     @Inject
     private IPostService postService;
+
+    private static final Logger logger = Logger.getLogger(UpdateStatusRentalController.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,14 +41,17 @@ public class UpdateStatusRentalController extends HttpServlet {
                 postService.updateStatusRentalByPostId(postId, !statusRental);
                 out.write("{\"success\":\"OK\", \"statusRental\":" + !statusRental + "}");
                 out.flush();
+                logger.info("update status rental motel success");
             } else {
                 out.write("{\"success\":\"fail\"}");
                 out.flush();
+                logger.info("update status rental motel failed");
             }
         } catch (Exception e) {
             e.printStackTrace();
             out.write("{\"success\":\"fail\"}");
             out.flush();
+            logger.info("update status rental motel failed: " + e.toString());
         }
     }
 }

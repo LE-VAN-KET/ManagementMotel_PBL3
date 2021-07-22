@@ -114,6 +114,12 @@ public class AccountService implements IAccountService {
                 errors.add(resourceBundle.getString("email_invalid"));
             }
 
+            // regex validation format password
+            String pwRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+            if (!accountModel.getPassword().matches(pwRegex)) {
+                errors.add(resourceBundle.getString("password_invalid"));
+            }
+
             // check email exist
             if (isEmail(accountModel.getUser().getEmail())) {
                 errors.add(resourceBundle.getString("email_already_exist"));

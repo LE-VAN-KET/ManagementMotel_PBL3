@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import constant.MessageType;
 import controller.client.message.decoder.MessageDecoder;
 import notificationMessage.NotificationMessage;
+import org.apache.log4j.Logger;
 import service.IMessageService;
 import service.implement.MessageService;
 import socket_common.SocketRooms;
@@ -40,6 +41,8 @@ public class MessageSocket implements Serializable {
 
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
+    private static final Logger logger = Logger.getLogger(MessageSocket.class);
+
     @OnOpen
     public void connect(@PathParam("senderId")String senderId, Session session) throws IOException {
         // concatenating senderId_recipientId
@@ -47,8 +50,10 @@ public class MessageSocket implements Serializable {
         String user_id = session.getUserPrincipal().getName();
         if (user_id.equals(senderId)) {
             SocketRooms.connection(senderId, users, session);
+            logger.info(session.getId() + " connected");
         } else {
             disConnect(senderId, session);
+            logger.info(session.getId() + " disconnected");
         }
 //        if ((user_id != null) && (!users.contains(user_id))) {
 //            users.add(user_id);
@@ -66,6 +71,7 @@ public class MessageSocket implements Serializable {
             refreshUsersOnline();
             usersOnline.clear();
         }
+        logger.info(session.getId() + " disconnected");
     }
 
     @OnMessage
@@ -97,6 +103,11 @@ public class MessageSocket implements Serializable {
                     break;
                 case MessageType.NOTIFICATION_MSG:
                     notificationMessage(senderId);
+                    break;
+                case MessageType.TOTAL_NOTIFICATION_MSG:
+                    List<NotificationMessage> notificationMessages;
+                    notificationMessages = messageService.notificationMessage(Long.parseLong(senderId), false);
+                    totalNotificationMessage(notificationMessages, senderId);
                     break;
             }
         } catch (IOException e) {
@@ -153,10 +164,11 @@ public class MessageSocket implements Serializable {
                 // notification message
                 notificationMessage(recipientId);
             }
-            // log.info("websocket message sent successfully");
+            logger.info("send message to all everyone in room senderId success");
         } else {
             sendMessageYourSelf( "{\"errors\":" + gson.toJson(errors) + ", " +
                     "\"messageType\": " + gson.toJson(MessageType.ADD) + "}", session);
+            logger.error("send message failed: not permit send yourself");
         }
     }
 
@@ -186,15 +198,18 @@ public class MessageSocket implements Serializable {
                     broadcast(recipientId, msg);
                     listLastMessage(recipientId);
                 }
+                logger.info("websocket delete message success");
             } else {
                 sendMessageYourSelf( "{\"errors\":" +
                         gson.toJson(resourceBundle.getString("message_not_exist")) + ", " +
                         "\"messageType\": " + gson.toJson(MessageType.DELETE) + "}", session);
+                logger.error("websocket delete message failed: message not found database");
             }
         } else {
             sendMessageYourSelf("{\"errors\":" +
                     gson.toJson(resourceBundle.getString("message_not_exist")) + ", " +
                     "\"messageType\": " + gson.toJson(MessageType.DELETE) + "}", session);
+            logger.error("websocket delete message failed: message not exist");
         }
     }
 
@@ -204,6 +219,7 @@ public class MessageSocket implements Serializable {
         List<MessageModel> messageModelList = messageService.findBySenderIdOrRecipientId(senderId, recipientId);
         session.getBasicRemote().sendText("{\"messages\":" + gson.toJson(messageModelList) + ", \"messageType\":" +
                 gson.toJson(MessageType.MSG_HISTORY) + "}");
+        logger.info("load history message conversation success");
     }
 
     private void listLastMessage(String userId) throws IOException {
@@ -211,6 +227,7 @@ public class MessageSocket implements Serializable {
         String msg = "{\"listLastMessage\": " + gson.toJson(messageModelList) + ", \"messageType\":"
                 + gson.toJson(MessageType.LIST_LAST_MESSAGE) + "}";
         broadcast(userId, msg);
+        logger.info("load list last message every conversation success");
     }
 
     private void listUsersOnline(String userId) throws IOException {
@@ -229,6 +246,7 @@ public class MessageSocket implements Serializable {
         String msg = "{\"listUsersOnline\": " + gson.toJson(usersOnline) + ", \"messageType\":"
                 + gson.toJson(MessageType.LIST_USERS_ONLINE) + "}";
         broadcast(userId, msg);
+        logger.info("load list user currently online successfully");
     }
 
     private void reloadListUsersOnline() {
@@ -245,6 +263,7 @@ public class MessageSocket implements Serializable {
             String message = "{\"messageType\":" + gson.toJson(MessageType.REFRESH_USERS_ONLINE) + "}";
             broadcast(user_id, message);
         }
+        logger.info("refresh list user online success");
     }
 
     private void updateMessageSeen(String senderId, JsonObject data) throws IOException {
@@ -257,6 +276,7 @@ public class MessageSocket implements Serializable {
                     gson.toJson(MessageType.MSG_HISTORY) + "}";
             broadcast(recipientId.toString(), msg);
         }
+        logger.info("websocket update message conversation successfully");
     }
 
     private void notificationMessage(String senderId) throws IOException {
@@ -265,5 +285,18 @@ public class MessageSocket implements Serializable {
         String msg = "{\"notificationMessages\": " + gson.toJson(notificationMessages) + ", \"messageType\": "
                 + gson.toJson(MessageType.NOTIFICATION_MSG) + "}";
         broadcast(senderId, msg);
+        totalNotificationMessage(notificationMessages, senderId);
+        logger.info("notify new message success");
+    }
+
+    private void totalNotificationMessage(List<NotificationMessage> notificationMessages, String senderId) throws IOException {
+        int count = 0;
+        for (NotificationMessage notificationMessage: notificationMessages) {
+            count += notificationMessage.getAmount();
+        }
+        String msg = "{\"countMesssage\":" + gson.toJson(count) + ", \"messageType\":" +
+                gson.toJson(MessageType.TOTAL_NOTIFICATION_MSG) + "}";
+        broadcast(senderId, msg);
+        logger.info("notify total new message success");
     }
 }

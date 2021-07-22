@@ -4,6 +4,7 @@ import bean.AccountModel;
 import bean.RoleModel;
 import bean.UserModel;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import service.IAccountService;
 import service.IRoleService;
 import utils.FormUtil;
@@ -25,6 +26,8 @@ public class RegisterController extends HttpServlet {
 
     @Inject
     private IAccountService accountService;
+
+    private static final Logger logger = Logger.getLogger(RegisterController.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,10 +53,13 @@ public class RegisterController extends HttpServlet {
         List<String> errors = accountService.registerValidation(accountModel, repeatPassword);
         if (errors.isEmpty()) {
             accountService.insert(accountModel);
+            // create new account success
+            logger.info("create new account successfully");
             resp.sendRedirect("/login");
             return;
         }
         req.setAttribute(SystemConstant.ERRORS, errors);
+        logger.error("create account failed: several field invalid");
         doGet(req, resp);
     }
 }

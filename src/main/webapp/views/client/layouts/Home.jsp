@@ -181,7 +181,7 @@
                         <div class="row grid-destination">
                             <div class="grid-lg col-lg-8 col-md-6 col-sm-12">
                                 <div class="grid-item">
-                                    <a href="#" class="w-100">
+                                    <a href="/home?districtName=lien+chieu" class="w-100">
                                         <img class="lazyload"
                                             data-src="${contextPath}/assets/images/lien-chieu.jpg"
                                             alt="Liên chiểu">
@@ -197,7 +197,7 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="#">
+                                    <a href="/home?districtName=hai+chau">
                                         <img class="lazyload"
                                             data-src="${contextPath}/assets/images/hanh-chinh.jpg"
                                             alt="Hải Châu">
@@ -213,7 +213,7 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="#">
+                                    <a href="/home?districtName=thanh+khe">
                                         <img class="lazyload"
                                             data-src="${contextPath}/assets/images/thanh-khe.jpg"
                                             alt="Thanh khê">
@@ -229,7 +229,7 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="#">
+                                    <a href="/home?districtName=hoa+vang">
                                         <img class="lazyload"
                                             data-src="${contextPath}/assets/images/hoa-vang.jpg"
                                             alt="Hòa Vang">
@@ -245,7 +245,7 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="#">
+                                    <a href="/home?districtName=cam+le">
                                         <img class="lazyload"
                                             data-src="${contextPath}/assets/images/cam-le.jpeg"
                                             alt="Cẩm Lệ">
@@ -261,7 +261,7 @@
                             </div>
                             <div class="grid-lg col-lg-4 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="#">
+                                    <a href="/home?districtName=son+tra">
                                         <img class="lazyload"
                                             data-src="${contextPath}/assets/images/son-tra.png"
                                             alt="Sơn Trà">
@@ -277,7 +277,7 @@
                             </div>
                             <div class="grid-lg col-lg-8 col-md-6 col-sm-12 row-mn">
                                 <div class="grid-item">
-                                    <a href="#">
+                                    <a href="/home?districtName=ngu+hanh+son">
                                         <img class="lazyload"
                                             data-src="${contextPath}/assets/images/ngu-hanh-son.jpg"
                                             alt="Ngũ Hành Sơn">
@@ -529,6 +529,7 @@
             setupVillage();
         })
     </script>
+    <%@include file="../components/notifyMessage.jsp"%>
 </body>
 
 </html>

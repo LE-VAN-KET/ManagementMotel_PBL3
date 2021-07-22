@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import configtor_WebSocket.Configurator;
 import constant.SystemConstant;
+import org.apache.log4j.Logger;
 import service.ICommentService;
 import service.implement.CommentService;
 import socket_common.SocketRooms;
@@ -36,6 +37,8 @@ public class CommentFinalController {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
 
+    private static final Logger logger = Logger.getLogger(CommentFinalController.class);
+
     @OnOpen
     public void connect(@PathParam("postId")String postId, Session session, EndpointConfig config) {
 //        log.info("roomName={}", postId);
@@ -44,13 +47,13 @@ public class CommentFinalController {
         if (config.getUserProperties().containsKey(SystemConstant.ACCOUNTMODEL)) {
             this.accountModel = (AccountModel) config.getUserProperties().get(SystemConstant.ACCOUNTMODEL);
         }
-//        log.info("Client is connected");
+        logger.info(session.getId() + " is connected!");
     }
 
     @OnClose
     public void disConnect(@PathParam("postId") String postId, Session session) {
         rooms.get(postId).remove(session);
-//        System.out.println("Client has disconnected");
+        logger.info(session.getId() + " has disconnected");
     }
 
     @OnMessage
@@ -60,6 +63,7 @@ public class CommentFinalController {
             if (urlRedirect != null) {
                 // send yourself redirect authorization
                 sendMessageYourSelf(postId, "{\"urlRedirect\":\"" + urlRedirect + "\"}", session);
+                logger.error("user yet fulfill all info profile");
             } else {
                 JsonObject data = gson.fromJson(msg, JsonObject.class);
                 String state = gson.fromJson(data.get("method"), String.class);
@@ -79,9 +83,10 @@ public class CommentFinalController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-//            log.error("websocket message sending exception");
+            logger.error("websocket msg sending IOException" + e.toString());
         } catch (Exception ex) {
             ex.printStackTrace();
+            logger.error("websocket msg sending exception" + ex.toString());
         }
 
     }
@@ -89,6 +94,7 @@ public class CommentFinalController {
     @OnError
     public void onError(Session session, Throwable throwable) {
         // Do error handling here
+        logger.error("websocket comment errored");
     }
 
     private void sendMessageYourSelf(String postId, String msg, Session session) throws IOException {
@@ -121,11 +127,12 @@ public class CommentFinalController {
                 sessionItem.getBasicRemote().sendText("{\"createAt\":\"" + dateFormat.format(datetime) +
                         "\", \"comment\":" + gson.toJson(commentModel) + ", \"method\": \"add\"}");
 
-//                  log.info("websocket message sent successfully");
+            logger.info("websocket message sent successfully");
             }
         } else {
             sendMessageYourSelf(postId, "{\"errors\":" + gson.toJson(errors) + ", " +
                     "\"method\": \"add\"}", session);
+            logger.error("websocket message sent failed");
         }
     }
 
@@ -149,15 +156,18 @@ public class CommentFinalController {
                              gson.toJson(commentModel) + ", \"method\": \"delete\"}");
                     // delete comment successfully
                 }
+                logger.info("delete comment successfully");
             } else {
                 sendMessageYourSelf(postId, "{\"errors\":" +
                         gson.toJson(resourceBundle.getString("comment_not_exist")) + ", " +
                         "\"method\": \"delete\"}", session);
+                logger.error("delete comment failed: comment not exist");
             }
         } else {
             sendMessageYourSelf(postId, "{\"errors\":" +
                     gson.toJson(resourceBundle.getString("comment_not_exist")) + ", " +
                     "\"method\": \"delete\"}", session);
+            logger.error("delete comment failed: comment not exist");
         }
     }
 
@@ -169,6 +179,7 @@ public class CommentFinalController {
                 sendMessageYourSelf(postId, "{\"errors\":" +
                         gson.toJson(resourceBundle.getString("content_not_null")) + ", " +
                         "\"method\": \"update\"}", session);
+                logger.error("websocket message comment failed: content empty");
                 return;
             }
             // find comment by commentId
@@ -190,15 +201,18 @@ public class CommentFinalController {
                             "\", \"comment\":" + gson.toJson(commentModelAuth) + ", \"method\": \"update\"}");
                     // update comment successfully
                 }
+                logger.info("update comment successfully");
             } else {
                 sendMessageYourSelf(postId, "{\"errors\":" +
                         gson.toJson(resourceBundle.getString("comment_not_exist")) + ", " +
                         "\"method\": \"update\"}", session);
+                logger.error("update comment failed: comment not exist");
             }
         } else {
             sendMessageYourSelf(postId, "{\"errors\":" +
                     gson.toJson(resourceBundle.getString("comment_not_exist")) + ", " +
                     "\"method\": \"update\"}", session);
+            logger.error("update comment failed: comment not exist");
         }
     }
 }

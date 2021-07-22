@@ -11,6 +11,8 @@ function MessageSocket() {
             // console.log("Server connect...");
             if (typeof websocket != 'undefined' && websocket.readyState == WebSocket.OPEN) {
                 websocket.send(JSON.stringify({messageType : 'LIST_LAST_MESSAGE'}));
+                websocket.send(JSON.stringify({messageType : 'NOTIFICATION_MSG'}));
+                count_no_seen = 0;
             }
         }
 
@@ -95,13 +97,14 @@ function MessageSocket() {
         })
 
         $('#chat-message textarea[name="body"]').focus(function () {
-            if (count_no_seen !== 0 && (typeof websocket != 'undefined') && websocket.readyState == WebSocket.OPEN) {
+            let notifyMsg = $(".list-group .open-chat .new-message-count");
+            if (count_no_seen !== 0 && notifyMsg.length !== 0 && (typeof websocket != 'undefined')
+                && websocket.readyState == WebSocket.OPEN) {
                 websocket.send(JSON.stringify({
                     recipientId: $("#chat-message").attr("data-recipientid"),
                     messageType: 'UPDATE_MSG_SEEN'
                 }));
                 websocket.send(JSON.stringify({messageType : 'NOTIFICATION_MSG'}));
-                count_no_seen = 0;
             }
         })
 
@@ -123,7 +126,7 @@ function MessageSocket() {
             } else {
                 let type = (data.message.sender.userId === senderId) ?  'outgoing-message': null;
                 Message.add(data, type);
-                if (!data.message.isSeen && data.message.sender.userId != senderId) count_no_seen++;
+                // if (!data.message.isSeen && data.message.sender.userId != senderId) count_no_seen++;
             }
         }
 
@@ -225,9 +228,10 @@ function MessageSocket() {
         }
 
         const notificationMessage = data => {
-            // console.log(data);
+            count_no_seen = 0;
             $(".list-group .list-group-item .new-message-count").remove();
             data.notificationMessages.forEach(notification => {
+                count_no_seen += notification.amount;
                 $(".list-group .list-group-item").each(function () {
                     if ($(this).data("recipientid") == notification.recipinetId && notification.amount != 0) {
                         $(this).find(".users-list-body p").first().after('<div class="new-message-count float-right">' +
@@ -235,6 +239,7 @@ function MessageSocket() {
                     }
                 })
             })
+            $("#chat-message textarea[name='body']").focus();
         }
 
         $("#chat-message textarea[name='body']").on("keyup", function(event) {

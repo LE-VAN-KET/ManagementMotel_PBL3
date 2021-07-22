@@ -92,5 +92,6 @@
         })
     </script>
     <script src="../../../assets/javascript/newpost.js"></script>
+    <%@include file="../components/notifyMessage.jsp"%>
 </body>
 </html>
