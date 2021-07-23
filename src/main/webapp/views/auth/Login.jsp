@@ -31,6 +31,7 @@
 
                     <div class="card-body">
                         <form action="/login" method="POST" id="login-form" onsubmit="return validateForm()">
+                            <input type="hidden" name="_CSRFToken" value = "${sessionScope.CSRFToken}">
                             <div id="u" class="form-group">
                                 <input class="form-control" spellcheck="false" id="username" type="text" name="username"
                                        size="18" alt="login" autofocus=''>

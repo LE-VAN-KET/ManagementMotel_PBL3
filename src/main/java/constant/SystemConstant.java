@@ -17,4 +17,5 @@ public class SystemConstant {
     public static final String LISTLASTMESSAGE = "LISTLASTMESSAGE";
     public static final String SENDER = "SENDER";
     public static final String RECIPIENT = "RECIPIENT";
+    public static final String CSRFTOKEN = "CSRFToken";
 }

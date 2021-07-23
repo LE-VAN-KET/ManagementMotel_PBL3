@@ -37,6 +37,7 @@ public class LoginController extends HttpServlet {
             req.setAttribute("message", resourceBundle.getString(message));
             req.setAttribute("alert", alert);
         }
+
         req.getRequestDispatcher("/views/auth/Login.jsp").forward(req, resp);
     }
 
