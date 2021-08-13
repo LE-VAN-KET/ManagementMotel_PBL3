@@ -18,6 +18,6 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SessionUtil.getInstance().removeValue(req, SystemConstant.ACCOUNTMODEL);
         logger.info("user logout success");
-        resp.sendRedirect("/login?message=logout_sucess&alert=success");
+        resp.sendRedirect("/login?message=logout_success&alert=success");
     }
 }

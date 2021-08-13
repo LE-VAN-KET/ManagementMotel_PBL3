@@ -105,7 +105,7 @@
                             <%--                            </a>--%>
                             <c:forEach items="${IMAGES}" var="image">
                                 <a href="" class="image-post">
-                                    <img data-src="https://drive.google.com/uc?export=view&id=${image}"
+                                    <img data-src="https://drive.google.com/uc?id=${image}"
                                         class="coverflow__image lazyload" />
                                 </a>
                             </c:forEach>
@@ -291,11 +291,11 @@
     </div>
 
 <%--    icon chat with landlord--%>
-    <c:if test="${POSTMODELS.userModel.userId != ACCOUNTMODEL.user.userId && ACCOUNTMODEL != null}">
+<%--    <c:if test="${POSTMODELS.userModel.userId != ACCOUNTMODEL.user.userId && ACCOUNTMODEL != null}">--%>
         <a href="/message" class="btn-whatsapp-pulse" id="chat">
             <i class="far fa-comment-dots"></i>
         </a>
-    </c:if>
+<%--    </c:if>--%>
 
     <%@include file="../../../common/javasciptlib.jsp"%>
     <script src="../../../assets/javascript/slideShow.js"></script>
@@ -352,9 +352,11 @@
             localStorage.removeItem("_fullname");
 
             $("#chat").click(function () {
-                if (window.localStorage && ${POSTMODELS.userModel.userId} != ${ACCOUNTMODEL.user.userId}) {
-                    localStorage.setItem("_recipient_id", ${POSTMODELS.userModel.userId});
-                    localStorage.setItem("_fullname", '${POSTMODELS.userModel.fullName}');
+                if (window.localStorage) {
+                    <c:if test="${ACCOUNTMODEL != null && POSTMODELS.userModel.userId != ACCOUNTMODEL.user.userId}">
+                        localStorage.setItem("_recipient_id", ${POSTMODELS.userModel.userId});
+                        localStorage.setItem("_fullname", '${POSTMODELS.userModel.fullName}');
+                    </c:if>
                 }
             })
         })
