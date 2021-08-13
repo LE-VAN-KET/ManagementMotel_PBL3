@@ -1,21 +1,38 @@
-let theEditor;
 ClassicEditor.create(document.querySelector('.editor'), {
     toolbar: {
         items: [
-            'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList',
-            '|', 'outdent', 'redo', 'alignment', 'blockQuote', 'fontSize', 'fontFamily'
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'link',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'outdent',
+            'redo',
+            'alignment',
+            'blockQuote',
+            'fontSize',
+            'fontFamily'
         ]
     },
     language: 'vi',
     licenseKey: '',
+
+
 })
-.then(editor => {
-    window.editor = editor;
-    theEditor = editor;
-})
-.catch(error => {
-    console.error('Oops, something went wrong!');
-});
+    .then(editor => {
+        window.editor = editor;
+
+
+    })
+    .catch(error => {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: ivnhwqynk9aw-3fqxvojx359x');
+        console.error(error);
+    });
 
 const isEmptyField = function () {
     let count = $(".img-list-img").children().length;
@@ -31,7 +48,6 @@ const isEmptyField = function () {
     }
 }
 
-let delId = 0;
 let files = [];
 $(document).ready(function () {
     if (window.File && window.FileList && window.FileReader) {
@@ -67,15 +83,17 @@ $(document).ready(function () {
                     })
                 };
                 reader.readAsDataURL(files[i]);
-            };
+            }
+            ;
         }
     };
 
-    function FileListItems (files) {
+    function FileListItems(files) {
         let b = new ClipboardEvent("").clipboardData || new DataTransfer()
-        for (let i = 0, len = files.length; i<len; i++) {
+        for (let i = 0, len = files.length; i < len; i++) {
             b.items.add(files[i]);
         }
         return b.files;
     }
 })
+
