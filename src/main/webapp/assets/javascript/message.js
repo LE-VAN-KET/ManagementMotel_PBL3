@@ -144,7 +144,7 @@ function MessageSocket() {
             // console.log(data);
             count_no_seen = 0;
             $(".layout .content .chat .chat-body .messages .message-item").remove();
-            if (data.messages.length == 0) {
+            if (Object.keys(data.messages).length === 0) {
                 $(".chat-body .message").remove();
                 $(".chat-body").append('<div class="no-message-container">\n' +
                     '<i class="fa fa-comments-o"></i>\n' +
