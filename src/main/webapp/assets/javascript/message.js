@@ -357,7 +357,7 @@ $(document).on('click', '.messages .message-item .message-list-action', function
 $(document).on( "mouseup", "body", function(e) {
     e.stopPropagation();
     let _action = $(".messages .message-item .message-list-action");
-    if (!_action.is(e.target) && $action.has(e.target).length === 0)
+    if (!_action.is(e.target) && _action.has(e.target).length === 0)
     {
         _action.children().removeClass("show");
     }
