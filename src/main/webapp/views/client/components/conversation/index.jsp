@@ -49,10 +49,10 @@
         </div>
         -->
         <div class="messages">
-<%--            <div class="message-item outgoing-message">--%>
-<%--                <div class="message-content">Hey, Maher! I&apos;m waiting for you to send me the files.</div>--%>
-<%--                <div class="message-action">Am 09:34 <i class="ti-double-check"></i></div>--%>
-<%--            </div>--%>
+            <div class="message-item outgoing-message">
+                <div class="message-content">Hey, Maher! I&apos;m waiting for you to send me the files.</div>
+                <div class="message-action">Am 09:34 <i class="ti-double-check"></i></div>
+            </div>
 <%--            <div class="message-item">--%>
 <%--                <div class="d-flex flex-row flex-nowrap justify-content-center align-items-center">--%>
 <%--                    <div class="message-content mr-2">I&apos;m sorry :( I&apos;ll send you as soon as possibleddddddddddddddddddddddddddddddddddddddd--%>
@@ -112,7 +112,7 @@
 <%--                </div>--%>
 <%--                <div class="message-action had-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>--%>
 <%--            </div>--%>
-<%--        </div>--%>
+        </div>
     </div>
     <div class="chat-footer">
         <form action="" id="chat-message">
