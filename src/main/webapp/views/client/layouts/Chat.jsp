@@ -101,7 +101,7 @@
     <div class="nicescroll-rails nicescroll-rails-hr" id="ascrail2005-hr" style="height: 4px; z-index: auto; top: 724px; left: 1052px; position: absolute; cursor: default; display: none; width: 326px; opacity: 0;">
         <div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 4px; width: 330px; background-color: rgba(66, 66, 66, 0.2); border: 0px; background-clip: padding-box; border-radius: 5px; left: 0px;"></div>
     </div>
-    <script src="${contextPath}/assets/javascript/message.js"></script>
+    <script src="${contextPath}/assets/javascript/message.min.js"></script>
     <script>
         const senderId = ${SENDER.userId};
         let recipientId, currentChattingName;
