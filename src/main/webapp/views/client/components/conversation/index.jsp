@@ -49,70 +49,70 @@
         </div>
         -->
         <div class="messages">
-            <div class="message-item outgoing-message">
-                <div class="message-content">Hey, Maher! I&apos;m waiting for you to send me the files.</div>
-                <div class="message-action">Am 09:34 <i class="ti-double-check"></i></div>
-            </div>
-            <div class="message-item">
-                <div class="d-flex flex-row flex-nowrap justify-content-center align-items-center">
-                    <div class="message-content mr-2">I&apos;m sorry :( I&apos;ll send you as soon as possibleddddddddddddddddddddddddddddddddddddddd
-                        ddddddddddddddddddddddddddddddddddddddddddd.</div>
-                    <div class="message-list-action action-toggle">
-                        <div class="dropdown"><a data-toggle="dropdown" href="#"><i class="ti-more"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Open</a>
-                                <a class="dropdown-item active" href="#" data-navigation-target="contact-information">Profile</a>
-                                <a class="dropdown-item" href="#">Add to archive</a>
-                                <a class="dropdown-item" href="#">Delete</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-action not-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>
-            </div>
-            <div class="message-item outgoing-message">
-                <div class="message-content">I&apos;m waiting. Thank you :)</div>
-                <div class="message-action">Pm 14:25 <i class="ti-double-check"></i></div>
-            </div>
-            <div class="message-item outgoing-message" >
-                <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">
-                    <div class="message-list-action action-toggle popup">
-                        <a class="btn-action" href="#"><i class="ti-more"></i></a>
-                        <div class="active-menu">
-                            <a class="action-item text-muted" data-toggle="modal" data-target="#deleteModal"
-                               href="javascript:void(0)">Delete</a>
-                        </div>
-                    </div>
-                    <div class="message-content ml-2">I'm sorry :( I'll send you as soon as .</div>
-                </div>
-                <div class="message-action had-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>
-            </div>
-            <div class="message-item outgoing-message" >
-                <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">
-                    <div class="message-list-action action-toggle popup">
-                        <a class="btn-action" href="#"><i class="ti-more"></i></a>
-                        <div class="active-menu">
-                            <a class="action-item text-muted" data-toggle="modal" data-target="#deleteModal"
-                               href="javascript:void(0)">Delete</a>
-                        </div>
-                    </div>
-                    <div class="message-content ml-2">I'm sorry :( I'll send you as soon as .</div>
-                </div>
-                <div class="message-action had-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>
-            </div>
-            <div class="message-item outgoing-message" >
-                <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">
-                    <div class="message-list-action action-toggle popup">
-                        <a class="btn-action" href="#"><i class="ti-more"></i></a>
-                        <div class="active-menu">
-                            <a class="action-item text-muted" data-toggle="modal" data-target="#deleteModal"
-                               href="javascript:void(0)">Delete</a>
-                        </div>
-                    </div>
-                    <div class="message-content ml-2">I'm sorry :( I'll send you as soon as .</div>
-                </div>
-                <div class="message-action had-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>
-            </div>
-        </div>
+<%--            <div class="message-item outgoing-message">--%>
+<%--                <div class="message-content">Hey, Maher! I&apos;m waiting for you to send me the files.</div>--%>
+<%--                <div class="message-action">Am 09:34 <i class="ti-double-check"></i></div>--%>
+<%--            </div>--%>
+<%--            <div class="message-item">--%>
+<%--                <div class="d-flex flex-row flex-nowrap justify-content-center align-items-center">--%>
+<%--                    <div class="message-content mr-2">I&apos;m sorry :( I&apos;ll send you as soon as possibleddddddddddddddddddddddddddddddddddddddd--%>
+<%--                        ddddddddddddddddddddddddddddddddddddddddddd.</div>--%>
+<%--                    <div class="message-list-action action-toggle">--%>
+<%--                        <div class="dropdown"><a data-toggle="dropdown" href="#"><i class="ti-more"></i></a>--%>
+<%--                            <div class="dropdown-menu dropdown-menu-right">--%>
+<%--                                <a class="dropdown-item" href="#">Open</a>--%>
+<%--                                <a class="dropdown-item active" href="#" data-navigation-target="contact-information">Profile</a>--%>
+<%--                                <a class="dropdown-item" href="#">Add to archive</a>--%>
+<%--                                <a class="dropdown-item" href="#">Delete</a></div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="message-action not-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>--%>
+<%--            </div>--%>
+<%--            <div class="message-item outgoing-message">--%>
+<%--                <div class="message-content">I&apos;m waiting. Thank you :)</div>--%>
+<%--                <div class="message-action">Pm 14:25 <i class="ti-double-check"></i></div>--%>
+<%--            </div>--%>
+<%--            <div class="message-item outgoing-message" >--%>
+<%--                <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">--%>
+<%--                    <div class="message-list-action action-toggle popup">--%>
+<%--                        <a class="btn-action" href="#"><i class="ti-more"></i></a>--%>
+<%--                        <div class="active-menu">--%>
+<%--                            <a class="action-item text-muted" data-toggle="modal" data-target="#deleteModal"--%>
+<%--                               href="javascript:void(0)">Delete</a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="message-content ml-2">I'm sorry :( I'll send you as soon as .</div>--%>
+<%--                </div>--%>
+<%--                <div class="message-action had-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>--%>
+<%--            </div>--%>
+<%--            <div class="message-item outgoing-message" >--%>
+<%--                <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">--%>
+<%--                    <div class="message-list-action action-toggle popup">--%>
+<%--                        <a class="btn-action" href="#"><i class="ti-more"></i></a>--%>
+<%--                        <div class="active-menu">--%>
+<%--                            <a class="action-item text-muted" data-toggle="modal" data-target="#deleteModal"--%>
+<%--                               href="javascript:void(0)">Delete</a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="message-content ml-2">I'm sorry :( I'll send you as soon as .</div>--%>
+<%--                </div>--%>
+<%--                <div class="message-action had-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>--%>
+<%--            </div>--%>
+<%--            <div class="message-item outgoing-message" >--%>
+<%--                <div class="d-flex flex-row flex-nowrap justify-content-end align-items-center">--%>
+<%--                    <div class="message-list-action action-toggle popup">--%>
+<%--                        <a class="btn-action" href="#"><i class="ti-more"></i></a>--%>
+<%--                        <div class="active-menu">--%>
+<%--                            <a class="action-item text-muted" data-toggle="modal" data-target="#deleteModal"--%>
+<%--                               href="javascript:void(0)">Delete</a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="message-content ml-2">I'm sorry :( I'll send you as soon as .</div>--%>
+<%--                </div>--%>
+<%--                <div class="message-action had-seen"><i class="ti-check mr-1"></i>Pm 14:20</div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </div>
     <div class="chat-footer">
         <form action="" id="chat-message">

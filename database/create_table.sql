@@ -24,7 +24,7 @@ create table users(
 create table account(
     accountId int auto_increment not null,
     username varchar(50) not null,
-    password varchar(50) not null,
+    password varchar(255) not null,
     userId int unique not null,
     createAt timestamp default current_timestamp,
     modifiedAt timestamp default current_timestamp
@@ -102,7 +102,7 @@ create table message(
         on delete cascade on update cascade,
     constraint fk_toUsers_message foreign key(toUserId) references users(userId)
         on delete cascade on update cascade
-)
+);
 
 DROP TRIGGER IF EXISTS after_statusPost_update;
 DELIMITER $$

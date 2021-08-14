@@ -135,7 +135,7 @@
                                     </a>
                                 </div>
                                 <div class="info-real col-7">
-                                    <h6>
+                                    <h6 class="overflow-hidden text-truncate">
                                         <a href="/post/show/${postModels.postSlug}">
                                             ${postModels.title}
                                         </a>

@@ -22,22 +22,25 @@
                 <h2 class="form-title w-100">Sign up</h2>
                 <form action="/register" method="POST" class="register-form w-100" id="register-form"
                       onsubmit="return validateUserPW()">
-                    <div class="form-group">
-                        <label for="username" ><i class="far fa-user"></i></label>
-                        <input type="text" name="username" id="username" placeholder="User Name"
+                    <div class="form-group mt-2 mb-1">
+                        <label for="username" ><i class="far fa-user text-primary"></i></label>
+                        <input type="text" name="username" id="username" placeholder="User Name such as vanhoang" autofocus
                                required pattern="^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$"/>
                     </div>
-                    <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope-open"></i></label>
+                    <small class="text-muted">Username must be at least 5 characters and contain no special characters(*)</small>
+                    <div class="form-group mt-2 mb-1">
+                        <label for="email"><i class="fas fa-envelope-open text-primary"></i></label>
                         <input type="email" name="email" id="email" placeholder="Your Email" required />
                     </div>
-                    <div class="form-group">
-                        <label for="pass"><i class="fas fa-lock"></i></label>
+                    <div class="form-group mt-2 mb-1">
+                        <label for="pass"><i class="fas fa-lock text-primary"></i></label>
                         <input type="password" name="password" id="pass" placeholder="Password"
                                required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/>
                     </div>
-                    <div class="form-group">
-                        <label for="repeat-password"><i class="fas fa-redo"></i></label>
+                    <small class="text-muted">Password must minimum 8 characters, at least one uppercase letter,
+                        one lowercase letter and one number(*)</small>
+                    <div class="form-group mt-2 mb-1">
+                        <label for="repeat-password"><i class="fas fa-redo text-primary"></i></label>
                         <input type="password" name="repeat-password" id="repeat-password" placeholder="Repeat your password"
                             required />
                     </div>

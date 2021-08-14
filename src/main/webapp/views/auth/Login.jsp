@@ -37,7 +37,7 @@
                                        size="18" alt="login" autofocus=''>
                                 <span class="form-highlight"></span>
                                 <span class="form-bar"></span>
-                                <label for="username" class="float-label">Username or email</label>
+                                <label for="username" class="float-label">Username or email(*)</label>
                                 <erroru>
                                     Email is required
                                     <i>
@@ -53,7 +53,7 @@
                                        name="password" size="18" alt="login">
                                 <span class="form-highlight"></span>
                                 <span class="form-bar"></span>
-                                <label for="password" class="float-label">Password</label>
+                                <label for="password" class="float-label">Password(*)</label>
                                 <errorp>
                                     Password is required
                                     <i>
@@ -71,6 +71,11 @@
                             <button class="btn btn-login float-right border-0 btn-primary" type="submit" id="submit">
                                 <span>Sign In</span>
                             </button>
+                            <a href="/forgot-password" class="text-center text-primary pb-2 text-decoration-none
+                            float-right mr-3"
+                               style="font-size: 15px">
+                                I forgot password ?
+                            </a>
                         </form>
                     </div>
                     <div class = "text-center pb-2">
@@ -79,9 +84,6 @@
                             Register Account
                         </a>
                     </div>
-                    <a href="/forgot-password" class="text-center text-primary pb-2 text-decoration-none" style="font-size: 15px">
-                        I forgot password
-                    </a>
                 </div>
             </div>
         </div>
