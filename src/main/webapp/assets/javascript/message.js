@@ -144,13 +144,14 @@ function MessageSocket() {
             // console.log(data);
             count_no_seen = 0;
             $(".layout .content .chat .chat-body .messages .message-item").remove();
-            if (Object.keys(data.messages).length === 0) {
-                $(".chat-body .message").remove();
-                $(".chat-body").append('<div class="no-message-container">\n' +
-                    '<i class="fa fa-comments-o"></i>\n' +
-                    '<p>Select a chat to read messages</p>\n' +
-                    '</div>');
-            }
+            // if (typeof(data.message) === "undefined" || data.message === null) {
+            //     $(".chat-body .message").remove();
+            //     $(".chat-body").append('<div class="no-message-container">\n' +
+            //         '<i class="fa fa-comments-o"></i>\n' +
+            //         '<p>Select a chat to read messages</p>\n' +
+            //         '</div>');
+            //         return;
+            // }
             data.messages.forEach(message => {
                 let msg = {
                     message: message
