@@ -44,21 +44,21 @@
                 </a>
             </li>
 
-            <li class="">
-                <a class="nav-link text-left" role="button">
-                    <i class="fas fa-comments"></i><span class="px-2">Comment</span>
-                </a>
-            </li>
-            <li class="">
-                <a class="nav-link text-left" role="button">
-                    <i class="fas fa-code-branch"></i><span class="px-2">Role</span>
-                </a>
-            </li>
-            <li class="">
-                <a class="nav-link text-left" role="button" href="/admin/account">
-                    <i class="fas fa-chart-area"></i><span class="px-2">Account</span>
-                </a>
-            </li>
+<%--            <li class="">--%>
+<%--                <a class="nav-link text-left" role="button">--%>
+<%--                    <i class="fas fa-comments"></i><span class="px-2">Comment</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li class="">--%>
+<%--                <a class="nav-link text-left" role="button">--%>
+<%--                    <i class="fas fa-code-branch"></i><span class="px-2">Role</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li class="">--%>
+<%--                <a class="nav-link text-left" role="button" href="/admin/account">--%>
+<%--                    <i class="fas fa-chart-area"></i><span class="px-2">Account</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
             <li class="">
                 <a class="nav-link text-left" role="button" href="/admin/village" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-chart-area"></i><span class="px-2">Village</span>
