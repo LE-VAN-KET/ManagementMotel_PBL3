@@ -130,7 +130,7 @@
                                 <div class="col-5 p-0">
                                     <a href="/post/show/${postModels.postSlug}">
                                         <img class="img-fluid lazyload"
-                                             data-src="https://drive.google.com/uc?export=view&id=${postModels.linkImages}"
+                                             data-src="https://drive.google.com/uc?id=${postModels.linkImages}"
                                              style="width: 100%; height: 200px" alt="...">
                                     </a>
                                 </div>

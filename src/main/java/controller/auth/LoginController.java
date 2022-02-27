@@ -47,6 +47,7 @@ public class LoginController extends HttpServlet {
         try {
             // toLowerCase Username
             accountModel.setUsername(accountModel.getUsername().toLowerCase());
+            System.out.println(accountModel.getUsername() + accountModel.getPassword());
             accountModel = accountService.findByUserNameAndPassword(accountModel.getUsername(),
                     accountModel.getPassword());
             if (accountModel != null) {

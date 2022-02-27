@@ -95,9 +95,9 @@
     </welcome-file-list>
 
 <!--    Websocket Endpoint-->
-    <context-param>
-        <param-name>javax.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>
-        <param-value>true</param-value>
-    </context-param>
+<!--    <context-param>-->
+<!--        <param-name>javax.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>-->
+<!--        <param-value>true</param-value>-->
+<!--    </context-param>-->
 
 </web-app>

@@ -61,6 +61,7 @@ public class UploadFileUtil {
                 .setAccessType("offline")
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+//        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8080).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 

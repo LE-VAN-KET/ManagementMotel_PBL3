@@ -106,7 +106,7 @@
                             <i class="fa fa-times-circle"></i>
                             This field is required.
                         </div>
-                        <textarea class="form-control" rows="50" name="description" id="description"
+                        <textarea class="form-control editor" rows="50" name="description" id="description"
                                   placeholder="Content's name...">${POSTMODEL.description}</textarea>
                     </div>
                     <input name="villageId" type="number" hidden>
