@@ -44,23 +44,30 @@ public class UploadFileUtil {
      * @return An authorized Credential object.
      * @throws IOException If the credentials.json file cannot be found.
      */
-    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException, GeneralSecurityException {
+    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
+            throws IOException, GeneralSecurityException {
         // Load client secrets.
-//        InputStream in = UploadFileUtil.class.getResourceAsStream(GoogleAPIConstant.CLIENT_SECRET_FILE_NAME);
-//        if (in == null) {
-//            throw new FileNotFoundException("Resource not found: " + GoogleAPIConstant.CLIENT_SECRET_FILE_NAME);
-//        }
-//        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
-//
-//        // Build flow and trigger user authorization request.
-//        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-//                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-//                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(GoogleAPIConstant.TOKENS_DIRECTORY_PATH)))
-//                .setAccessType("offline")
-//                .build();
-////        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-//        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8080).build();
-//        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+        // InputStream in =
+        // UploadFileUtil.class.getResourceAsStream(GoogleAPIConstant.CLIENT_SECRET_FILE_NAME);
+        // if (in == null) {
+        // throw new FileNotFoundException("Resource not found: " +
+        // GoogleAPIConstant.CLIENT_SECRET_FILE_NAME);
+        // }
+        // GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
+        // new InputStreamReader(in));
+        //
+        // // Build flow and trigger user authorization request.
+        // GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+        // HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+        // .setDataStoreFactory(new FileDataStoreFactory(new
+        // java.io.File(GoogleAPIConstant.TOKENS_DIRECTORY_PATH)))
+        // .setAccessType("offline")
+        // .build();
+        //// LocalServerReceiver receiver = new
+        // LocalServerReceiver.Builder().setPort(8888).build();
+        // LocalServerReceiver receiver = new
+        // LocalServerReceiver.Builder().setPort(8080).build();
+        // return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
         Collection<String> elenco = new ArrayList<String>();
         elenco.add("https://www.googleapis.com/auth/drive");
         return new GoogleCredential.Builder()
@@ -70,6 +77,10 @@ public class UploadFileUtil {
                 .setServiceAccountScopes(elenco)
                 .setServiceAccountPrivateKeyFromP12File(new java.io.File(GoogleAPIConstant.pathServiceAccountKey))
                 .build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+        // LocalServerReceiver receiver = new
+        // LocalServerReceiver.Builder().setPort(8080).build();
+        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
     private static File createGoogleFolder(String folderIdParent, String folderName) throws IOException {
@@ -98,8 +109,8 @@ public class UploadFileUtil {
                             @Override
                             public void initialize(HttpRequest httpRequest) throws IOException {
                                 credential.initialize(httpRequest);
-                                httpRequest.setConnectTimeout(3 * 60000);  // 300 minutes connect timeout
-                                httpRequest.setReadTimeout(3 * 60000);  // 300 minutes read timeout
+                                httpRequest.setConnectTimeout(3 * 60000); // 300 minutes connect timeout
+                                httpRequest.setReadTimeout(3 * 60000); // 300 minutes read timeout
                             }
                         })
                         .setApplicationName(GoogleAPIConstant.APPLICATION_NAME)
@@ -111,7 +122,8 @@ public class UploadFileUtil {
         return _driverService;
     }
 
-    public static String uploadFile(String postId, List<FileItem> listImages) throws GeneralSecurityException, IOException {
+    public static String uploadFile(String postId, List<FileItem> listImages)
+            throws GeneralSecurityException, IOException {
 
         // create a root folder
         File folder = createGoogleFolder(GoogleAPIConstant.folderRootId, postId);
@@ -124,18 +136,19 @@ public class UploadFileUtil {
     }
 
     private static String uploadFileItem(InputStreamContent uploadStreamContent, String customFileName,
-                                         String parents) throws IOException {
+            String parents) throws IOException {
         File newGGDriveFile = new File();
         newGGDriveFile.setParents(Collections.singletonList(parents)).setName(customFileName);
-        File file = getInstanceDriverService().files().create(newGGDriveFile, uploadStreamContent).setFields("id,webViewLink").execute();
+        File file = getInstanceDriverService().files().create(newGGDriveFile, uploadStreamContent)
+                .setFields("id,webViewLink").execute();
         return file.getWebViewLink();
     }
 
     public static void getListLinkOneImagesByFolderId(List<PostModel> postModels) throws IOException {
         ExecutorService es = Executors.newCachedThreadPool();
-         for (PostModel postModel: postModels) {
-             es.execute(new Thread(new GetImageId(postModel, getInstanceDriverService())));
-         }
+        for (PostModel postModel : postModels) {
+            es.execute(new Thread(new GetImageId(postModel, getInstanceDriverService())));
+        }
         es.shutdown();
         try {
             es.awaitTermination(1, TimeUnit.MINUTES);
@@ -152,11 +165,10 @@ public class UploadFileUtil {
                 .execute();
         List<File> files = result.getFiles();
         List<String> listFile = new ArrayList<>();
-        for (File file : files
-        ) {
+        for (File file : files) {
             listFile.add(file.getId());
         }
-        return listFile.isEmpty() ? null: listFile;
+        return listFile.isEmpty() ? null : listFile;
     }
 
     public static void deleteFile(String fileId) {
@@ -188,7 +200,7 @@ class GetImageId implements Runnable {
 
     @Override
     public void run() {
-        synchronized(postModel){
+        synchronized (postModel) {
             try {
                 String query = "mimeType != 'application/vnd.google-apps.folder'"
                         + " and '" + postModel.getLinkImages() + "' in parents";
@@ -198,7 +210,8 @@ class GetImageId implements Runnable {
                         .setPageSize(1)
                         .execute();
                 List<File> files = result.getFiles();
-                if (!files.isEmpty()) postModel.setLinkImages(files.get(0).getId());
+                if (!files.isEmpty())
+                    postModel.setLinkImages(files.get(0).getId());
             } catch (IOException e) {
                 e.printStackTrace();
             }
